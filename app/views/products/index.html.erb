@@ -1,9 +1,21 @@
 <h1>List of Products</h1>
 
-<ul>
-  <% @products.each do |product| %>
-  <li>
-    <%= link_to "#{product.name}", product_path(product.id) %></td>
-  </li>
-  <% end %>
-</ul>
+
+<% @products.each do |product| %>
+<a href="<%= product_path(product) %>">
+  <ul>
+    <li>
+      <%=  "#{product.name}" %>
+    </li>
+    <li>
+      <%=  "#{product.category}" %>
+    </li>
+    <li>
+      <%=  "#{product.quantity} " %>
+    </li>
+    <li>
+      <%=  "#{product.price}" %>
+    </li>
+  </ul>
+</a>
+<% end %>
