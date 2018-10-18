@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+
   def index
     @products = Product.all
   end
@@ -12,7 +14,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
     render_404 unless @product
   end
 
@@ -20,6 +21,11 @@ class ProductsController < ApplicationController
   end
 
   def update
+    if @product.update(product_params)
+      redirect_to product_path(@product.id)
+    else
+      render :edit, status: :bad_request
+    end
   end
 
   def destroy
@@ -33,5 +39,9 @@ class ProductsController < ApplicationController
   private
   def product_params
     params.require(:product).permit(:category, :name, :price, :quantity)
+  end
+
+  def find_product
+    @product = Product.find_by(id: params[:id])
   end
 end
