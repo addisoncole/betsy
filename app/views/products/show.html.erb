@@ -1,0 +1,20 @@
+<h1><%= @product.name.capitalize %></h1>
+
+<section class="table">
+<ul>
+  <li>
+    <%= @product.name %>
+  </li>
+  <li>
+    <%= @product.category %>
+  </li>
+  <li>
+    <%= @product.quantity %>
+  </li>
+  <li>
+    <%= @product.price %>
+  </li>
+</ul>
+</section>
+
+<%= link_to "Back to Product List", products_path %>
