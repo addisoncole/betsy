@@ -11,7 +11,7 @@ require 'csv'
 # doesn't currently check for if titles are unique against each other
 
 CSV.open('.fetchtest/product_seeds.csv', "w", :write_headers=> true,
-  :headers => ["name", "category", "quantity", "price", "description"]) do |csv|
+  :headers => ["category", "name", "quantity", "price", "description"]) do |csv|
 
     25.times do |i|
       category = %w(Plants Housewares Fashion Beauty Lifestyle).sample
