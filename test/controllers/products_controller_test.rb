@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe ProductsController do
+describe "ProductsController" do
   # it "must be a real test" do
   #   flunk "Need real tests"
   # end
