@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root 'pages#show', page: "shop"
   resources :users
   resources :products
-  get 'pages/:id', to: 'pages#show', as: 'page'
+  get 'pages/:page', to: 'pages#show', as: 'page'
 end
