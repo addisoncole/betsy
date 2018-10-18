@@ -11,7 +11,7 @@ require 'csv'
 # doesn't currently check for if titles are unique against each other
 
 CSV.open('.fetchtest/product_seeds.csv', "w", :write_headers=> true,
-  :headers => ["category", "name", "quantity", "price", "description"]) do |csv|
+  :headers => ["category", "name", "quantity", "price", "image"]) do |csv|
 
     25.times do |i|
       category = %w(Plants Housewares Fashion Beauty Lifestyle).sample
@@ -19,28 +19,33 @@ CSV.open('.fetchtest/product_seeds.csv', "w", :write_headers=> true,
         name = Faker::Ancient.primordial + " " + Faker::Zelda.item
         quantity = rand(25)
         price = 6.66
+        image = "https://placekitten.com/200/200"
       end
       if category == "Housewares"
         name = Faker::Robin.quote + " " + Faker::GameOfThrones.house
         quantity = rand(25)
         price = 6.66
+        image = "https://placekitten.com/200/200"
       end
       if category == "Fashion"
         name = Faker::Nation.capital_city + " " + Faker::TwinPeaks.location
         quantity = rand(25)
         price = 6.66
+        image = "https://placekitten.com/200/200"
       end
       if category == "Beauty"
         name = Faker::Ancient.primordial + " " + Faker::Dessert.flavor
         quantity = rand(25)
         price = 6.66
+        image = "https://placekitten.com/200/200"
       end
       if category == "Lifestyle"
         name = Faker::Nation.national_sport + " " +  Faker::Dog.meme_phrase
         quantity = rand(25)
         price = 6.66
+        image = "https://placekitten.com/200/200"
       end
 
-      csv << [category, name, quantity, price]
+      csv << [category, name, quantity, price, image]
     end
   end
