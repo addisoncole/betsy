@@ -32,6 +32,6 @@ class UserController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:category, :name, :price, :quantity)
+    params.require(:user).permit(:name, :username, :email, :merchant)
   end
 end
