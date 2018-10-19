@@ -1,3 +1,4 @@
+require 'pry'
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
@@ -11,6 +12,14 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+# binding.pry
+    if @product.save
+      flash[:success] = "Successfully uploaded \"#{@product.name}\""
+      redirect_to products_path
+    else
+      flash.now[:error] = "Invalid product data. Unable to save."
+      render :new, status: :bad_request
+    end
   end
 
   def show
@@ -29,16 +38,17 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    flash[:status] = :success
-    flash[:result_text] = "Successfully destroyed #{@product.singularize} #{@product.id}"
-    redirect_to root_path
+    if @product.destroy
+      flash[:status] = :success
+      flash[:result_text] = "Successfully destroyed #{@product.name}"
+      redirect_to products_path
+    end
   end
 
 
   private
   def product_params
-    params.require(:product).permit(:category, :name, :price, :quantity)
+    params.require(:product).permit(:category, :name, :price, :quantity, :image)
   end
 
   def find_product

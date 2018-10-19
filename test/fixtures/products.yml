@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  category: MyString
+avocadotoast:
+  name: Avocado Toast
+  category: Lifestyle
   quantity: 1
-  price: 9.99
+  price: 7.99
 
-two:
-  category: MyString
+swisscheeseplant:
+  name: Monstera Deliciosa 
+  category: Plants
   quantity: 1
-  price: 9.99
+  price: 39.99

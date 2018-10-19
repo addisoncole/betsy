@@ -6,11 +6,13 @@ describe Product do
   describe 'validations' do
     before do
       # Arrange
+      @user = User.first
       @product = Product.new(name: 'Avocado Toast', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200')
     end
 
     it 'is valid when all fields are present' do
       # Act
+      @product.user = @user
       result = @product.valid?
 
       # Assert
@@ -23,7 +25,7 @@ describe Product do
       result = @product.valid?
 
       # Assert
-      expect(result).must_equal true
+      expect(result).must_equal false
     end
 
     it 'it is invalid if another product has the same name' do
