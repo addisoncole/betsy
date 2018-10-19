@@ -46,7 +46,7 @@ user = User.new(name: 'fetch devs', username: 'fetch.', email: 'teamfetch@fetch.
 successful = user.save
 
 if !successful
-  product_failures << product
+  user_failures << user
   puts "Failed to save user: #{user.inspect}"
 else
   puts "Created user: #{user.inspect}"
