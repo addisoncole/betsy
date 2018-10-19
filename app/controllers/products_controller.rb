@@ -38,10 +38,11 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product.destroy
-    flash[:status] = :success
-    flash[:result_text] = "Successfully destroyed #{@product.singularize} #{@product.id}"
-    redirect_to root_path
+    if @product.destroy
+      flash[:status] = :success
+      flash[:result_text] = "Successfully destroyed #{@product.name}"
+      redirect_to products_path
+    end
   end
 
 
