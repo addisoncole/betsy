@@ -42,4 +42,14 @@ ActiveRecord::Base.connection.tables.each do |t|
   ActiveRecord::Base.connection.reset_pk_sequence!(t)
 end
 
+user = User.new(name: 'fetch devs', username: 'fetch.', email: 'teamfetch@fetch.com')
+successful = user.save
+
+if !successful
+  user_failures << user
+  puts "Failed to save user: #{user.inspect}"
+else
+  puts "Created user: #{user.inspect}"
+end
+
 puts "done"

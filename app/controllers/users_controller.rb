@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   def index
     @users = User.all
   end
@@ -32,6 +32,10 @@ class UserController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:category, :name, :price, :quantity)
+    params.require(:user).permit(:name, :username, :email, :merchant)
   end
+  def find_user
+    @user = User.find_by(id: params[:id])
+  end
+
 end
