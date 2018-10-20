@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>Fetch.</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,26 @@
   </head>
 
   <body>
+    <header>
+      <h1>Fetch.<small>We're making it happen.</small></h1>
+      <nav>
+        <ul>
+          <li><%= link_to "the spread", products_path %></li>
+          <li><%= link_to "pop-ups" %></li>
+          <li><%= link_to "the message", "/pages/themessage" %></li>
+        </ul>
+        <ul>
+          <li><%= link_to "login" %></li>
+        </ul>
+        <ul>
+          <li><%= link_to "plants" %></li>
+          <li><%= link_to "housewares" %></li>
+          <li><%= link_to "fashion" %></li>
+          <li><%= link_to "beauty" %></li>
+          <li><%= link_to "lifestyle" %></li>
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
