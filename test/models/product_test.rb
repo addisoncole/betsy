@@ -86,11 +86,23 @@ describe Product do
       expect(result).must_equal false
     end
 
-    it 'must have a user associated with it' do
-      # Act
-      @product.user = nil
-      result = @product.valid?
-      expect(result).must_equal false
+  end
+
+  describe 'relations' do
+    it 'has a user' do
+      @product2 = Product.first
+      @user = User.first
+      @product2.user_id = @user.id
+
+      user = User.find_by(id: @product2.user_id )
+      expect(user).must_be_instance_of User
     end
+
+      it 'must have a user associated with it' do
+        # Act
+        @product2 = Product.first
+        result = @product2.valid?
+        expect(result).must_equal false
+      end
   end
 end

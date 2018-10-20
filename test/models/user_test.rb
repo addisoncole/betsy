@@ -1,9 +1,15 @@
 require "test_helper"
 
-describe User do
-  let(:user) { User.new }
+# t.string "name"
+# t.string "username"
+# t.string "email"
+# t.boolean "merchant", default: false
 
-  it "must be valid" do
-    value(user).must_be :valid?
+
+describe User do
+  describe 'validations' do
+    before do
+      @user = User.first
+    end
   end
 end

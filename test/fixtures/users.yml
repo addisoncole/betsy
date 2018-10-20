@@ -4,4 +4,4 @@ fetchuser:
   name: fetch dev
   username: fetch.
   email: fetch@fetch.com
-  merchant: false
+  merchant: true
