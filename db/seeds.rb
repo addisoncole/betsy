@@ -15,7 +15,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-user = User.new(name: 'fetch devs', username: 'fetch.', email: 'teamfetch@fetch.com')
+user = User.new(name: 'fetch devs', username: 'fetch.', email: 'teamfetch@fetch.com', uid: 36283115, provider: 'github')
 successful = user.save
 
 user_failures = []
