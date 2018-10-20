@@ -29,7 +29,7 @@ describe Product do
 
     it 'it is invalid if another product has the same name' do
       # Act
-      @product2 = Product.new(name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 99.99, image: 'https://placekitten.com/200/200')
+      @product2 = Product.new(name: 'Artisanal Coffee')
       result = @product2.valid?
 
       # Assert
@@ -91,17 +91,19 @@ describe Product do
   describe 'relations' do
     it 'has a user' do
       @product2 = Product.first
-      @user = User.first
-      @product2.user_id = @user.id
 
-      user = User.find_by(id: @product2.user_id )
+      user = @product2.user
+
       expect(user).must_be_instance_of User
     end
 
       it 'must have a user associated with it' do
         # Act
         @product2 = Product.first
+        @product2.user = nil
+
         result = @product2.valid?
+
         expect(result).must_equal false
       end
   end
