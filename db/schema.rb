@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_19_220812) do
+ActiveRecord::Schema.define(version: 2018_10_20_002415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cart_entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "card_number"
+    t.string "card_expiration"
+    t.integer "CVV"
+    t.integer "billing_zip_code"
+    t.string "shipping_address"
+    t.string "email"
+    t.string "address"
+    t.string "status"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -25,6 +44,13 @@ ActiveRecord::Schema.define(version: 2018_10_19_220812) do
     t.string "image"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "rating"
+    t.string "comment"
   end
 
   create_table "users", force: :cascade do |t|
