@@ -20,7 +20,7 @@
       </ul>
       <ul>
         <% if session[:user_id] %>
-          <li><%= link_to "logged in as #{@logged_in_user.name}", "/auth/github" %></li>
+          <li><%= link_to "logged in as #{@logged_in_user.name}", user_path(@logged_in_user.id) %></li>
           <li><%= link_to "logout", logout_path, method: "delete" %></li>
         <% else %>
           <li><%= link_to "login", "/auth/github" %></li>
