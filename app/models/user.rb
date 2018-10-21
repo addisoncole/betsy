@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :products, dependent: :nullify
+  has_many :reviews
 
   def self.build_user_hash(auth_hash)
     user = User.new
