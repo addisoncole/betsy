@@ -15,16 +15,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-user = User.new(name: 'fetch devs', username: 'fetch.', email: 'teamfetch@fetch.com', uid: 36283115, provider: 'github')
-successful = user.save
+user = User.new(name: 'Addison', username: 'fetch dev addy', email: 'teamfetch@fetch.com', uid: 36283115, provider: 'github')
+user2 = User.new(name: 'Hayden', username: 'fetch dev hayden', email: 'teamfetch@fetch.com', uid: 35811280, provider: 'github')
+user3 = User.new(name: 'Karis', username: 'fetch dev karis', email: 'teamfetch@fetch.com', uid: 17921445, provider: 'github')
+user4 = User.new(name: 'Naheed', username: 'fetch dev naheed', email: 'teamfetch@fetch.com', uid: 35782635, provider: 'github')
+
+users_list = [user, user2, user3, user4]
 
 user_failures = []
-if !successful
-  user_failures << user
-  puts "Failed to save user: #{user.inspect}"
-else
-  puts "Created user: #{user.inspect}"
+
+users_list.each do |user|
+  successful = user.save
+  if !successful
+    user_failures << user
+    puts "Failed to save user: #{user.inspect}"
+  else
+    puts "Created user: #{user.inspect}"
+  end
 end
+
 
 puts "Added #{User.count} user records"
 puts "#{user_failures.length} product failed to save"
