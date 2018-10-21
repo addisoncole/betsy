@@ -30,6 +30,11 @@
   font-style: normal;
 }
 
+body {
+  // background-color: #fdfff7;
+  background-image: linear-gradient(#fdfff7, #fdfff7, #fefffc, #fefffc, #ffffff);
+}
+
 .body-container {
   margin-top: 4rem;
 }
@@ -37,6 +42,12 @@
 .header-container {
   display: flex;
   width: 100%;
+}
+
+.audio-player {
+  position: absolute;
+  top: 2vw;
+  right: 2.5vw;
 }
 
 .header-nav {
@@ -58,13 +69,36 @@
 
 .header-nav a {
   text-decoration: none;
-  color: #dbdbdb;
+  color: #404040;
   font-family: 'NeuePlakSemi';
   font-size: 2.7vw;
+  opacity: .97;
 }
 
 .header-nav a:hover {
-  color: #404040;
+  opacity: .8;
+  animation-name: shadowfade;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shadowfade {
+  0% {color: #404040;
+  text-shadow: 3px -3px 0px #ffffff,
+   5px -7px 0px #ffffff,
+   -3px 3px 0px #ffffff,
+    -5px 7px 0px #ffffff;}
+  33% {color: #ff6b25;
+  text-shadow: 3px -3px 0px #fffd67,
+   5px -7px 0px #ffffff,
+   -3px 3px 0px #fffd67,
+    -5px 7px 0px #ffffff;}
+  66% {color: #ff6b25;
+  text-shadow: 3px -3px 0px #ffffff,
+   5px -7px 0px #6787ff,
+   -3px 3px 0px #ffffff,
+    -5px 7px 0px #6787ff;}
 }
 
 .header-nav-links {
@@ -77,10 +111,10 @@
 }
 
 .logo-container {
-  margin-left: 3.5vw;
+  margin-left: 3vw;
   width: 30vw;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  display: inline-block;
 }
 
 .logo {
@@ -88,9 +122,23 @@
   height: auto;
 }
 
+.logo-top {
+  max-width: 100%;
+  height: auto;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.logo-container:hover .logo-top {
+    display: inline;
+}
+
 .tagline {
   display: block;
-  align-self: flex-end;
+  float: right;
   margin-top: -2%;
 }
 
@@ -133,17 +181,42 @@
 }
 
 .categories a:hover {
-  color: #6787ff;
-  text-shadow: 0px 5px 0px #fffd67,
-   0px 10px 0px #ff6b25;
+  animation-name: shadowcycle;
+  animation-iteration-count: infinite;
+  animation-duration: .75s;
+  opacity: .9;
+}
+
+@keyframes shadowcycle {
+  0% {color: #6787ff;
+    text-shadow: 0px 5px 0px #fffd67,
+     0px 10px 0px #ff6b25;}
+  16% {color: #ff6b25;
+    text-shadow: 0px 5px 0px #6787ff,
+     0px 10px 0px #fffd67;}
+  32% {color: #fffd67;
+    text-shadow: 0px 5px 0px #ff6b25,
+     0px 10px 0px #6787ff;}
+  49% {color: #6787ff;
+    text-shadow: 0px 5px 0px #fffd67,
+     0px 10px 0px #ff6b25;}
+  65% {color: #ff6b25;
+    text-shadow: 0px 5px 0px #6787ff,
+     0px 10px 0px #fffd67;}
+  81% {color: #fffd67;
+    text-shadow: 0px 5px 0px #ff6b25,
+     0px 10px 0px #6787ff;}
+  100% {color: #6787ff;
+       text-shadow: 0px 5px 0px #fffd67,
+        0px 10px 0px #ff6b25;}
 }
 
 .cat1 {
-  transform: translateY(1vw) rotate(3deg) scale(1, 1.2);
+  transform: translate(.6vw, 1vw) rotate(3deg) scale(1, 1.2);
 }
 
 .cat2 {
-  transform: translate(.8vw, 2vw) rotate(-5deg) skewX(20deg);
+  transform: translate(1.1vw, 2vw) rotate(-5deg) skewX(20deg);
 }
 
 .cat3 {
@@ -155,5 +228,5 @@
 }
 
 .cat5 {
-  transform: translate(8vw, 2.6vw) rotate(6deg) scale(1.9, 1);
+  transform: translate(7.6vw, 2.6vw) rotate(6deg) scale(1.9, 1);
 }

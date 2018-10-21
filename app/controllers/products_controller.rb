@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.user_id = session[:user_id]
 # binding.pry
     if @product.save
       flash[:success] = "Successfully uploaded \"#{@product.name}\""
@@ -29,7 +30,10 @@ class ProductsController < ApplicationController
   end
 
   def show
+<<<<<<< HEAD
 
+=======
+>>>>>>> f449d52b4e9962e442086da04e500b7f82e18188
     render_404 unless @product
   end
 
@@ -52,10 +56,23 @@ class ProductsController < ApplicationController
     end
   end
 
+  def review
+    @review = Review.new(rating: params[:rating], comment: params[:comment])
+    @review.product_id = params[:id]
+
+    if @review.save
+      raise
+      flash[:success] = "Successfully submitted comment!"
+      redirect_to request.referrer
+    else
+      flash[:error] = "A problem occurred: could not save rating and/or review."
+      redirect_to product_path(@product.id)
+    end
+  end
 
   private
   def product_params
-    params.require(:product).permit(:category, :name, :price, :quantity, :image)
+    params.require(:product).permit(:category, :name, :price, :quantity, :image, :user_id)
   end
 
   def find_product

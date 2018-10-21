@@ -25,6 +25,26 @@
 </ul>
 </section>
 
+<<<<<<< HEAD
 <%= button_to "Add to cart", cart_entries_path(product_id: @product)%>
 
 <%= link_to "Back to Product List", products_path %>
+=======
+<section>
+  <%= form_with model: @review, :url => { :action => :review, :method => :post } do |f| %>
+    <%= f.label :rating %>
+    <%= f.select :rating, [*1..5] %>
+
+    <%= f.label :comment %>
+    <%= f.text_area :comment %>
+
+    <%= f.submit "Submit" %>
+  <% end %>
+</section>
+
+
+<section>
+<h1>Reviews</h1>
+
+</section>
+>>>>>>> f449d52b4e9962e442086da04e500b7f82e18188
