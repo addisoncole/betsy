@@ -77,7 +77,7 @@
 }
 
 .logo-container {
-  margin-left: 3.8vw;
+  margin-left: 3.5vw;
   width: 30vw;
   display: flex;
   flex-direction: column;
@@ -101,13 +101,9 @@
   text-decoration: none;
 }
 
-.categories-nav {
-  display: block;
-}
-
 .login {
   padding: 0;
-  margin-right: -.9vw;
+  margin-right: -2.8vw;
   margin-left: 2vw;
 }
 
@@ -115,6 +111,7 @@
   display: flex;
   justify-content: center;
   margin-left: -12vw;
+  height: 9vw;
 }
 
 .categories {
@@ -142,21 +139,21 @@
 }
 
 .cat1 {
-  transform: rotate(3deg) scale(1, 1.2);
+  transform: translateY(1vw) rotate(3deg) scale(1, 1.2);
 }
 
 .cat2 {
-  transform: translateY(2.8vw) rotate(-5deg) skewX(20deg);
+  transform: translate(.8vw, 2vw) rotate(-5deg) skewX(20deg);
 }
 
 .cat3 {
-  transform: translate(2.3vw, 3vw) rotate(1deg) scale(1.2, 1.7);
+  transform: translate(2.3vw, 3.3vw) rotate(1deg) scale(1.2, 1.7);
 }
 
 .cat4 {
-  transform: translate(3.5vw, 1.2vw) rotate(-20deg);
+  transform: translate(3.9vw, 1vw) rotate(-20deg);
 }
 
 .cat5 {
-  transform: translate(8vw, 3vw) rotate(6deg) scale(1.9, 1);
+  transform: translate(8vw, 2.6vw) rotate(6deg) scale(1.9, 1);
 }
