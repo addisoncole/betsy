@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fetch.</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Fetch.</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <header>
-      <h1><%= link_to "Fetch.", root_path %><small>We're making it happen.</small></h1>
-      <nav>
-        <ul>
-          <li><%= link_to "the spread", products_path %></li>
-          <li><%= link_to "pop-ups" %></li>
-          <li><%= link_to "the message", "/pages/themessage" %></li>
-        </ul>
-        <ul>
-          <li><%= link_to "login", "/auth/github" %></li>
+<body>
+  <header>
+    <h1><%= link_to "Fetch.", root_path %><small>We're making it happen.</small></h1>
+    <nav>
+      <ul>
+        <li><%= link_to "the spread", products_path %></li>
+        <li><%= link_to "pop-ups" %></li>
+        <li><%= link_to "the message", "/pages/themessage" %></li>
+      </ul>
+      <ul>
+        <% if session[:user_id] %>
           <li><%= link_to "logged in as #{@logged_in_user.name}", "/auth/github" %></li>
-          <li><%= link_to "logout", "/auth/github" %></li>
-        </ul>
-        <ul>
-          <li><%= link_to "plants" %></li>
-          <li><%= link_to "housewares" %></li>
-          <li><%= link_to "fashion" %></li>
-          <li><%= link_to "beauty" %></li>
-          <li><%= link_to "lifestyle" %></li>
-        </ul>
-      </nav>
-    </header>
+          <li><%= link_to "logout", logout_path, method: "delete" %></li>
+        <% else %>
+          <li><%= link_to "login", "/auth/github" %></li>
+        <% end %>
+      </ul>
+      <ul>
+        <li><%= link_to "plants" %></li>
+        <li><%= link_to "housewares" %></li>
+        <li><%= link_to "fashion" %></li>
+        <li><%= link_to "beauty" %></li>
+        <li><%= link_to "lifestyle" %></li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <% if !flash.empty? %>
+      <% flash.each do |key, message| %>
+      <div >
+        <span><%= message %></span>
+      </div>
+      <% end %>
+    <% end %>
+  </section>
+  <main>
     <%= yield %>
-  </body>
+  </main>
+</body>
 </html>

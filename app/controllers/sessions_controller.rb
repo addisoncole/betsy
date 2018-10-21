@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  def create
+  def login
     auth_hash = request.env['omniauth.auth']
 
     user = User.find_by(uid: auth_hash[:uid], provider: 'github')
@@ -32,5 +32,13 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     redirect_to root_path
   end
+
+  def destroy
+    session[:user_id] = nil
+    flash[:success] = "You have been logged out."
+
+    redirect_to root_path
+  end
+
 
 end
