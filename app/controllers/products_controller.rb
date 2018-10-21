@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    
     render_404 unless @product
   end
 
