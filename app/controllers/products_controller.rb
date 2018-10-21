@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = Product.new(product_params)
   end
 
   def create
@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    
+
     render_404 unless @product
   end
 
