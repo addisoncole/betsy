@@ -27,11 +27,11 @@
         <% end %>
       </ul>
       <ul>
-        <li><%= link_to "plants" %></li>
-        <li><%= link_to "housewares" %></li>
-        <li><%= link_to "fashion" %></li>
-        <li><%= link_to "beauty" %></li>
-        <li><%= link_to "lifestyle" %></li>
+        <li><%= link_to "plants", products_path(:category =>"Plants") %></li>
+        <li><%= link_to "housewares", products_path(:category =>"Housewares") %></li>
+        <li><%= link_to "fashion", products_path(:category =>"Fashion") %></li>
+        <li><%= link_to "beauty", products_path(:category =>"Beauty") %></li>
+        <li><%= link_to "lifestyle", products_path(:category =>"Lifestyle") %></li>
       </ul>
     </nav>
   </header>

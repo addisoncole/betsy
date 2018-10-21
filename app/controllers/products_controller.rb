@@ -3,7 +3,11 @@ class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.all
+    if params[:category]
+      @products = Product.where(:category => params[:category])
+    else
+      @products = Product.all
+    end
   end
 
   def new
