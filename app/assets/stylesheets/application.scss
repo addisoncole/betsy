@@ -7,7 +7,6 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
  */
@@ -16,3 +15,148 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+@font-face {
+  font-family: 'NeuePlakWide';
+  src: font-url('neueplakwide.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NeuePlakSemi';
+  src: font-url('neueplaksemi.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.body-container {
+  margin-top: 4rem;
+}
+
+.header-container {
+  display: flex;
+  width: 100%;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 60%;
+  flex-shrink: 1;
+}
+
+.header-nav ul {
+  list-style: none;
+  margin-bottom: 0px;
+}
+
+.header-nav ul li {
+  white-space: nowrap;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: #dbdbdb;
+  font-family: 'NeuePlakSemi';
+  font-size: 2.7vw;
+}
+
+.header-nav a:hover {
+  color: #404040;
+}
+
+.header-nav-links {
+  display: flex;
+}
+
+.header-nav-links li {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.logo-container {
+  margin-left: 3.8vw;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+}
+
+.tagline {
+  display: block;
+  align-self: flex-end;
+  margin-top: -2%;
+}
+
+.logo-container a {
+  font-size: 1.35vw;
+  font-family: 'NeuePlakWide';
+  color: #404040;
+  text-decoration: none;
+}
+
+.categories-nav {
+  display: block;
+}
+
+.login {
+  padding: 0;
+  margin-right: -.9vw;
+  margin-left: 2vw;
+}
+
+.categories-nav {
+  display: flex;
+  justify-content: center;
+  margin-left: -12vw;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  padding-left: 0px;
+  list-style: none;
+}
+
+.categories a {
+  text-decoration: none;
+  font-family: 'NeuePlakSemi';
+  font-size: 3vw;
+  color: #ff6b25;
+  text-shadow: 0px 5px 0px #fffd67,
+   0px 10px 0px #6787ff;
+  opacity: .7;
+}
+
+.categories a:hover {
+  color: #6787ff;
+  text-shadow: 0px 5px 0px #fffd67,
+   0px 10px 0px #ff6b25;
+}
+
+.cat1 {
+  transform: rotate(3deg) scale(1, 1.2);
+}
+
+.cat2 {
+  transform: translateY(2.8vw) rotate(-5deg) skewX(20deg);
+}
+
+.cat3 {
+  transform: translate(2.3vw, 3vw) rotate(1deg) scale(1.2, 1.7);
+}
+
+.cat4 {
+  transform: translate(3.5vw, 1.2vw) rotate(-20deg);
+}
+
+.cat5 {
+  transform: translate(8vw, 3vw) rotate(6deg) scale(1.9, 1);
+}

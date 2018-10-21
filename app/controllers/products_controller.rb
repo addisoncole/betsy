@@ -4,8 +4,10 @@ class ProductsController < ApplicationController
 
   def index
     if params[:category]
+      @title = "#{params[:category].downcase}"
       @products = Product.where(:category => params[:category])
     else
+      @title = "the spread"
       @products = Product.all
     end
   end

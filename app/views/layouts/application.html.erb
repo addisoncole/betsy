@@ -10,42 +10,51 @@
 </head>
 
 <body>
-  <header>
-    <h1><%= link_to "Fetch.", root_path %><small>We're making it happen.</small></h1>
-    <nav>
-      <ul>
-        <li><%= link_to "the spread", products_path %></li>
-        <li><%= link_to "pop-ups" %></li>
-        <li><%= link_to "the message", "/pages/themessage" %></li>
-      </ul>
-      <ul>
-        <% if session[:user_id] %>
-          <li><%= link_to "logged in as #{@logged_in_user.username}", user_path(@logged_in_user.id) %></li>
-          <li><%= link_to "logout", logout_path, method: "delete" %></li>
-        <% else %>
-          <li><%= link_to "login", "/auth/github" %></li>
-        <% end %>
-      </ul>
-      <ul>
-        <li><%= link_to "plants", products_path(:category =>"Plants") %></li>
-        <li><%= link_to "housewares", products_path(:category =>"Housewares") %></li>
-        <li><%= link_to "fashion", products_path(:category =>"Fashion") %></li>
-        <li><%= link_to "beauty", products_path(:category =>"Beauty") %></li>
-        <li><%= link_to "lifestyle", products_path(:category =>"Lifestyle") %></li>
-      </ul>
-    </nav>
-  </header>
-  <section>
-    <% if !flash.empty? %>
+  <div class="body-container">
+    <header>
+      <div class="header-container">
+        <div class="logo-container">
+          <%= link_to image_tag("logo.png", alt: "Fetch logo. Slanted blue text with chunky black outline and pink wavy accents.", class: "logo"), root_path %>
+          <span class="tagline"><%= link_to "We're making it happen", root_path %></span>
+        </div>
+        <nav class="header-nav">
+          <ul class="header-nav-links">
+            <li><%= link_to "the spread", products_path %></li>
+            <li><%= link_to "pop-ups" %></li>
+            <li><%= link_to "the message", "/pages/themessage" %></li>
+          </ul>
+          <ul class="login">
+            <% if session[:user_id] %>
+            <li><%= link_to "logged in as #{@logged_in_user.username}", user_path(@logged_in_user.id) %></li>
+            <li><%= link_to "logout", logout_path, method: "delete" %></li>
+            <% else %>
+            <li><%= link_to "login", "/auth/github" %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+      <nav class="categories-nav">
+        <ul class="categories">
+          <li class="cat1"><%= link_to "plants", products_path(:category =>"Plants") %></li>
+          <li class="cat2"><%= link_to "paraphernalia", products_path(:category =>"Housewares") %></li>
+          <li class="cat3"><%= link_to "fashion", products_path(:category =>"Fashion") %></li>
+          <li class="cat4"><%= link_to "beauty", products_path(:category =>"Beauty") %></li>
+          <li class="cat5"><%= link_to "lifestyle", products_path(:category =>"Lifestyle") %></li>
+        </ul>
+      </nav>
+    </header>
+    <section>
+      <% if !flash.empty? %>
       <% flash.each do |key, message| %>
       <div >
         <span><%= message %></span>
       </div>
       <% end %>
-    <% end %>
-  </section>
-  <main>
-    <%= yield %>
-  </main>
+      <% end %>
+    </section>
+    <main>
+      <%= yield %>
+    </main>
+  </div>
 </body>
 </html>
