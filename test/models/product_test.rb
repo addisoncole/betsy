@@ -7,7 +7,7 @@ describe Product do
     before do
       # Arrange
       @user = User.first
-      @product = Product.new(name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200', user_id: @user.id)
+      @product = Product.new(name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200', user: @user)
     end
 
     it 'is valid when all fields are present' do

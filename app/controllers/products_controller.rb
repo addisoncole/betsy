@@ -21,8 +21,9 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:success] = "Successfully uploaded \"#{@product.name}\""
-      redirect_to products_path
+      redirect_to product_path(@product.id)
     else
+      puts "Failed to save product: #{@product.errors.messages}"
       flash.now[:error] = "Invalid product data. Unable to save."
       render :new, status: :bad_request
     end

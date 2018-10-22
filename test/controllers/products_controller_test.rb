@@ -22,26 +22,36 @@ describe ProductsController do
     end
   end
 
-  # describe "create" do
-  #   it "can create a product with valid data" do
-  #     # Arrange
-  #     @user = User.first
-  #     product_hash = { product:
-  #       { name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200', user_id: @user.id }
-  #     }
-  #
-  #     # Assumptions
-  #     test_product = Product.new(product_hash[:product])
-  #     test_product.must_be :valid?, "Product data was invalid. Please come fix this test"
-  #
-  #     # Act
-  #     expect {
-  #       post products_path, params: product_hash
-  #     }.must_change('Product.count', +1)
-  #
-  #     # Assert
-  #     must_redirect_to product_path(Product.last)
-  #   end
+  describe "create" do
+    it "can create a product with valid data" do
+      # Arrange
+
+      @user = users(:fetchuser)
+      perform_login(@user)
+
+      product_hash = {
+        product: {
+          name: 'Artisanal Coffee',
+          category: "Lifestyle",
+          quantity: 4,
+          price: 9.99,
+          image: 'https://placekitten.com/200/200',
+          user: @user
+        }
+      }
+
+      # Assumptions
+      test_product = Product.new(product_hash[:product])
+      test_product.must_be :valid?, "Product data was invalid. Please come fix this test"
+
+      # Act
+      expect {
+        post products_path, params: product_hash
+      }.must_change('Product.count', +1)
+
+      # Assert
+      must_redirect_to product_path(Product.last)
+    end
 
     # it "does not create a new product w/ invalid data" do
     #   # Arrange
@@ -143,5 +153,5 @@ describe ProductsController do
 
 
 
-# end
+end
 end
