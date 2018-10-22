@@ -14,18 +14,20 @@ class CartEntriesController < ApplicationController
   end
 
   def create
+
     @product = Product.find(params[:product_id])
     @cart_entry = @order.add_product(@product, session[:order_id])
 
     if @cart_entry.order_id == nil
       @cart_entry.order_id = @order.id
     end
+    
     if @cart_entry.save
-    flash[:success] = "Item succesfully added to cart"
-    redirect_to request.referrer
+      flash[:success] = "Item succesfully added to cart"
+      redirect_back(fallback_location: root_path)
     else
       flash[:error] = "ERRORRRRR"
-      redirect_to request.referrer
+      redirect_back(fallback_location: root_path)
     end
 
   end

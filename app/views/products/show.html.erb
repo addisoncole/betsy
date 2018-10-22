@@ -25,7 +25,7 @@
 </ul>
 </section>
 
-<%= button_to "Add to cart", cart_entries_path(product_id: @product)%>
+<%= button_to "Add to cart", product_cart_entries_path(product_id: @product)%>
 
 <%= link_to "Back to Product List", products_path %>
 <section>
