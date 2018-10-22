@@ -25,6 +25,9 @@
 </ul>
 </section>
 
+<%= button_to "Add to cart", cart_entries_path(product_id: @product)%>
+
+<%= link_to "Back to Product List", products_path %>
 <section>
   <%= form_with model: @review, :url => { :action => :review, :method => :post } do |f| %>
     <%= f.label :rating %>
@@ -41,4 +44,18 @@
 <section>
 <h1>Reviews</h1>
 
+<% @product.reviews.each do |review| %>
+
+<ul>
+  <li>
+    Review title: <%= review.rating %>
+  </li>
+  <li>
+    Username: <%= review.user_id %>
+  </li>
+  <li>
+    Comments: <%= review.comment %>
+  </li>
+</ul>
+<% end %>
 </section>

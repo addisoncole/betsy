@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user
       # User was found in the database
       flash[:success] = "Logged in as returning user #{user.name}"
-
+      session[:order_id] = nil
     else
       # User doesn't match anything in the DB
       # Attempt to create a new user
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
       if user.save
         flash[:success] = "Logged in as new user #{user.name}"
-
+        session[:order_id] = nil
       else
         # Couldn't save the user for some reason. If we
         # hit this it probably means there's a bug with the
@@ -35,6 +35,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:order_id] = nil
     flash[:success] = "You have been logged out."
 
     redirect_to root_path
