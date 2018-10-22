@@ -17,6 +17,16 @@
           <%= link_to "my bag (#{@order.cart_entries.length})", order_path(@order), class: "my-bag" %>
         <% end %>
       </div>
+      <div class="login-container">
+        <ul class="login">
+          <% if session[:user_id] %>
+          <li class="login-button"><%= link_to "#{@logged_in_user.username}", user_path(@logged_in_user.id) %></li>
+          <li class="login-button"><%= link_to "logout", logout_path, method: "delete" %></li>
+          <% else %>
+          <li class="login-button"><%= link_to "login", "/auth/github" %></li>
+          <% end %>
+        </ul>
+      </div>
       <div class="header-container">
         <div class="logo-container">
           <%= link_to image_tag("logo.png", alt: "Fetch logo. Slanted blue text with chunky black outline and pink wavy accents.", class: "logo"), root_path %>
@@ -28,14 +38,6 @@
             <li><%= link_to "the spread", products_path %></li>
             <li><%= link_to "pop-ups" %></li>
             <li><%= link_to "the message", "/pages/themessage" %></li>
-          </ul>
-          <ul class="login">
-            <% if session[:user_id] %>
-            <li class="login-button"><%= link_to "logged in as #{@logged_in_user.username}", user_path(@logged_in_user.id) %></li>
-            <li class="login-button"><%= link_to "logout", logout_path, method: "delete" %></li>
-            <% else %>
-            <li class="login-button"><%= link_to "login", "/auth/github" %></li>
-            <% end %>
           </ul>
         </nav>
       </div>
@@ -62,10 +64,10 @@
       <%= yield %>
     </main>
     <footer>
-      <iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+      <!-- <iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
       <audio controls class="audio-player">
       <source src="audio/pinkandblue.mp3" type="audio/mpeg" />
-      </audio>
+      </audio> -->
     </footer>
   </div>
 </body>

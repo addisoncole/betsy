@@ -71,6 +71,37 @@ body {
   animation-iteration-count: infinite;
 }
 
+.login {
+  position: fixed;
+  z-index: 99;
+  background-color: #fdfff7;
+  transform: translateY(6vw);
+  opacity: .97;
+  right: 3.4vw;
+  padding: 2px 15px 10px 15px;
+  border: 1px solid #404040;
+  box-shadow: 5px 5px #404040;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.login:hover {
+  opacity: .8;
+  animation-name: shadowfade;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+.login a {
+  text-decoration: none;
+  color: #404040;
+  font-family: 'NeuePlakSemi';
+  font-size: 2vw;
+}
+
 .header-container {
   display: flex;
   width: 100%;
@@ -180,17 +211,6 @@ body {
   font-family: 'NeuePlakWide';
   color: #404040;
   text-decoration: none;
-}
-
-.login {
-  padding: 0;
-  margin-right: -2vw;
-  margin-left: 2vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
 }
 
 .categories-nav {
