@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :cart_entries
   resources :orders
 
+  get 'users/dash/:id', to: 'users#userdash', as: 'userdash'
 
   get "/auth/:provider/callback", to: "sessions#login"
   delete "/logout", to: "sessions#destroy", as: "logout"

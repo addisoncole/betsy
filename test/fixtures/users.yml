@@ -5,3 +5,5 @@ fetchuser:
   username: fetch.
   email: fetch@fetch.com
   merchant: true
+  uid: 1341342
+  provider: github
