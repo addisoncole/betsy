@@ -3,10 +3,6 @@ class CartEntriesController < ApplicationController
   before_action :find_cart_entry, only: [:show, :edit, :update, :destroy]
   before_action :find_order, only: [:create]
 
-  def index
-    @cart_entries = CartEntry.all
-  end
-
   def show
   end
 
