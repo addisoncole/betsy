@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :orders
 
 
-  get "/auth/:provider/callback", to: "sessions#login"
+  get "/auth/:provider/callback", to: "sessions#login", as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"
 
   post 'products/:id/review', to:'products#review', as: 'review'

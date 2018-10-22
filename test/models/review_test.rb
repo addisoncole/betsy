@@ -1,8 +1,9 @@
 require "test_helper"
 
-# Rating must be present
-# Rating must be an integer
-# Rating must be between 1 and 5
+# t.string "name"
+# t.string "username"
+# t.string "email"
+# t.boolean "merchant", default: false
 
 describe Review do
   let(:review) { Review.new }
