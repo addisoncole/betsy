@@ -19,7 +19,8 @@ class CartEntriesController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
-    @cart_entry = @order.add_product(@product)
+    @cart_entry = @order.add_product(@product, session[:order_id])
+
     if @cart_entry.order_id == nil
       @cart_entry.order_id = @order.id
     end
