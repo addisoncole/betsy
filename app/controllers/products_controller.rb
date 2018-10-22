@@ -30,10 +30,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-<<<<<<< HEAD
-
-=======
->>>>>>> f449d52b4e9962e442086da04e500b7f82e18188
     render_404 unless @product
   end
 
@@ -61,7 +57,6 @@ class ProductsController < ApplicationController
     @review.product_id = params[:id]
 
     if @review.save
-      raise
       flash[:success] = "Successfully submitted comment!"
       redirect_to request.referrer
     else
