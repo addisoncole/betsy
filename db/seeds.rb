@@ -51,7 +51,7 @@ CSV.foreach(PRODUCT_FILE, :headers => true) do |row|
   product.price = row['price']
   product.image = row['image']
   product.user_id = @user.id
-  successful = product.save
+  successful = product.save!
   if !successful
     product_failures << product
     puts "Failed to save product: #{product.inspect}"
