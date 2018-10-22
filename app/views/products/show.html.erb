@@ -41,4 +41,18 @@
 <section>
 <h1>Reviews</h1>
 
+<% @product.reviews.each do |review| %>
+
+<ul>
+  <li>
+    Review title: <%= review.rating %>
+  </li>
+  <li>
+    Username: <%= review.user_id %>
+  </li>
+  <li>
+    Comments: <%= review.comment %>
+  </li>
+</ul>
+<% end %>
 </section>

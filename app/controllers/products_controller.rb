@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user_id = session[:user_id]
-# binding.pry
+
     if @product.save
       flash[:success] = "Successfully uploaded \"#{@product.name}\""
       redirect_to products_path
@@ -55,14 +55,16 @@ class ProductsController < ApplicationController
   def review
     @review = Review.new(rating: params[:rating], comment: params[:comment])
     @review.product_id = params[:id]
+    @review.user_id = session[:user_id]
+
+    @user = User.find_by(id: @review.user_id)
 
     if @review.save
-      raise
       flash[:success] = "Successfully submitted comment!"
       redirect_to request.referrer
     else
       flash[:error] = "A problem occurred: could not save rating and/or review."
-      redirect_to product_path(@product.id)
+      redirect_to product_path(@review.product_id)
     end
   end
 
