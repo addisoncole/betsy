@@ -1,0 +1,52 @@
+<h1>Order# <%= @order.id %></h1>
+
+<ul>
+  <h2>Order Info</h2>
+  <li>
+    name:
+    <% user = User.find_by(id: session[:user_id]) %>
+    <% if user %>
+      <%= user.name %>
+    <% else %>
+      <span>Guest</span>
+    <% end %>
+  </li>
+  <li>
+    email:
+    <% if user %>
+      <%= user.name %>
+    <% else %>
+      <span>Guest</span>
+    <% end %>
+  </li>
+  <li>
+    shipping address:
+    <%= @order.address %>
+  </li>
+  <li>
+    cc:
+    <%= @order.card_number.to_s[-4..-1] %>
+  </li>
+  <li>
+    cc exp:
+    <%= @order.card_expiration %>
+  </li>
+</ul>
+
+<ul>
+  <h2>Items</h2>
+  <% @order.cart_entries.each do |entry| %>
+  <li>
+    <%= Product.find_by(id: entry.product_id).name %>
+  </li>
+  <li>
+    qty: <%= entry.quantity %>
+  </li>
+  <li>
+    <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
+  </li>
+  <li>
+    status:
+  </li>
+  <% end %>
+</ul>
