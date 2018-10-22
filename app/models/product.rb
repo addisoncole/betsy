@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :reviews
 
+
   private
 
   def not_referenced_by_any_cart_entry
