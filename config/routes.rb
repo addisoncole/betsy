@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :products
+  resources :cart_entries
+  resources :orders
+
 
   get "/auth/:provider/callback", to: "sessions#login"
   delete "/logout", to: "sessions#destroy", as: "logout"
