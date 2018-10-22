@@ -5,11 +5,9 @@ avocadotoast:
   category: Lifestyle
   quantity: 1
   price: 7.99
-  user: fetchuser
 
 swisscheeseplant:
   name: Monstera Deliciosa
   category: Plants
   quantity: 1
   price: 39.99
-  user: fetchuser
