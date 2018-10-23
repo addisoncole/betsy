@@ -11,5 +11,5 @@ persons_order:
   billing_zip_code: 98223
   shipping_address: 123 idk lane
   email: Email@email.email
-  address: 1234 idk lane
+  billing_address: 1234 idk lane
   status: Pending
