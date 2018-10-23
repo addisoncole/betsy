@@ -30,7 +30,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    render_404 unless @product
   end
 
   def edit
@@ -75,5 +74,6 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find_by(id: params[:id])
+    head :not_found unless @product
   end
 end
