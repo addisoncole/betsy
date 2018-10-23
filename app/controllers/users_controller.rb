@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
-<<<<<<< HEAD
-  before_action :find_user, only: [:show, :edit, :update, :destroy, :userdash]
-=======
+
   before_action :find_user, only: [:show, :edit, :update, :destroy]
   before_action :current_user?, only: [:edit, :destroy]
->>>>>>> oauth
 
   def index
     if User.find_by(id: session[:user_id])
@@ -55,9 +52,7 @@ class UsersController < ApplicationController
     flash[:error] = "Members Only"
     redirect_to root_path
   end
-end
 
-<<<<<<< HEAD
   def userdash
     @products = @user.products
     @orders = @user.orders
@@ -70,16 +65,7 @@ end
   def find_user
     @user = User.find_by(id: params[:id])
   end
-
-=======
-private
-def user_params
-  params.require(:user).permit(:name, :username, :email, :merchant)
-end
-def find_user
-  @user = User.find_by(id: params[:id])
-end
-def current_user?
-  @user == User.find_by(id: session[:user_id])
->>>>>>> oauth
+  def current_user?
+    @user == User.find_by(id: session[:user_id])
+  end
 end
