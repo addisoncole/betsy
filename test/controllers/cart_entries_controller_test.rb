@@ -36,7 +36,7 @@ describe CartEntriesController do
 
     it "does not create a new cart entry w/ invalid data" do
       # Assumptions
-      @cart_entry_data[:cart_entry][:order_id] = nil
+      @cart_entry_data[:product_id] = nil
 
       CartEntry.new(@cart_entry_data[:cart_entry]).wont_be :valid?, "Entry data wasn't invalid. Please come fix this test"
 # binding.pry

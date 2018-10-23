@@ -25,7 +25,14 @@
 </ul>
 </section>
 
-<%= button_to "Add to cart", cart_entries_path(product_id: @product)%>
+<section>
+  <%= form_with model: @cart_entry, :url =>  cart_entries_path(product_id:  @product.id)  do |f| %>
+    <%= f.label :quantity %>
+    <%= f.select :quantity, [*1..@product.quantity] %>
+
+    <%= f.submit "Submit" %>
+  <% end %>
+</section>
 
 <%= link_to "Back to Product List", products_path %>
 <section>
