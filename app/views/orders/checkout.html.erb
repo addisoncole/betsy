@@ -91,7 +91,7 @@
     <% @order.cart_entries.each do |entry| %>
       <ul class="cart-entry">
         <li class="entry-name">
-          <%= Product.find_by(id: entry.product_id).name %>
+          <%= link_to "#{Product.find_by(id: entry.product_id).name}", product_path(Product.find_by(id: entry.product_id)) %>
         </li>
         <li class="entry-qty">
           qty: <%= entry.quantity %>
@@ -104,5 +104,6 @@
         </li>
       </ul>
     <% end %>
+      <h4></h4>
   </section>
 </div>
