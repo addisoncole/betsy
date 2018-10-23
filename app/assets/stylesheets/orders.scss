@@ -29,6 +29,7 @@ h1 {
 
 .order-info input {
   display: block;
+  width: 18.8vw;
 }
 
 .order-info label {
@@ -43,7 +44,7 @@ h1 {
   font-family: NeuePlakReg;
   font-size: 1vw;
   font-style: italic;
-  padding: .7vw 6vw .9vw 1vw;
+  padding: .7vw 3.5vw .9vw 3.5vw;
   border-radius: 3px;
 }
 
@@ -87,7 +88,7 @@ h1 {
 
 .items-info {
   width: 50vw;
-  height: 25vw;
+  height: max-content;
   border: 1px solid #404040;
   padding: 0 2.3vw 0 0;
   margin: 0;
@@ -128,6 +129,10 @@ h1 {
   margin-top: 1vw;
   font-family: NeuePlakLight;
   font-size: 1.3vw;
+}
+
+.cart-entry:last-of-type {
+  margin-bottom: 3.1vw;
 }
 
 .entry-status {

@@ -89,20 +89,20 @@
     <h4 class="items-info-heading itemheading1">total</h4>
     <h4 class="items-info-heading itemheading2">status</h4>
     <% @order.cart_entries.each do |entry| %>
-    <ul class="cart-entry">
-      <li class="entry-name">
-        <%= Product.find_by(id: entry.product_id).name %>
-      </li>
-      <li class="entry-qty">
-        qty: <%= entry.quantity %>
-      </li>
-      <li class="entry-total">
-        <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
-      </li>
-      <li class="entry-status">
-        <%= entry.status %>
-      </li>
-    </ul>
+      <ul class="cart-entry">
+        <li class="entry-name">
+          <%= Product.find_by(id: entry.product_id).name %>
+        </li>
+        <li class="entry-qty">
+          qty: <%= entry.quantity %>
+        </li>
+        <li class="entry-total">
+          <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
+        </li>
+        <li class="entry-status">
+          <%= entry.status %>
+        </li>
+      </ul>
     <% end %>
   </section>
 </div>
