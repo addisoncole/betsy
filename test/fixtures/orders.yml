@@ -4,8 +4,12 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+persons_order:
+  card_number: 333333
+  card_expiration: 10/2018
+  CVV: 123
+  billing_zip_code: 98223
+  shipping_address: 123 idk lane
+  email: Email@email.email
+  address: 1234 idk lane
+  status: Pending

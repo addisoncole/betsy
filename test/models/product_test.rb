@@ -97,14 +97,14 @@ describe Product do
       expect(user).must_be_instance_of User
     end
 
-      it 'must have a user associated with it' do
-        # Act
-        @product2 = Product.first
-        @product2.user = nil
+    it 'must have a user associated with it' do
+      # Act
+      @product2 = Product.first
+      @product2.user = nil
 
-        result = @product2.valid?
+      result = @product2.valid?
 
-        expect(result).must_equal false
-      end
+      expect(result).must_equal false
+    end
   end
 end
