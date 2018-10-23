@@ -21,15 +21,15 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:success] = "Successfully uploaded \"#{@product.name}\""
-      redirect_to products_path
+      redirect_to product_path(@product.id)
     else
+      puts "Failed to save product: #{@product.errors.messages}"
       flash.now[:error] = "Invalid product data. Unable to save."
       render :new, status: :bad_request
     end
   end
 
   def show
-    render_404 unless @product
   end
 
   def edit
@@ -56,14 +56,16 @@ class ProductsController < ApplicationController
     @review.product_id = params[:id]
     @review.user_id = session[:user_id]
 
+    @product = Product.find_by(id: params[:id])
+
     @user = User.find_by(id: @review.user_id)
 
-    if @review.save
+    if @user == @product.user
+        flash[:error] = "Cannot review own product."
+        redirect_to product_path(@review.product_id)
+    else @review.save
       flash[:success] = "Successfully submitted comment!"
       redirect_to request.referrer
-    else
-      flash[:error] = "A problem occurred: could not save rating and/or review."
-      redirect_to product_path(@review.product_id)
     end
   end
 
@@ -74,5 +76,6 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find_by(id: params[:id])
+    head :not_found unless @product
   end
 end

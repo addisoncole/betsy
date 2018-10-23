@@ -9,7 +9,7 @@
     <%= @product.category %>
   </li>
   <li>
-    <%= @product.quantity %>
+    <%= display_quantity_or_sell_out(@product) %>
   </li>
   <li>
     <%= @product.price %>
@@ -25,7 +25,7 @@
 </ul>
 </section>
 
-<%= button_to "Add to cart", cart_entries_path(product_id: @product)%>
+<%= display_add_to_cart_or_sold_out(@product) %>
 
 <%= link_to "Back to Product List", products_path %>
 <section>

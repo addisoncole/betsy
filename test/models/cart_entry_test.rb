@@ -1,12 +1,6 @@
 require "test_helper"
 require "pry"
 
-# Must belong to a Product
-# Must belong to an Order
-# Quantity must be present
-# Quantity must be an integer
-# Quantity must be greater than 0
-
 describe CartEntry do
   describe "validations" do
     it "is valid when all fields are present" do

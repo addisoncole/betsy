@@ -22,126 +22,175 @@ describe ProductsController do
     end
   end
 
-  # describe "create" do
-  #   it "can create a product with valid data" do
-  #     # Arrange
-  #     @user = User.first
-  #     product_hash = { product:
-  #       { name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200', user_id: @user.id }
-  #     }
-  #
-  #     # Assumptions
-  #     test_product = Product.new(product_hash[:product])
-  #     test_product.must_be :valid?, "Product data was invalid. Please come fix this test"
-  #
-  #     # Act
-  #     expect {
-  #       post products_path, params: product_hash
-  #     }.must_change('Product.count', +1)
-  #
-  #     # Assert
-  #     must_redirect_to product_path(Product.last)
-  #   end
+  describe "create" do
+    it "can create a product with valid data" do
+      # Arrange
 
-    # it "does not create a new product w/ invalid data" do
-    #   # Arrange
-    #   @user = User.first
-    #   product_hash = {product: { name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200', user_id: @user.id }}
-    #
-    #   # Assumptions
-    #   Book.new(book_data[:book]).wont_be :valid?, "Book data wasn't invalid. Please come fix this test"
-    #
-    #   # Act
-    #   expect {
-    #     post(books_path, params: book_data)
-    #   }.wont_change('Book.count')
-    #
-    #   # Assert
-    #   must_respond_with :bad_request
-    # end
-  # end
+      @user = users(:fetchuser)
+      perform_login(@user)
 
-  # describe "show" do
+      product_hash = {
+        product: {
+          name: 'Artisanal Coffee',
+          category: "Lifestyle",
+          quantity: 4,
+          price: 9.99,
+          image: 'https://placekitten.com/200/200',
+          user: @user
+        }
+      }
 
-  # it "should respond with success for showing an existing book" do
-  #   # Arrange
-  #   existing_book = books(:poodr)
-  #
-  #   # Act
-  #   get book_path(existing_book.id)
-  #
-  #   # Assert
-  #   must_respond_with :success
-  # end
-  #
-  # it "should respond with not found for showing a non-existing book" do
-  #   # Arrange
-  #   # book = books(:poodr)
-  #   # id = book.id
-  #
-  #   # get book_path(id)
-  #   # must_respond_with :success
-  #   #
-  #   #
-  #   # book.destroy
-  #
-  #   # Act
-  #   get book_path(bad_book_id)
-  #
-  #   # Assert
-  #   must_respond_with :missing
-  # end
+      # Assumptions
+      test_product = Product.new(product_hash[:product])
+      test_product.must_be :valid?, "Product data was invalid. Please come fix this test"
 
-# end
+      # Act
+      expect {
+        post products_path, params: product_hash
+      }.must_change('Product.count', +1)
 
-# describe "edit" do
-#   it "responds with success for an existing book" do
-#     get edit_book_path(Book.first)
-#     must_respond_with :success
-#   end
-#
-#   it "responds with not_found for a book that D.N.E." do
-#     get edit_book_path(bad_book_id)
-#     must_respond_with :not_found
-#   end
-# end
-#
-# describe "update" do
-# end
-#
-#
-# describe "destroy" do
-#   it "can destroy an existing book" do
-#     # Arrange
-#     book = books(:poodr)
-#     # before_book_count = Book.count
-#
-#     # Act
-#     expect {
-#       delete book_path(book)
-#     }.must_change('puts "inside the must_change argument"; Book.count', -1)
-#
-#     # Assert
-#     must_respond_with :redirect
-#     must_redirect_to books_path
-#
-#     # expect(Book.count).must_equal(
-#     #   before_book_count - 1,
-#     #   "book count did not decrease"
-#     # )
-#   end
-#
-#   it "responds with not_found if the book doesn't exist" do
-#     id = bad_book_id
-#     expect {
-#       delete book_path(id)
-#     }.wont_change('Book.count')
-#
-#     must_respond_with :not_found
-#   end
-# end
+      # Assert
+      must_redirect_to product_path(Product.last)
+    end
+
+    it "does not create a new product w/ invalid data" do
+      # Arrange
+
+      @user = users(:fetchuser)
+      perform_login(@user)
+
+      product_hash = {
+        product: {
+          name: '',
+          category: "Lifestyle",
+          quantity: 4,
+          price: 9.99,
+          image: 'https://placekitten.com/200/200',
+          user: @user
+        }
+      }
+
+      # Assumptions
+      test_product = Product.new(product_hash[:product])
+
+      # Act
+      expect {
+        post products_path, params: product_hash
+      }.wont_change('Product.count')
+
+      # Assert
+      must_respond_with :bad_request
+    end
+
+    describe "show" do
+
+      it "should respond with success for showing an existing book" do
+        # Arrange
+        @product = products(:avocadotoast)
+
+        # Act
+        get products_path(@product.id)
+
+        # Assert
+        must_respond_with :success
+      end
+
+      it "should respond with not found for showing a non-existing product" do
+        # Arrange
+        @product = products(:avocadotoast)
+        id = @product.id
+
+        get product_path(id)
+        must_respond_with :success
 
 
+        @product.destroy
 
-# end
+        # Act
+        get product_path(id)
+
+        # Assert
+        must_respond_with :missing
+      end
+
+    end
+
+    describe "edit" do
+      it "responds with success for an existing product" do
+        get edit_product_path(Product.first)
+        must_respond_with :success
+      end
+
+      it "responds with not_found for a product that doesn't exist" do
+        @product = products(:avocadotoast)
+        id = @product.id
+
+        @product.destroy
+
+        get edit_product_path(id)
+        must_respond_with :not_found
+      end
+    end
+
+    describe "update" do
+      it "responds with success for an updating existing product with valid information" do
+        @user = users(:fetchuser)
+        perform_login(@user)
+
+        @product = products(:swisscheeseplant)
+        updated_name = "Addy waz here"
+        put product_path(@product.id), params: {
+          product: {
+            name: updated_name
+          }
+        }
+        @product.reload
+        assert_equal updated_name, @product.name
+      end
+
+      it "responds with bad_request for a product that is invalid" do
+        @user = users(:fetchuser)
+        perform_login(@user)
+
+        @product = products(:swisscheeseplant)
+        updated_name = ""
+        put product_path(@product.id), params: {
+          product: {
+            name: updated_name
+          }
+        }
+        must_respond_with :bad_request
+      end
+
+    end
+
+    describe "destroy" do
+      it "can destroy an existing product" do
+        # Arrange
+        @product = products(:swisscheeseplant)
+        # before_book_count = Book.count
+
+        # Act
+        expect {
+          delete product_path(@product)
+        }.must_change('Product.count', -1)
+
+        # Assert
+        must_respond_with :redirect
+        must_redirect_to products_path
+      end
+
+      it "responds with not_found if the product doesn't exist" do
+        id = bad_product_id
+        expect {
+          delete product_path(id)
+        }.wont_change('Product.count')
+
+        must_respond_with :not_found
+      end
+    end
+
+
+
+  end
 end
