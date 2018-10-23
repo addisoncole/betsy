@@ -1,0 +1,108 @@
+<h1>Order #<%= @order.id %></h1>
+
+<div class="shit-container">
+  <ul class="order-info">
+    <% if !@order.card_number %>
+    <h2 class="order-info-header">Orderrr Info</h2>
+    <%= form_with model: @order, method: :patch do |f| %>
+    <p>
+      To complete your order, please share your private information with us!
+    </p>
+    <p>
+      (We promise we will keep it safe...)
+    </p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+
+    <%= f.label :billing_address %>
+    <%= f.text_field :billing_address %>
+
+    <%= f.label :billing_zip_code %>
+    <%= f.text_field :billing_zip_code %>
+
+    <%= f.label :card_number %>
+    <%= f.text_field :card_number %>
+
+    <%= f.label :CVV %>
+    <%= f.text_field :CVV %>
+
+    <%= f.label :shipping_address %>
+    <%= f.text_field :shipping_address %>
+
+    <%= f.submit "CHECK OUT (no backsies!)", class: "submit" %>
+    <% end %>
+    <% else %>
+    <h2 class="order-info-header">Infocard</h2>
+    <ul class="order-data">
+      <li>name:</li>
+      <li><%= @order.name %></li>
+      <li>email:</li>
+      <li><%= @order.email %></li>
+      <li>billing address:</li>
+      <li><%= @order.billing_address %></li>
+      <li>billing zip code:</li>
+      <li><%= @order.billing_zip_code %></li>
+      <li>card number:</li>
+      <li>********<%= @order.card_number.to_s[-4..-1] %></li>
+      <li>shipping address:</li>
+      <li><%= @order.shipping_address %></li>
+    </ul>
+    <% end %>
+
+    <!--
+    <li>
+    name:
+    <% user = User.find_by(id: session[:user_id]) %>
+    <% if user %>
+    <%= user.name %>
+    <% else %>
+    <span>Guest</span>
+    <% end %>
+  </li>
+  <li>
+  email:
+  <% if user %>
+  <%= user.name %>
+  <% else %>
+  <span>Guest</span>
+  <% end %>
+</li>
+<li>
+  shipping address:
+  <%= @order.shipping_address %>
+</li>
+<li>
+  cc:
+  <%= @order.card_number.to_s[-4..-1] %>
+</li>
+<li>
+  cc exp:
+  <%= @order.card_expiration %>
+</li> -->
+  </ul>
+
+  <section class="items-info">
+    <h2 class="items-info-header">Itemsss</h2>
+    <h4 class="items-info-heading itemheading1">total</h4>
+    <h4 class="items-info-heading itemheading2">status</h4>
+    <% @order.cart_entries.each do |entry| %>
+    <ul class="cart-entry">
+      <li class="entry-name">
+        <%= Product.find_by(id: entry.product_id).name %>
+      </li>
+      <li class="entry-qty">
+        qty: <%= entry.quantity %>
+      </li>
+      <li class="entry-total">
+        <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
+      </li>
+      <li class="entry-status">
+        <%= entry.status %>
+      </li>
+    </ul>
+    <% end %>
+  </section>
+</div>
