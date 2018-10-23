@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy, :userdash]
 
   def index
     @users = User.all
@@ -29,6 +29,11 @@ class UsersController < ApplicationController
     flash[:status] = :success
     flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}"
     redirect_to root_path
+  end
+
+  def userdash
+    @products = @user.products
+    @orders = @user.orders
   end
 
   private

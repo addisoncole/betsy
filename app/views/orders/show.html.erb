@@ -1,4 +1,8 @@
-<h1>Order# <%= @order.id %></h1>
+<% if @order.status == "pending" %>
+  <h1>My Bag</h1>
+<% else %>
+  <h1>Order #<%= @order.id %></h1>
+<% end %>
 
 <ul>
   <h2>Order Info</h2>
@@ -21,7 +25,7 @@
   </li>
   <li>
     shipping address:
-    <%= @order.address %>
+    <%= @order.shipping_address %>
   </li>
   <li>
     cc:
@@ -50,3 +54,5 @@
   </li>
   <% end %>
 </ul>
+
+<%= link_to "chekout!", order_checkout_path(@order) %>

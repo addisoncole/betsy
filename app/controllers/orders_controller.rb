@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-  before_action :find_order, only: [:show, :edit, :update, :destroy]
+  before_action :find_order, only: [:show, :edit, :update, :destroy, :checkout]
 
   def index
     @orders = Order.all
@@ -16,6 +16,15 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  def update
+    if @order.update(order_params)
+      @order.decrement_products
+      session[:order_id] = nil
+      redirect_to order_checkout_path(@order)
+    else
+    end
+  end
+
   def create
     @order = Order.new(order_params)
   end
@@ -25,6 +34,9 @@ class OrdersController < ApplicationController
     session[:order_id] = nil
   end
 
+  def checkout
+  end
+
   private
 
   def find_order
@@ -32,7 +44,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.fetch(:order, {})
+    return params.require(:order).permit(:name, :billing_address, :email, :shipping_address, :billing_zip_code, :card_number, :card_expiration, :CVV)
   end
 
 end
