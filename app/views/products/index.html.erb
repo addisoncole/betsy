@@ -11,7 +11,7 @@
       <%=  "#{product.category}" %>
     </li>
     <li>
-      <%=  "#{product.quantity} " %>
+      <%= display_quantity_or_sell_out(product) %>
     </li>
     <li>
       <%=  "#{product.price}" %>
