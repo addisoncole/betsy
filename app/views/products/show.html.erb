@@ -25,18 +25,17 @@
 </ul>
 </section>
 
-<<<<<<< HEAD
+
 <section>
+
   <%= form_with model: @cart_entry, :url =>  cart_entries_path(product_id:  @product.id)  do |f| %>
     <%= f.label :quantity %>
     <%= f.select :quantity, [*1..@product.quantity] %>
 
-    <%= f.submit "Submit" %>
+
+    <%= display_add_to_cart_or_sold_out(@product) %>
   <% end %>
 </section>
-=======
-<%= display_add_to_cart_or_sold_out(@product) %>
->>>>>>> 6ebdd0b01670bd3cf843a7dd14ab2d5efb27f426
 
 <%= link_to "Back to Product List", products_path %>
 <section>

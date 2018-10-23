@@ -23,11 +23,12 @@ class CartEntriesController < ApplicationController
     @product = Product.find(params[:product_id])
     head :not_found unless @product
 
-
+    if params[:cart_entry] != nil
       @cart_entry = @order.add_product(@product, session[:order_id], params[:cart_entry][:quantity].to_i)
-      
+    end
+
     if !@cart_entry
-      flash[:error] = ""
+      flash[:error] = "Product unavailable, needs more swag"
       redirect_to product_path(@product.id)
       return
     end
@@ -35,6 +36,7 @@ class CartEntriesController < ApplicationController
     if @cart_entry.order_id == nil
       @cart_entry.order_id = @order.id
     end
+    
     if @cart_entry.save!
       flash[:success] = "Item succesfully added to cart"
       redirect_back(fallback_location: root_path)
