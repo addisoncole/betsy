@@ -90,12 +90,18 @@
 
   <section class="items-info">
     <h2 class="items-info-header">Itemsss</h2>
+<<<<<<< HEAD
     <div class="items-info-headers-container">
       <h4 class="items-info-heading itemheading1">total</h4>
       <h4 class="items-info-heading itemheading2">status</h4>
     </div>
     <div class="cart-entries-container">
       <% @order.cart_entries.each do |entry| %>
+=======
+    <h4 class="items-info-heading itemheading1">total</h4>
+    <h4 class="items-info-heading itemheading2">status</h4>
+    <% @order.cart_entries.each do |entry| %>
+>>>>>>> add h1 to userdash view
       <ul class="cart-entry">
         <li class="entry-name">
           <%= link_to "#{Product.find_by(id: entry.product_id).name}", product_path(Product.find_by(id: entry.product_id)) %>
@@ -110,6 +116,7 @@
           <%= entry.status %>
         </li>
       </ul>
+<<<<<<< HEAD
       <% end %>
       <ul class="cart-entry">
         <li class="entry-total grand-total">
@@ -117,5 +124,8 @@
         </li>
       </ul>
     </div>
+=======
+    <% end %>
+>>>>>>> add h1 to userdash view
   </section>
 </div>
