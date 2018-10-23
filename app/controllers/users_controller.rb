@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :current_user?, only: [:edit, :destroy]
 
   def index
     if User.find_by(id: session[:user_id])
@@ -21,32 +22,44 @@ class UsersController < ApplicationController
   def show
     if User.find_by(id: session[:user_id])
       @user = User.find_by(id: params[:id])
-      render_404 unless @user
     else
-      flash[:error] = "Must be logged in to do that."
+      flash[:error] = "Members Only"
       redirect_to root_path
     end
   end
 
   def edit
+    unless current_user?
+      redirect_to root_path, :alert => "Members Only"
+    end
   end
 
   def update
   end
 
   def destroy
-    @user.destroy
-    flash[:status] = :success
-    flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}"
+    if current_user?
+      @user.destroy
+      flash[:status] = :success
+      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}"
+      redirect_to root_path
+    else
+      flash[:error] = "Must be logged in as user to do that."
+      redirect_to root_path
+    end
+  else
+    flash[:error] = "Members Only"
     redirect_to root_path
   end
+end
 
-  private
-  def user_params
-    params.require(:user).permit(:name, :username, :email, :merchant)
-  end
-  def find_user
-    @user = User.find_by(id: params[:id])
-  end
-
+private
+def user_params
+  params.require(:user).permit(:name, :username, :email, :merchant)
+end
+def find_user
+  @user = User.find_by(id: params[:id])
+end
+def current_user?
+  @user == User.find_by(id: session[:user_id])
 end
