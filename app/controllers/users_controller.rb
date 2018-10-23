@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :edit, :update, :destroy, :userdash]
+
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :current_user?, only: [:edit, :destroy]
 
   def index
-    @users = User.all
+    if User.find_by(id: session[:user_id])
+      @users = User.all
+    else
+      flash[:error] = "Must be logged in to do that."
+      redirect_to root_path
+    end
   end
 
   def new
@@ -14,20 +21,35 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
-    render_404 unless @user
+    if User.find_by(id: session[:user_id])
+      @user = User.find_by(id: params[:id])
+    else
+      flash[:error] = "Members Only"
+      redirect_to root_path
+    end
   end
 
   def edit
+    unless current_user?
+      redirect_to root_path, :alert => "Members Only"
+    end
   end
 
   def update
   end
 
   def destroy
-    @user.destroy
-    flash[:status] = :success
-    flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}"
+    if current_user?
+      @user.destroy
+      flash[:status] = :success
+      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}"
+      redirect_to root_path
+    else
+      flash[:error] = "Must be logged in as user to do that."
+      redirect_to root_path
+    end
+  else
+    flash[:error] = "Members Only"
     redirect_to root_path
   end
 
@@ -43,5 +65,7 @@ class UsersController < ApplicationController
   def find_user
     @user = User.find_by(id: params[:id])
   end
-
+  def current_user?
+    @user == User.find_by(id: session[:user_id])
+  end
 end

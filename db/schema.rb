@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2018_10_23_052456) do
     t.datetime "updated_at", null: false
     t.bigint "order_id"
     t.integer "quantity", default: 1
-    t.string "status", default: "pending"
     t.bigint "product_id"
+    t.string "status", default: "pending"
     t.index ["order_id"], name: "index_cart_entries_on_order_id"
     t.index ["product_id"], name: "index_cart_entries_on_product_id"
   end
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2018_10_23_052456) do
     t.string "email"
     t.string "billing_address"
     t.string "status", default: "pending"
-    t.integer "user_id"
     t.string "name"
   end
 
