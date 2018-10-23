@@ -1,3 +1,151 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 {
+  color: #ff6b25;
+  font-family: NeuePlakSemi;
+  font-size: 6vw;
+  opacity: .8;
+  margin-top: -.5vw;
+  margin-bottom: 2vw;
+}
+
+.order-info {
+  width: 23vw;
+  border: 1px solid #404040;
+  padding: 0 2.3vw 0 0;
+  margin: 0;
+  margin-bottom: 5vw;
+  box-shadow: 5px 5px #404040;
+  background-color: #fdfff7;
+  list-style: none;
+}
+
+.order-info p {
+  font-family: NeuePlakReg;
+  font-size: 1.1vw;
+}
+
+.order-info input {
+  display: block;
+}
+
+.order-info label {
+  margin-bottom: 0;
+  margin-top: .5vw;
+  font-family: NeuePlakReg;
+  font-size: 1.2vw;
+}
+
+.submit {
+  margin-top: 1vw;
+  font-family: NeuePlakReg;
+  font-size: 1vw;
+  font-style: italic;
+  padding: .7vw 6vw .9vw 1vw;
+  border-radius: 3px;
+}
+
+.order-info-header {
+  border-bottom: 1px solid #404040;
+  padding-left: 1.5vw;
+  padding-top: 2vw;
+  font-family: NeuePlakSemi;
+  color: #404040;
+  font-size: 3vw;
+}
+
+.order-info form {
+  margin-left: 2vw;
+  margin-bottom: 2vw;
+}
+
+.order-info p:first-of-type {
+  margin-top: 1vw;
+  margin-bottom: .5vw;
+}
+
+.order-data {
+  list-style: none;
+  font-family: NeuePlakReg;
+  color: #404040;
+  font-size: 1.5vw;
+  margin-bottom: 2.7vw;
+}
+
+.order-data li:nth-of-type(odd) {
+  text-decoration: underline;
+}
+
+.order-data li:nth-of-type(even) {
+  line-height: 1.8vw;
+  margin-bottom: 1vw;
+  margin-left: 1vw;
+  font-family: NeuePlakLight;
+}
+
+.items-info {
+  width: 50vw;
+  height: 25vw;
+  border: 1px solid #404040;
+  padding: 0 2.3vw 0 0;
+  margin: 0;
+  margin-left: 2.2vw;
+  box-shadow: 5px 5px #404040;
+  background-color: #fdfff7;
+}
+
+.items-info-header {
+  border-bottom: 1px solid #404040;
+  padding-left: 1.5vw;
+  padding-top: 2vw;
+  font-family: NeuePlakSemi;
+  color: #404040;
+  font-size: 3vw;
+}
+
+.items-info-heading {
+  font-family: NeuePlakSemi;
+  color: #404040;
+  font-size: 1.4vw;
+  float: right;
+  margin-top: -2.4vw;
+}
+
+.itemheading1 {
+  margin-right: 11.7vw;
+}
+
+.itemheading2 {
+  margin-right: 3vw;
+}
+
+.cart-entry {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin-top: 1vw;
+  font-family: NeuePlakLight;
+  font-size: 1.3vw;
+}
+
+.entry-status {
+  margin-right: 2.3vw;
+}
+
+.entry-total {
+  margin-right: 5vw;
+}
+
+.entry-qty {
+  margin-right: 5vw;
+}
+
+.entry-name {
+  margin-right: 5vw;
+}
+
+.shit-container {
+  display: flex;
+}

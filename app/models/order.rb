@@ -10,4 +10,10 @@ class Order < ApplicationRecord
     end
     current_product
   end
+
+  def decrement_products
+    self.cart_entries.each do |entry|
+      entry.decrement_product
+    end
+  end
 end

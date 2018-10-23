@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :cart_entries
   resources :orders
 
+  patch 'orders/chekout/:id', to: 'orders#update'
+
+  get 'orders/chekout/:id', to: 'orders#checkout', as: 'order_checkout'
+
   get 'users/dash/:id', to: 'users#userdash', as: 'userdash'
 
   get "/auth/:provider/callback", to: "sessions#login"
