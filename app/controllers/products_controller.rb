@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :product_owner?, only: [:edit, :destroy]
+  before_action :is_reviewer_logged_in, only: [:review]
 
 
   def index
@@ -63,19 +64,24 @@ class ProductsController < ApplicationController
   end
 
   def review
-    @review = Review.new(rating: params[:rating], comment: params[:comment])
-    @review.product_id = params[:id]
-    @review.user_id = session[:user_id]
+    if @reviewer
+      @review = Review.new(rating: params[:rating], comment: params[:comment])
+      @review.product_id = params[:id]
+      @review.user_id = session[:user_id]
 
-    @product = Product.find_by(id: params[:id])
+      @product = Product.find_by(id: params[:id])
 
-    @user = User.find_by(id: @review.user_id)
+      @user = User.find_by(id: @review.user_id)
 
-    if @user == @product.user
-      flash[:error] = "Cannot review own product."
-      redirect_to product_path(@review.product_id)
-    else @review.save
-      flash[:success] = "Successfully submitted comment!"
+      if @user == @product.user
+        flash[:error] = "Cannot review own product."
+        redirect_to product_path(@review.product_id)
+      else @review.save
+        flash[:success] = "Successfully submitted comment!"
+        redirect_to request.referrer
+      end
+    else
+      flash[:error] = "Members Only"
       redirect_to request.referrer
     end
   end
@@ -93,5 +99,9 @@ class ProductsController < ApplicationController
   def product_owner?
     @user = User.find_by(id: session[:user_id])
     @user == @product.user
+  end
+
+  def is_reviewer_logged_in
+    @reviewer = User.find_by(id: session[:user_id])
   end
 end
