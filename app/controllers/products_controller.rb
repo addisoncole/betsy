@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :product_owner?, only: [:edit, :destroy]
+
 
   def index
     if params[:category]
@@ -35,6 +37,9 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    unless product_owner?
+      redirect_to products_path, :alert => "Members Only"
+    end
   end
 
   def update
@@ -46,10 +51,14 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if @product.destroy
-      flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed #{@product.name}"
-      redirect_to products_path
+    if product_owner?
+      if @product.destroy
+        flash[:status] = :success
+        flash[:result_text] = "Successfully destroyed #{@product.name}"
+        redirect_to products_path
+      end
+    else
+      redirect_to products_path, :alert => "Members Only"
     end
   end
 
@@ -58,14 +67,16 @@ class ProductsController < ApplicationController
     @review.product_id = params[:id]
     @review.user_id = session[:user_id]
 
+    @product = Product.find_by(id: params[:id])
+
     @user = User.find_by(id: @review.user_id)
 
-    if @review.save
+    if @user == @product.user
+      flash[:error] = "Cannot review own product."
+      redirect_to product_path(@review.product_id)
+    else @review.save
       flash[:success] = "Successfully submitted comment!"
       redirect_to request.referrer
-    else
-      flash[:error] = "A problem occurred: could not save rating and/or review."
-      redirect_to product_path(@review.product_id)
     end
   end
 
@@ -77,5 +88,10 @@ class ProductsController < ApplicationController
   def find_product
     @product = Product.find_by(id: params[:id])
     head :not_found unless @product
+  end
+
+  def product_owner?
+    @user = User.find_by(id: session[:user_id])
+    @user == @product.user
   end
 end

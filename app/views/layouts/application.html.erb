@@ -10,11 +10,24 @@
 </head>
 
 <body>
+  <%= image_tag "vines.png", alt: "Tangled vines hanging from the navigation card", class: "vines" %>
   <div class="body-container">
     <header>
       <div class="bag-container">
+        <ul class="login">
+          <% if session[:user_id] %>
+          <li class="guest-msg">
+            Welcome,
+          </li>
+          <li class="login-name-li"><span class="emoji"><%= random_emoji %></span><%= link_to "#{@logged_in_user.username}", user_path(@logged_in_user.id), class: "login-name" %></li>
+          <li class="login-button"><%= link_to "logout", logout_path, method: "delete" %></li>
+          <% else %>
+          <li class="guest-msg">currently browsing as a guest...</li>
+          <li class="login-button"><%= link_to "login", "/auth/github" %></li>
+          <% end %>
+        </ul>
         <% if @order.cart_entries.length >= 1 %>
-          <%= link_to "my bag (#{@order.cart_entries.length})", order_path(@order), class: "my-bag" %>
+        <%= link_to "my bag (#{@order.cart_entries.length})", order_path(@order), class: "my-bag" %>
         <% end %>
       </div>
       <div class="header-container">
@@ -28,14 +41,6 @@
             <li><%= link_to "the spread", products_path %></li>
             <li><%= link_to "pop-ups" %></li>
             <li><%= link_to "the message", "/pages/themessage" %></li>
-          </ul>
-          <ul class="login">
-            <% if session[:user_id] %>
-            <li class="login-button"><%= link_to "logged in as #{@logged_in_user.username}", user_path(@logged_in_user.id) %></li>
-            <li class="login-button"><%= link_to "logout", logout_path, method: "delete" %></li>
-            <% else %>
-            <li class="login-button"><%= link_to "login", "/auth/github" %></li>
-            <% end %>
           </ul>
         </nav>
       </div>

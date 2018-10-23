@@ -30,6 +30,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'NeuePlakReg';
+  src: font-url('neueplakreg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NeuePlakLight';
+  src: font-url('neueplaklight.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   height: 100%;
 }
@@ -42,24 +56,35 @@ body {
   background-image: linear-gradient(#fdfff7, #fdfff7, #fefffc, #fefffc, #ffffff);
 }
 
+.body-container {
+  max-width: 90vw;
+}
+
+header {
+  margin-left: -.3vw;
+}
+
 .bag-container {
+  position: fixed;
+  z-index: 100;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  top: 2vw;
+  right: 3.6vw;
+  width: 16vw;
+  min-height: 15vw;
+  padding: 0 2.3vw 0 0;
+  border: 1px solid #404040;
+  box-shadow: 5px 5px #404040;
+  background-color: #fdfff7;
 }
 
 .my-bag {
-  position: fixed;
-  z-index: 100;
-  background-color: #fdfff7;
-  transform: translateY(1vw);
   color: #404040;
   font-family: 'NeuePlakSemi';
   font-size: 2vw;
   opacity: .97;
-  right: 3.4vw;
-  padding: 2px 15px 10px 15px;
-  border: 1px solid #404040;
-  box-shadow: 5px 5px #404040;
 }
 
 .my-bag:hover {
@@ -71,16 +96,73 @@ body {
   animation-iteration-count: infinite;
 }
 
+.login {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.guest-msg {
+  color: #404040;
+  font-family: 'NeuePlakSemi';
+  font-size: 1.5vw;
+  white-space: normal;
+  text-align: right;
+  margin-bottom: .4vw;
+  margin-top: 1.4vw;
+}
+
+.emoji {
+  font-size: 1.7vw;
+  margin-right: .5vw;
+}
+
+.login-name-li {
+  text-align: right;
+  line-height: 1.5vw;
+  margin-bottom: .1vw;
+  padding-bottom: .2vw;
+  border-bottom: 1px solid #404040;
+}
+
+.login-name:hover, .login-button:hover {
+  opacity: .8;
+  animation-name: shadowfade;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+.login a {
+  text-decoration: none;
+  color: #404040;
+  font-family: 'NeuePlakSemi';
+  font-size: 2vw;
+}
+
+.vines {
+  position: fixed;
+  top: 10vw;
+  right: 1.5vw;
+  z-index: -1;
+  width: 15vw;
+}
+
 .header-container {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  padding-top: 7.4vw;
+  padding-top: 4.5vw;
 }
 
 .audio-player {
   position: fixed;
   bottom: 1vw;
-  right: 1vw;
+  right: 1.5vw;
+  width: 18.5vw;
 }
 
 .header-nav {
@@ -89,6 +171,8 @@ body {
   align-items: flex-end;
   width: 60%;
   flex-shrink: 1;
+  margin-left: 8vw;
+  margin-top: -.7vw;
 }
 
 .header-nav ul {
@@ -144,7 +228,7 @@ body {
 }
 
 .logo-container {
-  margin-left: 3.6vw;
+  margin-left: 3.4vw;
   width: 30vw;
   position: relative;
   display: inline-block;
@@ -182,28 +266,18 @@ body {
   text-decoration: none;
 }
 
-.login {
-  padding: 0;
-  margin-right: -2vw;
-  margin-left: 2vw;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-
 .categories-nav {
   display: flex;
-  justify-content: center;
-  margin-left: -11vw;
+  justify-content: flex-start;
+  margin-top: -1.2vw;
+  margin-left: 1.8vw;
   height: 9vw;
 }
 
 .categories {
   display: flex;
   justify-content: space-around;
-  width: 70%;
+  width: 75%;
   padding-left: 0px;
   list-style: none;
 }
@@ -211,7 +285,7 @@ body {
 .categories a {
   text-decoration: none;
   font-family: 'NeuePlakSemi';
-  font-size: 3vw;
+  font-size: 2.5vw;
   color: #ff6b25;
   text-shadow: 0px 5px 0px #fffd67,
    0px 10px 0px #6787ff;
@@ -250,21 +324,25 @@ body {
 }
 
 .cat1 {
-  transform: translate(.6vw, 1vw) rotate(3deg) scale(1, 1.2);
+  transform: translate(1vw, 1.6vw) rotate(3deg) scale(1, 1.2);
 }
 
 .cat2 {
-  transform: translate(1.1vw, 2vw) rotate(-5deg) skewX(20deg);
+  transform: translate(1.4vw, 2vw) rotate(-5deg) skewX(20deg);
 }
 
 .cat3 {
-  transform: translate(2.3vw, 3.3vw) rotate(1deg) scale(1.2, 1.7);
+  transform: translate(1.9vw, 3.3vw) rotate(1deg) scale(1.2, 1.7);
 }
 
 .cat4 {
-  transform: translate(3.9vw, 1vw) rotate(-20deg);
+  transform: translate(3.5vw, 1.5vw) rotate(-20deg);
 }
 
 .cat5 {
-  transform: translate(7.6vw, 2.6vw) rotate(6deg) scale(1.9, 1);
+  transform: translate(6vw, 1.6vw) rotate(6deg) scale(1.9, 1);
+}
+
+main {
+  margin-left: 3vw;
 }

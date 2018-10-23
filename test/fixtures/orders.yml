@@ -4,6 +4,7 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+<<<<<<< HEAD
 one:
   card_number: 1234
   card_expiration: something
@@ -13,3 +14,14 @@ one:
   email: 12345tsomething
   address: 132address
   status: pending
+=======
+persons_order:
+  card_number: 333333
+  card_expiration: 10/2018
+  CVV: 123
+  billing_zip_code: 98223
+  shipping_address: 123 idk lane
+  email: Email@email.email
+  billing_address: 1234 idk lane
+  status: Pending
+>>>>>>> 6ebdd0b01670bd3cf843a7dd14ab2d5efb27f426

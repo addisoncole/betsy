@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_10_23_181217) do
+=======
+ActiveRecord::Schema.define(version: 2018_10_23_052456) do
+>>>>>>> 6ebdd0b01670bd3cf843a7dd14ab2d5efb27f426
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_181217) do
     t.bigint "order_id"
     t.integer "quantity"
     t.bigint "product_id"
+    t.string "status", default: "pending"
     t.index ["order_id"], name: "index_cart_entries_on_order_id"
     t.index ["product_id"], name: "index_cart_entries_on_product_id"
   end
@@ -28,14 +33,15 @@ ActiveRecord::Schema.define(version: 2018_10_23_181217) do
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "card_number"
+    t.bigint "card_number"
     t.string "card_expiration"
     t.integer "CVV"
     t.integer "billing_zip_code"
     t.string "shipping_address"
     t.string "email"
-    t.string "address"
-    t.string "status"
+    t.string "billing_address"
+    t.string "status", default: "pending"
+    t.string "name"
   end
 
   create_table "products", force: :cascade do |t|
