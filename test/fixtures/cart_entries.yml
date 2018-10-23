@@ -8,4 +8,5 @@ entry:
   order_id: persons_order
   product_id: avocadotoast
   order: persons_order
+  product: avocadotoast
   quantity: 1
