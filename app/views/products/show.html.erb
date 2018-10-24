@@ -12,6 +12,9 @@
     Price: <%= @product.price %>
   </li>
   <li>
+    Swag Rating: <%= get_product_average_rating(@product) %>
+  </li>
+  <li>
     <%= image_tag ("#{@product.image}") %>
   <li>
     <%= display_edit_product_button?(@product) %>
@@ -25,33 +28,39 @@
 <%= display_add_to_cart_or_sold_out(@product) %>
 
 <%= link_to "Back to Product List", products_path %>
+
 <section>
+  <h5>leave thoughts && prayers for this item</h5>
   <%= form_with model: @review, :url => { :action => :review, :method => :post } do |f| %>
-    <%= f.label :rating %>
+    <div>
+    <%= f.label :rating %> 😍:
     <%= f.select :rating, [*1..5] %>
-
-    <%= f.label :comment %>
-    <%= f.text_area :comment %>
-
-    <%= f.submit "Submit" %>
+  </div>
+  <div>
+    <%= f.label :thoughts_and_prayers %>:
+    <div>
+      <%= f.text_area :comment %>
+    </div>
+  </div>
+    <%= f.submit "Make it happen" %>
   <% end %>
 </section>
 
 
 <section>
-<h1>Reviews</h1>
+<h1>thoughts && prayers</h1>
 
 <% @product.reviews.each do |review| %>
 
 <ul>
   <li>
-    Review title: <%= review.rating %>
+    member: <%= review.user.username %>
   </li>
   <li>
-    Username: <%= review.user_id %>
+    rating: <%= convert_review_rating_to_smileys(review.rating) %>
   </li>
   <li>
-    Comments: <%= review.comment %>
+    thought && prayer: <%= review.comment %>
   </li>
 </ul>
 <% end %>

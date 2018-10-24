@@ -43,7 +43,7 @@ module UsersHelper
       end
     end
     if count == 0.0
-      return "Review my swag! I have no reviews."
+      return "Review my swag!"
     else
       return "%.1f" % (rating/count)
     end

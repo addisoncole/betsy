@@ -18,6 +18,11 @@
     <li>
       <%=  "#{product.price}" %>
     </li>
+    <% if product.reviews.count != 0 %>
+    <li>
+      Swag Rating: <%= get_product_average_rating(product) %>
+    </li>
+    <% end %>
   </ul>
 </a>
 <% end %>
