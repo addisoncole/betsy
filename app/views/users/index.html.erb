@@ -1,21 +1,16 @@
-<h1>List of Users</h1>
-<%= link_to "Become a user", new_user_path %>
+<h1>pop-ups</h1>
 
 <% @users.each do |user| %>
-<a href="<%= user_path(user) %>">
-  <ul>
-    <li>
-      <%=  "#{user.name}" %>
-    </li>
-    <li>
-      <%=  "#{user.username}" %>
-    </li>
-    <li>
-      <%=  "#{user.email} " %>
-    </li>
-    <li>
-      <%=  "#{user.products}" %>
-    </li>
-  </ul>
-</a>
+  <% if user.merchant == true %>
+  <a href="<%= user_path(user) %>">
+    <ul>
+      <li>
+        <%=  "#{user.store_name}" %>
+      </li>
+      <li>
+        <%=  image_tag "#{user.store_banner_img}" %>
+      </li>
+    </ul>
+  </a>
+  <% end %>
 <% end %>
