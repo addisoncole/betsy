@@ -13,8 +13,10 @@ describe CartEntriesController do
       @cart_entry_data = {
         product_id: products(:avocadotoast).id,
         cart_entry: {
-          order_id: orders(:one).id,
-          quantity: 1
+          order_id: orders(:persons_order).id,
+          product_id: products(:avocadotoast).id,
+          quantity: 1,
+          status: "pending"
         }
       }
     end
@@ -35,18 +37,18 @@ describe CartEntriesController do
     end
 
     it "does not create a new cart entry w/ invalid data" do
-      # Assumptions
-#       @cart_entry_data[:product_id] = nil
-#
-#       CartEntry.new(@cart_entry_data[:cart_entry]).wont_be :valid?, "Entry data wasn't invalid. Please come fix this test"
-# # binding.pry
-#       # Act
-#       expect {
-#         post cart_entries_path(products(:avocadotoast).id), params: @cart_entry_data
-#       }.wont_change('CartEntry.count')
-#
-#       # Assert
-#       must_respond_with :not_found
+
+      @cart_entry_data[:cart_entry][:quantity] = nil
+
+      CartEntry.new(@cart_entry_data[:cart_entry]).wont_be :valid?, "Entry data wasn't invalid. Please come fix this test"
+
+      # Act
+      expect {
+        post cart_entries_path(products(:avocadotoast).id), params: @cart_entry_data
+      }.wont_change('CartEntry.count')
+
+      # Assert
+      must_redirect_to product_path(products(:avocadotoast).id)
     end
   end
 end

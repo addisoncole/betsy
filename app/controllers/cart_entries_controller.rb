@@ -46,12 +46,12 @@ class CartEntriesController < ApplicationController
       @cart_entry.order_id = @order.id
     end
 
-    if @cart_entry.save!
+    if @cart_entry.save
       flash[:success] = "Item succesfully added to cart"
       redirect_back(fallback_location: root_path)
     else
       flash[:error] = "ERRORRRRR"
-      render :new, status: :bad_request
+      redirect_to product_path(@product.id)
     end
   end
 
