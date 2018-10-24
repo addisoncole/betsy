@@ -28,7 +28,7 @@ class CartEntriesController < ApplicationController
     flash[:success] = "Item added to bag, you go, Glen Coco!"
     redirect_to request.referrer
     else
-      flash[:error] = "Errawr. 🦖 Looks like something was missing."
+      flash[:error] = "Errawr. \u{1F996} Looks like something was missing."
       redirect_to request.referrer
     end
 
