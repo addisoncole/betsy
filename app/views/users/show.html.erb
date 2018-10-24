@@ -1,1 +1,4 @@
-<%= render partial: "merchant_show"%>
+<% if @user.merchant %>
+  <%= render partial: "merchant_show"%>
+<% end %>
+<%= render partial: "user_show"%>

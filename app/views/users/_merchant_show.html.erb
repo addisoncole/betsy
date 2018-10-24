@@ -1,4 +1,4 @@
-<h1><%= display_store_name_or_users_name(@user) %></h1>
+<h1><%= @user.store_name %></h1>
 
 <section class="table">
   <%= image_tag ("#{@user.store_banner_img}") %>
@@ -10,10 +10,10 @@
       <%= @user.store_location %> | <%= display_users_join_date(@user.created_at) %>
     </li>
     <li>
-      Average rating: <%= show_average_rating(@user) %>
+      Average rating:
     </li>
     <li>
-      <%= display_edit_button?(@user) %>
+      <%= display_edit_pop_up_button?(@user) %>
     </li>
     <li>
       <%= display_add_new_product?(@user) %>
@@ -21,7 +21,7 @@
   </ul>
 </section>
 <% if @user.products.count > 0 %>
-<h2>Yr Products</h2>
+<h2><small>fetch by</small> <%= @user.store_name.downcase %>.</h2>
 <section class="table">
   <ul>
     <% @user.products.each do |product| %>
@@ -30,7 +30,7 @@
         <%= image_tag ("#{product.image}") %>
       </li>
       <li>
-        <%=  "#{product.name}" %>
+        <h6><%=  "#{product.name}" %></h6>
       </li>
       <li>
         <%=  "#{product.category}" %>

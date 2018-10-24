@@ -1,0 +1,20 @@
+<h2>Dassshboard</h2>
+<section class="table">
+  <ul>
+    <li>
+      <%= @user.username %>
+    </li>
+    <li>
+      <%= @user.name %>
+    </li>
+    <li>
+      <%= display_users_join_date(@user.created_at) %>
+    </li>
+    <li>
+      <%= display_edit_button?(@user) %>
+    </li>
+    <li>
+      <%= display_sign_up_button?(@user) %>
+    </li>
+  </ul>
+</section>
