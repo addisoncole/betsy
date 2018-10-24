@@ -1,0 +1,48 @@
+<h1><%= display_store_name_or_users_name(@user) %></h1>
+
+<section class="table">
+  <%= image_tag ("#{@user.store_banner_img}") %>
+  <ul>
+    <li>
+      <%= @user.store_description %>
+    </li>
+    <li>
+      <%= @user.store_location %> | <%= display_users_join_date(@user.created_at) %>
+    </li>
+    <li>
+      Average rating: <%= show_average_rating(@user) %>
+    </li>
+    <li>
+      <%= display_edit_button?(@user) %>
+    </li>
+    <li>
+      <%= display_add_new_product?(@user) %>
+    </li>
+  </ul>
+</section>
+<% if @user.products.count > 0 %>
+<h2>Yr Products</h2>
+<section class="table">
+  <ul>
+    <% @user.products.each do |product| %>
+    <a href="<%= product_path(product) %>">
+      <li>
+        <%= image_tag ("#{product.image}") %>
+      </li>
+      <li>
+        <%=  "#{product.name}" %>
+      </li>
+      <li>
+        <%=  "#{product.category}" %>
+      </li>
+      <li>
+        <%= display_quantity_or_sell_out(product) %>
+      </li>
+      <li>
+        <%=  "#{product.price}" %>
+      </li>
+    </a>
+    <% end %>
+  </ul>
+</section>
+<% end %>

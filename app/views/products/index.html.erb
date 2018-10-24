@@ -1,9 +1,11 @@
 <h1><%= @title %></h1>
 
-<%= link_to "Add new product", new_product_path %>
 <% @products.each do |product| %>
 <a href="<%= product_path(product) %>">
   <ul>
+    <li>
+      <%= image_tag ("#{product.image}") %>
+    </li>
     <li>
       <%=  "#{product.name}" %>
     </li>
