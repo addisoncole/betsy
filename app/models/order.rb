@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  belong_to :users
   has_many :cart_entries, dependent: :destroy
 
   def add_product(product, order_id)

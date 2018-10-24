@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :products, dependent: :nullify
   has_many :reviews
+  has_many :orders
   validates :email, presence: true
 
   def self.build_user_hash(auth_hash)
