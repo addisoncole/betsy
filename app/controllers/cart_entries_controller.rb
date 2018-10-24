@@ -30,19 +30,11 @@ class CartEntriesController < ApplicationController
     end
 
     if @cart_entry.save
-<<<<<<< HEAD
-      flash[:success] = "Item succesfully added to cart"
+      flash[:success] = "Item added to bag, you go, Glen Coco!"
       redirect_back(fallback_location: root_path)
     else
-      flash[:error] = "ERRORRRRR"
-      redirect_to product_path(@product.id)
-=======
-    flash[:success] = "Item added to bag, you go, Glen Coco!"
-    redirect_to request.referrer
-    else
       flash[:error] = "Errawr. \u{1F996} Looks like something was missing."
-      redirect_to request.referrer
->>>>>>> 9f4b7dd9aa4f5b7d9dbc035254e406a9404d975d
+      redirect_to product_path(@product.id)
     end
   end
 
@@ -61,4 +53,4 @@ class CartEntriesController < ApplicationController
     @cart_entry = CartEntry.find(params[:id])
 
   end
-endr
+end
