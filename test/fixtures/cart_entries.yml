@@ -4,12 +4,10 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-<<<<<<< HEAD
-=======
+
 entry:
   order_id: persons_order
   product_id: avocadotoast
   order: persons_order
   product: avocadotoast
   quantity: 1
->>>>>>> 6ebdd0b01670bd3cf843a7dd14ab2d5efb27f426
