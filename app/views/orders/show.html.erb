@@ -46,7 +46,7 @@
   <li>
     <%= form_with model: entry, :method => "patch", :url =>  cart_entry_path(id: entry.id, product_id:  entry.product.id)   do |f| %>
       <%= f.label :qty %>
-      <%= f.select :quantity, [*1..entry.product.quantity], {}, { value: entry.quantity, class: 'form-control', onchange: 'this.form.submit();' } %>
+      <%= f.select :quantity, [*1..entry.product.quantity], {}, { value: entry.quantity, onchange: 'this.form.submit();' } %>
     <% end %>
   </li>
   <li>
