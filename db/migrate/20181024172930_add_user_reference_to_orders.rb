@@ -1,5 +1,5 @@
 class AddUserReferenceToOrders < ActiveRecord::Migration[5.2]
   def change
-    add_reference :orders, :users, foreign_key: true
+    add_reference :orders, :users
   end
 end
