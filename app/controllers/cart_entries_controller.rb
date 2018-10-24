@@ -18,8 +18,17 @@ class CartEntriesController < ApplicationController
   def edit
   end
 
+  def update
+    hash = {:quantity => params[:cart_entry][:quantity].to_i}
+# raise
+    if @cart_entry.update(hash)
+      redirect_to order_path(@cart_entry.order_id)
+    else
+      render :edit, status: :bad_request
+    end
+  end
+
   def create
-    puts params
     @product = Product.find(params[:product_id])
     head :not_found unless @product
 
@@ -36,7 +45,7 @@ class CartEntriesController < ApplicationController
     if @cart_entry.order_id == nil
       @cart_entry.order_id = @order.id
     end
-    
+
     if @cart_entry.save!
       flash[:success] = "Item succesfully added to cart"
       redirect_back(fallback_location: root_path)
@@ -63,6 +72,6 @@ class CartEntriesController < ApplicationController
   end
 
   def cart_entry_params
-    params.require(:cart_entry).permit(:product_id)
+    return params.require(:cart_entry).permit(:product_id)
   end
 end

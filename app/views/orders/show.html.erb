@@ -44,7 +44,10 @@
     <%= Product.find_by(id: entry.product_id).name %>
   </li>
   <li>
-    qty: <%= entry.quantity %>
+    <%= form_with model: entry, :method => "patch", :url =>  cart_entry_path(id: entry.id, product_id:  entry.product.id)   do |f| %>
+      <%= f.label :qty %>
+      <%= f.select :quantity, [*1..entry.product.quantity], {}, { value: entry.quantity, class: 'form-control', onchange: 'this.form.submit();' } %>
+    <% end %>
   </li>
   <li>
     <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
