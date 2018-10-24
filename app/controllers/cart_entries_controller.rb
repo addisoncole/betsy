@@ -29,10 +29,6 @@ class CartEntriesController < ApplicationController
       return
     end
 
-    if @cart_entry.order_id == nil
-      @cart_entry.order_id = @order.id
-    end
-
     if @cart_entry.save
       flash[:success] = "Item succesfully added to cart"
       redirect_back(fallback_location: root_path)
@@ -56,9 +52,5 @@ class CartEntriesController < ApplicationController
   def find_cart_entry
     @cart_entry = CartEntry.find(params[:id])
 
-  end
-
-  def cart_entry_params
-    return params.require(:cart_entry).permit(:product_id)
   end
 end

@@ -66,5 +66,19 @@ describe CartEntriesController do
       # Assert
       must_redirect_to product_path(products(:avocadotoast).id)
     end
+
+    it "does not create a cart entry if there is no order id" do
+      @cart_entry_data[:cart_entry][:order_id] = nil
+
+      CartEntry.new(@cart_entry_data[:cart_entry]).wont_be :valid?, "Entry data wasn't invalid. Please come fix this test"
+
+      # Act
+      expect {
+        post cart_entries_path(products(:avocadotoast).id), params: @cart_entry_data
+      }.wont_change('CartEntry.count')
+
+      # Assert
+      must_redirect_to product_path(products(:avocadotoast).id)
+    end
   end
 end
