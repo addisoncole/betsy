@@ -1,5 +1,15 @@
 class Order < ApplicationRecord
   has_many :cart_entries, dependent: :destroy
+  validate :card_number, :presence, if: Proc.new { |a| a.status == "paid" }
+  validates :card_number, :numericality => { :only_interger => true, :must_equal => 16 }
+  validate :card_expiration, :presence, if: Proc.new { |a| a.status == "paid" }
+  validate :CVV, :presence, if: Proc.new { |a| a.status == "paid" }
+  validates :CVV, :numericality => { :only_interger => true, :must_equal => 3 }
+  validate :billing_address, :presence, if: Proc.new { |a| a.status == "paid" }
+  validate :billing_zip_code, :presence, if: Proc.new { |a| a.status == "paid" }
+  validates :billing_zip_code, :numericality => { :only_interger => true, :must_equal => 5 }
+  validate :email, :presence, if: Proc.new { |a| a.status == "paid" }
+  validate :shipping_address, :presence, if: Proc.new { |a| a.status == "paid" }
 
   def add_product(product, order_id)
     current_product = CartEntry.find_by(product_id: product.id, order_id: order_id)
@@ -15,32 +25,5 @@ class Order < ApplicationRecord
     self.cart_entries.each do |entry|
       entry.decrement_product
     end
-  end
-
-  def mark_paid
-    self.cart_entries.each do |entry|
-      entry.mark_paid
-    end
-  end
-
-  def total
-    total = 0
-
-    self.cart_entries.each do |entry|
-      price = Product.find_by(id: entry.product_id).price
-      total += entry.quantity * price
-    end
-
-    return total
-  end
-
-  def order_status
-    self.cart_entries.each do |entry|
-      unless entry.status == :shipped
-        return "awaiting shipment(s)"
-      end
-    end
-
-    return "all items in yr order have been shipped, bb!"
   end
 end
