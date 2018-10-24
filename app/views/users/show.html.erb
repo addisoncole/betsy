@@ -8,13 +8,36 @@
   <li>
     <%= @user.username %>
   </li>
-  <li>
-    <%= @user.products %>
-  </li>
-  <li>
-    <%= display_edit_button?(@user) %>
-  </li>
 </ul>
 </section>
-
-<%= link_to "Back to Users", users_path %>
+<h2>Yr Products</h2>
+<section class="table">
+<ul>
+  <% @user.products.each do |product| %>
+    <a href="<%= product_path(product) %>">
+          <li>
+            <%=  "#{product.name}" %>
+          </li>
+          <li>
+            <%=  "#{product.category}" %>
+          </li>
+          <li>
+            <%= display_quantity_or_sell_out(product) %>
+          </li>
+          <li>
+            <%=  "#{product.price}" %>
+          </li>
+      </a>
+    <% end %>
+</ul>
+</section>
+<section>
+  <ul>
+    <li>
+      <%= display_edit_button?(@user) %>
+    </li>
+    <li>
+      <%= link_to "Back to Users", users_path %>
+    </li>
+  </ul>
+</section>
