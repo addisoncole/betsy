@@ -25,6 +25,17 @@ describe User do
   end
 
   describe "relations" do
+    before do
+      @user = User.first
+    end
 
+    it "has many products" do
+      expect(@user.products).must_respond_to :each
+    end
+
+    it "has many reviews" do
+      puts @user.reviews
+      expect(@user.reviews).must_respond_to :each
+    end
   end
 end

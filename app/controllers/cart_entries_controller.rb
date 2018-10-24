@@ -1,27 +1,14 @@
 require 'pry'
 class CartEntriesController < ApplicationController
   include CurrentCart
-  before_action :find_cart_entry, only: [:show, :edit, :update, :destroy]
+  before_action :find_cart_entry, only: [:edit, :update, :destroy]
   before_action :find_order, only: [:create]
-
-  def index
-    @cart_entries = CartEntry.all
-  end
-
-  def show
-  end
-
-  def new
-    @cart_entry = CartEntry.new
-  end
 
   def edit
   end
 
   def update
-    hash = {:quantity => params[:cart_entry][:quantity].to_i}
-# raise
-    if @cart_entry.update(hash)
+    if @cart_entry.update(params[:cart_entry][:quantity].to_i)
       redirect_to order_path(@cart_entry.order_id)
     else
       render :edit, status: :bad_request
