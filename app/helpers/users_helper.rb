@@ -6,4 +6,12 @@ module UsersHelper
     end
   end
 
+  def display_store_name_or_users_name(user)
+    if @user.store_name
+      return @user.store_name
+    else
+      return @user.name.downcase
+    end
+  end
+
 end
