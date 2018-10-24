@@ -25,7 +25,7 @@ module ProductsHelper
 
     def display_delete_product_button?(product)
       if product.user == User.find_by(id: session[:user_id])
-        (link_to "Delete", product_path, method: :delete, data: {confirm: "Delete  #{@product.name}?"}).html_safe
+        (link_to "Delete", product_path, method: :delete, data: {confirm: "Delete  #{product.name}?"}).html_safe
       end
     end
 end

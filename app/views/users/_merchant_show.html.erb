@@ -41,8 +41,13 @@
       <li>
         <%=  "#{product.price}" %>
       </li>
-    </a>
-    <% end %>
-  </ul>
+        <%= display_edit_product_button?(product) %>
+      </li>
+      <li>
+        <%= display_delete_product_button?(product) %>
+      </li>
+  </a>
+  <% end %>
+</ul>
 </section>
 <% end %>
