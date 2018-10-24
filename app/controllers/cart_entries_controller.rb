@@ -53,4 +53,4 @@ class CartEntriesController < ApplicationController
     @cart_entry = CartEntry.find(params[:id])
 
   end
-end
+endr
