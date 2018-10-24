@@ -46,5 +46,12 @@ describe Review do
       expect(new_rating.valid?).must_equal false
       expect( new_rating.errors ).must_include :rating
     end
+
+    it "is not valid if rating is a string/alphabet" do
+      new_rating = Review.new(rating: "a", comment: "newwww comment")
+
+      expect(new_rating.valid?).must_equal false
+      expect( new_rating.errors ).must_include :rating
+    end
   end
 end
