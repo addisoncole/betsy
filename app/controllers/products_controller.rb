@@ -72,10 +72,10 @@ class ProductsController < ApplicationController
       @user = User.find_by(id: @review.user_id)
 
       if @user == @product.user
-        flash[:error] = "Cannot review own product."
+        flash[:error] = "Errawr. 🦖 Cannot review own product, loser."
         redirect_to product_path(@review.product_id)
       else @review.save
-        flash[:success] = "Successfully submitted comment! You go Glen Coco!"
+        flash[:success] = "Successfully gave your thoughts && prayers! You go Glen Coco!"
         redirect_to request.referrer
       end
     else
