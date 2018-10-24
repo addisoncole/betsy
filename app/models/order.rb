@@ -19,4 +19,31 @@ class Order < ApplicationRecord
       entry.decrement_product
     end
   end
+
+  def mark_paid
+    self.cart_entries.each do |entry|
+      entry.mark_paid
+    end
+  end
+
+  def total
+    total = 0
+
+    self.cart_entries.each do |entry|
+      price = Product.find_by(id: entry.product_id).price
+      total += entry.quantity * price
+    end
+
+    return total
+  end
+
+  def order_status
+    self.cart_entries.each do |entry|
+      unless entry.status == :shipped
+        return "awaiting shipment(s)"
+      end
+    end
+
+    return "all items in yr order have been shipped, bb!"
+  end
 end

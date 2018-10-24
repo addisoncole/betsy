@@ -8,4 +8,8 @@ class CartEntry < ApplicationRecord
       product = Product.find_by(id: self.product_id)
       product.decrement!(:quantity, by = self.quantity)
   end
+
+  def mark_paid
+    self.update_attribute(:status, "paid")
+  end
 end

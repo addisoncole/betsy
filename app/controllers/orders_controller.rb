@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   def update
     if @order.update(order_params)
       @order.decrement_products
+      @order.mark_paid
       session[:order_id] = nil
       redirect_to order_checkout_path(@order)
     else
