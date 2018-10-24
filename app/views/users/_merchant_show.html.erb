@@ -11,7 +11,7 @@
       <%= @user.store_location %> | <%= display_users_join_date(@user.created_at) %>
     </li>
     <li>
-      Average rating:
+      Average rating: <%= get_average_rating(@user) %>
     </li>
     <li>
       <%= display_edit_pop_up_button?(@user) %>

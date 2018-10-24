@@ -15,4 +15,5 @@ class User < ApplicationRecord
     # Note that the user has not been saved
     return user
   end
+
 end

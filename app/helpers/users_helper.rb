@@ -26,13 +26,23 @@ module UsersHelper
     end
   end
 
-  def get_average_rating(user)
-    products = user.products
-    binding.pry
-  end
-
   def display_users_join_date(date)
     ("<span>" + "Member since: " + date.strftime("%b %d") + ", 2k" +  date.strftime("%y") + "</span>").html_safe
+  end
+
+  def get_average_rating(user)
+    products = user.products
+    rating = 0.0
+    count = 0.0
+    products.each do |product|
+      if product.reviews
+        product.reviews.each do |review|
+          rating += review.rating
+          count += 1
+        end
+      end
+    end
+    return "%.1f" % (rating/count)
   end
 
 end
