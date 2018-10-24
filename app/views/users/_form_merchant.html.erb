@@ -1,0 +1,14 @@
+<%= form_with model: @user do |f| %>
+
+<section>
+  <%= f.label :pop_up_name %>
+  <%= f.text_field :store_name %>
+</section>
+<section>
+  <%= f.label :pop_up_brand_image %>
+  <%= f.text_field :store_banner_img %>
+</section>
+
+  <%= f.submit "Make it happen" %>
+
+<% end %>
