@@ -49,6 +49,10 @@
       <li>********<%= @order.card_number.to_s[-4..-1] %></li>
       <li>shipping address:</li>
       <li><%= @order.shipping_address %></li>
+      <li>order placed:</li>
+      <li><%= @order.created_at.strftime("%Y AD / %b  %-d, %H:%M:%S.%L") %></li>
+      <li>order status:</li>
+      <li><%= @order.order_status %></li>
     </ul>
     <% end %>
 
@@ -86,12 +90,15 @@
 
   <section class="items-info">
     <h2 class="items-info-header">Itemsss</h2>
-    <h4 class="items-info-heading itemheading1">total</h4>
-    <h4 class="items-info-heading itemheading2">status</h4>
-    <% @order.cart_entries.each do |entry| %>
+    <div class="items-info-headers-container">
+      <h4 class="items-info-heading itemheading1">total</h4>
+      <h4 class="items-info-heading itemheading2">status</h4>
+    </div>
+    <div class="cart-entries-container">
+      <% @order.cart_entries.each do |entry| %>
       <ul class="cart-entry">
         <li class="entry-name">
-          <%= Product.find_by(id: entry.product_id).name %>
+          <%= link_to "#{Product.find_by(id: entry.product_id).name}", product_path(Product.find_by(id: entry.product_id)) %>
         </li>
         <li class="entry-qty">
           qty: <%= entry.quantity %>
@@ -103,6 +110,12 @@
           <%= entry.status %>
         </li>
       </ul>
-    <% end %>
+      <% end %>
+      <ul class="cart-entry">
+        <li class="entry-total grand-total">
+          $<%= @order.total %>
+        </li>
+      </ul>
+    </div>
   </section>
 </div>

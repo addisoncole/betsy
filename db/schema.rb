@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_052456) do
+ActiveRecord::Schema.define(version: 2018_10_24_003401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2018_10_23_052456) do
     t.datetime "updated_at", null: false
     t.bigint "order_id"
     t.integer "quantity", default: 1
-    t.bigint "product_id"
     t.string "status", default: "pending"
+    t.bigint "product_id"
     t.index ["order_id"], name: "index_cart_entries_on_order_id"
     t.index ["product_id"], name: "index_cart_entries_on_product_id"
   end
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_052456) do
     t.string "email"
     t.string "billing_address"
     t.string "status", default: "pending"
+    t.integer "user_id"
     t.string "name"
   end
 

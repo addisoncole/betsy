@@ -98,6 +98,7 @@ h1 {
 }
 
 .items-info-header {
+  display: block;
   border-bottom: 1px solid #404040;
   padding-left: 1.5vw;
   padding-top: 2vw;
@@ -106,49 +107,65 @@ h1 {
   font-size: 3vw;
 }
 
+.items-info-headers-container {
+  display: grid;
+  grid-template-columns: 22.7vw 7.5vw 7.5vw 7.7vw 4.6vw;
+  justify-items: end;
+}
+
 .items-info-heading {
   font-family: NeuePlakSemi;
   color: #404040;
   font-size: 1.4vw;
-  float: right;
-  margin-top: -2.4vw;
+  margin: 0;
+  margin-bottom: 0vw;
 }
 
 .itemheading1 {
-  margin-right: 11.7vw;
+  grid-column-start: 3;
 }
 
 .itemheading2 {
-  margin-right: 3vw;
+  grid-column-start: 4;
 }
 
 .cart-entry {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: 22.7vw 7.5vw 7.5vw 7.7vw 4.6vw;
+  justify-items: end;
   list-style: none;
   margin-top: 1vw;
   font-family: NeuePlakLight;
   font-size: 1.3vw;
+  padding: 0;
+  padding-right: 2.3vw;
 }
 
-.cart-entry:last-of-type {
-  margin-bottom: 3.1vw;
+.cart-entry:nth-last-child(2) {
+  margin-bottom: .8vw;
 }
 
 .entry-status {
-  margin-right: 2.3vw;
+  grid-column-start: 4;
 }
 
 .entry-total {
-  margin-right: 5vw;
+  grid-column-start: 3;
 }
 
 .entry-qty {
-  margin-right: 5vw;
+  grid-column-start: 2;
 }
 
 .entry-name {
-  margin-right: 5vw;
+  grid-column-start: 1;
+}
+
+.grand-total {
+  border-top: 1px dashed #404040;
+  padding-top: .6vw;
+  font-family: NeuePlakReg;
+  font-size: 1.4vw;
 }
 
 .shit-container {
