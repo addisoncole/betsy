@@ -1,19 +1,23 @@
 <%= form_with model: @user do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
+<section>
   <%= f.label :username %>
   <%= f.text_field :username %>
 
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</section>
+
+<section>
   <%= f.label :email %>
   <%= f.text_field :email %>
+</section>
 
+<section>
+  Would you like to join the fetch team as a merchant?
+  <%= f.label :merchant, as: :boolean do
+    f.check_box :merchant, {}, "true", "false"
+  end %>
+</section>
 
-  <%= radio_button_tag(:merchant, true) %>
-  <%= label_tag(:merchant, "I would like to sell products") %>
-  <%= radio_button_tag(:merchant, false) %>
-  <%= label_tag(:merchant, "I don't want to sell products") %>
-
-
-  <%= f.submit "Save" %>
-  <% end %>
+<%= f.submit "Save" %>
+<% end %>

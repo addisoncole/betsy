@@ -36,6 +36,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.update(user_params)
+      redirect_to edit_user_path(@user.id)
+      flash[:success] = "Updated"
+    else
+      render :edit, status: :bad_request
+    end
   end
 
   def destroy
@@ -58,9 +64,21 @@ class UsersController < ApplicationController
     @orders = @user.orders
   end
 
+  # def toggle_complete
+  #   @task = Task.find_by(id: params[:id])
+  #   if @task.completed == false
+  #     @task.completed = true
+  #     @task.save
+  #   else
+  #     @task.completed = false
+  #     @task.save
+  #   end
+  #   redirect_to tasks_path
+  # end
+
   private
   def user_params
-    params.require(:user).permit(:name, :username, :email, :merchant)
+    params.require(:user).permit(:name, :username, :email, :merchant, :store_name, :store_banner_img)
   end
   def find_user
     @user = User.find_by(id: params[:id])
