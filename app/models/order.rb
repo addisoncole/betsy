@@ -19,6 +19,7 @@ class Order < ApplicationRecord
   end
 
   def mark_paid
+    self.update_attribute(:status, :paid)
     self.cart_entries.each do |entry|
       entry.mark_paid
     end

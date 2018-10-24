@@ -17,4 +17,16 @@ class User < ApplicationRecord
     return user
   end
 
+  def merchant_orders
+    my_products = Product.where(user_id: self.id)
+    entries = CartEntry.where(product_id: my_products)
+    order_ids = []
+
+    entries.each do |entry|
+      order_ids << entry.order_id
+    end
+
+    merchant_orders = Order.where(id: order_ids, status: :paid)
+    return merchant_orders
+  end
 end
