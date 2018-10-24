@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     if User.find_by(id: session[:user_id])
       @users = User.all
     else
-      flash[:error] = "Must be logged in to do that."
-      redirect_to root_path
+      @users = User.where(merchant: true)
     end
   end
 
@@ -21,12 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if User.find_by(id: session[:user_id])
       @user = User.find_by(id: params[:id])
-    else
-      flash[:error] = "Members Only"
-      redirect_to root_path
-    end
   end
 
   def edit
@@ -36,16 +30,22 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.update(user_params)
+      redirect_to edit_user_path(@user.id)
+      flash[:success] = "Successfully updated, you go Glen Coco! \u{1F389}"
+    else
+      render :edit, status: :bad_request
+    end
   end
 
   def destroy
     if current_user?
       @user.destroy
       flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}"
+      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id} \u{1F4A5}"
       redirect_to root_path
     else
-      flash[:error] = "Must be logged in as user to do that."
+      flash[:error] = "Must be logged in as this loser to do that."
       redirect_to root_path
     end
   else
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :username, :email, :merchant)
+    params.require(:user).permit(:name, :username, :email, :merchant, :store_name, :store_banner_img, :store_location, :store_description, :bio)
   end
   def find_user
     @user = User.find_by(id: params[:id])

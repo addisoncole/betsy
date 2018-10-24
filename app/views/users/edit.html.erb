@@ -1,4 +1,9 @@
-<h2>Edit This User</h2>
+<h2><%= @user.name.downcase %></h2>
 <%= render partial: "form_users" %>
 
-<!-- edit username and decide if you want to be a merchant -->
+<% if @user.merchant == true %>
+<section>  
+<h4>manage YR pop-up</h4>
+<%= render partial: "form_merchant" %>
+</section>
+<% end %>

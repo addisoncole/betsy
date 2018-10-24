@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(uid: auth_hash[:uid], provider: 'github')
     if user
       # User was found in the database
-      flash[:success] = "Logged in as returning user #{user.name}"
+      flash[:success] = "Get in, loser. We're going shopping, #{user.name}. \u{1F485}"
       session[:order_id] = nil
     else
       # User doesn't match anything in the DB
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       user = User.build_user_hash(auth_hash)
 
       if user.save
-        flash[:success] = "Logged in as new user #{user.name}"
+        flash[:success] = "Logged in as new loser #{user.name}. We're going shopping. \u{1F485}"
         session[:order_id] = nil
       else
         # Couldn't save the user for some reason. If we
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
         # way we've configured GitHub. Our strategy will
         # be to display error messages to make future
         # debugging easier.
-        flash[:error] = "Could not create new user account: #{user.errors.messages}"
+        flash[:error] = "Could not create new loser account: #{user.errors.messages}"
         redirect_to root_path
         return
       end
@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:order_id] = nil
-    flash[:success] = "You have been logged out."
+    flash[:success] = "You have been logged out. Been there. Shopped that. \u{1F485}"
 
     redirect_to root_path
   end
