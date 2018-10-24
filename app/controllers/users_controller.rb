@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     if current_user?
       @user.destroy
       flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id}, you go Glen Coco!"
+      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id} 💥"
       redirect_to root_path
     else
       flash[:error] = "Must be logged in as this loser to do that."

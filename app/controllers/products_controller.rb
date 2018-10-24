@@ -43,8 +43,10 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
+      flash[:success] = "Successfully updated yr swag! You go Glen Coco!"
       redirect_to product_path(@product.id)
     else
+      flash[:error] = "Errawr. 🦖 Cannot review own product, loser."
       render :edit, status: :bad_request
     end
   end
@@ -53,7 +55,7 @@ class ProductsController < ApplicationController
     if product_owner?
       if @product.destroy
         flash[:status] = :success
-        flash[:result_text] = "Successfully destroyed #{@product.name}"
+        flash[:success] = "Successfully destroyed #{@product.name} 💥"
         redirect_to products_path
       end
     else
