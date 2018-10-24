@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
 
     if @product.save
-      flash[:success] = "Successfully uploaded \"#{@product.name}\""
+      flash[:success] = "Successfully uploaded \"#{@product.name}\", you go Glen Coco!"
       redirect_to product_path(@product.id)
     else
       puts "Failed to save product: #{@product.errors.messages}"
@@ -75,7 +75,7 @@ class ProductsController < ApplicationController
         flash[:error] = "Cannot review own product."
         redirect_to product_path(@review.product_id)
       else @review.save
-        flash[:success] = "Successfully submitted comment!"
+        flash[:success] = "Successfully submitted comment! You go Glen Coco!"
         redirect_to request.referrer
       end
     else

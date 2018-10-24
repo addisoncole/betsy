@@ -30,7 +30,7 @@ module UsersHelper
     ("<span>" + "Member since: " + date.strftime("%b %d") + ", 2k" +  date.strftime("%y") + "</span>").html_safe
   end
 
-  def get_average_rating(user)
+  def get_merchant_average_rating(user)
     products = user.products
     rating = 0.0
     count = 0.0
@@ -42,7 +42,11 @@ module UsersHelper
         end
       end
     end
-    return "%.1f" % (rating/count)
+    if count == 0.0
+      return "Review my swag! I have no reviews."
+    else
+      return "%.1f" % (rating/count)
+    end
   end
 
 end
