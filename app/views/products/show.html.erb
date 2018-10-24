@@ -17,10 +17,10 @@
   <li>
     <%= image_tag ("#{@product.image}") %>
   <li>
-    <%= link_to "Edit", edit_product_path(@product.id) %>
+    <%= display_edit_product_button?(@product) %>
   </li>
   <li>
-    <%= link_to "Delete", product_path, method: :delete, data: {confirm: "Delete  #{@product.name}?"}  %>
+    <%= display_delete_product_button?(@product)  %>
   </li>
 </ul>
 </section>
