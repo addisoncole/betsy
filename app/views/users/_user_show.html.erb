@@ -1,12 +1,9 @@
-<h2>Dassshboard</h2>
+<h1><%= @user.username %></h1>
 <section class="table">
   <%= image_tag (@user.profile_picture) %>
   <ul>
     <li>
-      <%= @user.username %>
-    </li>
-    <li>
-      <%= @user.name %>
+      <%= @user.bio %>
     </li>
     <li>
       <%= display_users_join_date(@user.created_at) %>
@@ -18,4 +15,10 @@
       <%= display_sign_up_button?(@user) %>
     </li>
   </ul>
+</section>
+<section>
+  <h1>Pop-History</h1>
+</section>
+<section>
+  <h1>Fav Pop-ups</h1>
 </section>

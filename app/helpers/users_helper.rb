@@ -21,7 +21,7 @@ module UsersHelper
   end
 
   def display_add_new_product?(user)
-    if @user.merchant
+    if @user == User.find_by(id: session[:user_id])
       (link_to "Add new swag to pop-up", new_product_path).html_safe
     end
   end
