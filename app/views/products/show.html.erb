@@ -3,16 +3,13 @@
 <section class="table">
 <ul>
   <li>
-    <%= @product.name %>
-  </li>
-  <li>
     <%= @product.category %>
   </li>
   <li>
-    <%= display_quantity_or_sell_out(@product) %>
+    Stock: <%= display_quantity_or_sell_out(@product) %>
   </li>
   <li>
-    <%= @product.price %>
+    Price: <%= @product.price %>
   </li>
   <li>
     <%= image_tag ("#{@product.image}") %>

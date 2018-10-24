@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     if User.find_by(id: session[:user_id])
       @users = User.all
     else
-      flash[:error] = "Must be logged in to do that."
-      redirect_to root_path
+      @users = User.where(merchant: true)
     end
   end
 
@@ -21,12 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if User.find_by(id: session[:user_id])
       @user = User.find_by(id: params[:id])
-    else
-      flash[:error] = "Members Only"
-      redirect_to root_path
-    end
   end
 
   def edit
