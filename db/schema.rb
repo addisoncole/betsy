@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_24_040956) do
+ActiveRecord::Schema.define(version: 2018_10_24_070458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2018_10_24_040956) do
     t.string "store_banner_img"
     t.string "store_location"
     t.string "store_description"
+    t.string "profile_picture"
   end
 
   add_foreign_key "cart_entries", "orders"

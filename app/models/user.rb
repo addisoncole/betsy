@@ -9,6 +9,8 @@ class User < ApplicationRecord
     user.provider = 'github'
     user.name = auth_hash['info']['name']
     user.email = auth_hash['info']['email']
+    user.username = auth_hash['info']['name']
+    user.profile_picture = auth_hash['info']['image']
 
     # Note that the user has not been saved
     return user
