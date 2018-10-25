@@ -11,7 +11,8 @@ class CartEntriesController < ApplicationController
     if @cart_entry.update(quantity: params[:cart_entry][:quantity].to_i)
       redirect_to order_path(@cart_entry.order_id)
     else
-      render :edit, status: :bad_request
+      flash[:error] = "Unable to update quantity. Please try again."
+      redirect_to order_path(@cart_entry.order_id)
     end
   end
 
@@ -34,16 +35,15 @@ class CartEntriesController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       flash[:error] = "Errawr. \u{1F996} Looks like something was missing."
-      redirect_to product_path(@product.id)
+      redirect_to  product_path(@product.id)
     end
   end
 
   def destroy
-    @order = Order.find(session[:cart_id])
+    # @order = Order.find(session[:order_id])
     if @cart_entry.destroy
-      flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed #{@cart_entry.product_id}"
-      redirect_to carts_path
+      flash[:success] = "Successfully destroyed #{@cart_entry.product.name}"
+      redirect_back(fallback_location: root_path)
     end
   end
 

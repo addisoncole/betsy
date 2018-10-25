@@ -69,6 +69,112 @@ describe CartEntriesController do
   end
 
   describe "update" do
-    
+    before do
+      user = users(:fetchuser)
+      perform_login(user)
+
+      session[:user_id] = user.id
+
+      # Arrange
+      @cart_entry_data = {
+        product_id: products(:swisscheeseplant).id,
+        cart_entry: {
+          order_id: orders(:persons_order).id,
+          product_id: products(:swisscheeseplant).id,
+          quantity: 1,
+          status: "pending"
+        }
+      }
+
+      @test_entry = CartEntry.create!(@cart_entry_data[:cart_entry])
+    end
+
+    it "updates quantity" do
+      # ARRANGE
+      new_quantity = 5
+      @test_entry.quantity = new_quantity
+      @test_entry.must_be :valid?, "Entry data was invalid. Please come fix this test"
+
+      # ACT
+      patch cart_entry_path(@test_entry), params: {cart_entry: {quantity: new_quantity}}
+
+      # ASSERT
+      @test_entry.reload
+
+      expect(@test_entry.quantity).must_equal new_quantity
+      must_redirect_to order_path(@test_entry.order_id)
+    end
+
+    it "does not update if quantity is invalid" do
+      @test_entry.must_be :valid?, "Entry data was invalid. Please come fix this test"
+
+      new_quantity = 0
+      @test_entry.quantity = new_quantity
+      @test_entry.wont_be :valid?, "Entry data was not invalid. Please come fix this test"
+
+      patch cart_entry_path(@test_entry), params: {cart_entry: {quantity: new_quantity}}
+
+      @test_entry.reload
+      expect(@test_entry.quantity).must_equal 1
+      must_redirect_to order_path(@test_entry.order_id)
+    end
+
+    it "does not update another user\'s cart entry" do
+      new_entry_data = {
+        product_id: products(:swisscheeseplant).id,
+        cart_entry: {
+          order_id: orders(:new_order).id,
+          product_id: products(:swisscheeseplant).id,
+          quantity: 1,
+          status: "pending"
+        }
+      }
+
+      new_entry = CartEntry.create!(new_entry_data[:cart_entry])
+
+      new_quantity = 5
+      new_entry.quantity = new_quantity
+
+      patch cart_entry_path(@test_entry), params: {cart_entry: {quantity: new_quantity}}
+
+      @test_entry.reload
+      expect(@test_entry.quantity).must_equal 1
+      must_redirect_to order_path(@test_entry.order_id)
+    end
+  end
+
+  describe "destroy" do
+    before do
+      user = users(:fetchuser)
+      perform_login(user)
+
+      session[:user_id] = user.id
+
+      # Arrange
+      @cart_entry_data = {
+        product_id: products(:avocadotoast).id,
+        cart_entry: {
+          order_id: orders(:persons_order).id,
+          product_id: products(:avocadotoast).id,
+          quantity: 1,
+          status: "pending"
+        }
+      }
+    end
+
+    it "deletes one cart entry in order page" do
+      #ARRANGE
+      test_entry = CartEntry.create!(@cart_entry_data[:cart_entry])
+      test_entry.must_be :valid?, "Entry data was invalid. Please come fix this test"
+
+      #ACT
+      expect {
+        delete cart_entry_path(test_entry.id)
+      }.must_change('CartEntry.count', -1)
+
+      #ASSERT
+      must_respond_with :redirect
+      must_redirect_to order_path(test_entry.order_id)
+    end
   end
 end

@@ -14,3 +14,13 @@ persons_order:
   email: Email@email.email
   billing_address: 1234 idk lane
   status: Pending
+
+new_order:
+  card_number: 333333
+  card_expiration: 10/2018
+  CVV: 123
+  billing_zip_code: 98223
+  shipping_address: 456 idk lane
+  email: EEmail@eeemail.eeemail
+  billing_address: 5678 idk lane
+  status: Pending

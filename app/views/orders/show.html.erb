@@ -56,7 +56,7 @@
     status:
   </li>
   <li>
-    <%= button_to "Delete", cart_entry_path(entry.id), method: :delete %>
+    <%= button_to "Delete", cart_entry_path(entry.id), method: :delete, data: { confirm: "Delete #{entry.product.name}?" } %>
   </li>
   <% end %>
 </ul>
