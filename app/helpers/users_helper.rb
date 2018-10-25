@@ -49,4 +49,16 @@ module UsersHelper
     end
   end
 
+  def display_personal_orders(user)
+    @user.orders.each do |order|
+      unless order.total == 0
+        <ul class="individual-order">
+          <li>ORDER #<%= order.id %></li>
+          <li><%= order.created_at.strftime("%Y AD / %b  %-d") %></li>
+          <li><%= order.total %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  end
+
 end

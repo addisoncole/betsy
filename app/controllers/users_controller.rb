@@ -58,6 +58,10 @@ class UsersController < ApplicationController
     @orders = @user.orders
   end
 
+  def manage_orders
+    @orders = @user.merchant_orders
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :username, :email, :merchant, :store_name, :store_banner_img, :store_location, :store_description, :bio)

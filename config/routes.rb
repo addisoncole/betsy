@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'orders/chekout/:id', to: 'orders#checkout', as: 'order_checkout'
 
   get 'users/dash/:id', to: 'users#userdash', as: 'userdash'
+  get 'users/manage/:id', to: 'users#manage_orders', as: 'manage_orders'
 
   get "/auth/:provider/callback", to: "sessions#login", as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"

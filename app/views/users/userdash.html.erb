@@ -8,8 +8,9 @@
       <li>name: <%= @user.name %></li>
       <li>email: <%= @user.email %></li>
       <li>user since: <%= @user.created_at.strftime("%Y AD / %b  %-d, %H:%M:%S.%L") %></li>
+      <li>merchant account: <%= @user.merchant %></li>
     </ul>
-    <p>(edit info)</p>
+    <p><%= link_to "(edit)", edit_user_path(@user) %></p>
   </section>
 </section>
 
@@ -17,7 +18,7 @@
   <section class="listings-amount">
     <p><%= @user.products.length %></p>
     <p>listings</p>
-    <p>(add item)</p>
+    <p><%= link_to "(add item)", new_product_path %></p>
   </section>
 </section>
 
@@ -25,7 +26,7 @@
   <section class="orders-amount">
     <p><%= @user.merchant_orders.length %></p>
     <p>pending orders</p>
-    <p>(manage orders)</p>
+    <p><%= link_to "(manage orders)", manage_orders_path(@user) %></p>
   </section>
 </section>
 
@@ -45,13 +46,21 @@
     <h2>Shop Settings</h2>
   </div>
   <div class="shop-settings-form">
-    
+    <%= render partial: "form_merchant" %>
   </div>
 </section>
 
-<% @orders.each do |order| %>
-<%= order %>
-<% end %>
-<% @products.each do |product| %>
-<%= product %>
-<% end %>
+<section class="order-herstory">
+  <h2>Your Personal Order Herstory</h2>
+  <div class="orders-container">
+    <% @user.orders.each do |order| %>
+      <% unless order.total == 0 %>
+        <ul class="individual-order">
+          <li>ORDER #<%= order.id %></li>
+          <li><%= order.created_at.strftime("%Y AD / %b  %-d") %></li>
+          <li><%= order.total %></li>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+</section>
