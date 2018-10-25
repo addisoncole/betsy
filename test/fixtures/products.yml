@@ -10,6 +10,6 @@ avocadotoast:
 swisscheeseplant:
   name: Monstera Deliciosa
   category: Plants
-  quantity: 1
+  quantity: 10
   price: 39.99
   user: fetchuser
