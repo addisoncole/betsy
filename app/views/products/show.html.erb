@@ -48,20 +48,6 @@
 
 
 <section>
-<h1>thoughts && prayers</h1>
-
-<% @product.reviews.each do |review| %>
-
-<ul>
-  <li>
-    member: <%= review.user.username %>
-  </li>
-  <li>
-    rating: <%= convert_review_rating_to_smileys(review.rating) %>
-  </li>
-  <li>
-    thought && prayer: <%= review.comment %>
-  </li>
-</ul>
-<% end %>
+<%= show_product_reviews_title?(@product) %>
+<%= render partial: "review", collection: @product.reviews %>
 </section>

@@ -36,4 +36,9 @@ module ProductsHelper
     def show_product_reviews?(product)
       ("<li>" + "Swag Rating: #{get_product_average_rating(product)}" + "</li>").html_safe unless product.reviews.count == 0
     end
+
+    def show_product_reviews_title?(product)
+      ("<h1>" + "thoughts && prayers" + "</h1>").html_safe unless product.reviews.count == 0
+    end
+
 end
