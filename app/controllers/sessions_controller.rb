@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
     user = User.find_by(uid: auth_hash[:uid], provider: 'github')
     if user
-      flash[:success] = "Get in, loser. We're going shopping, #{user.name}. \u{1F485}"
+      flash[:success] = "Get in, loser. We're going shopping. \u{1F485}"
       session[:order_id] = nil
     else
       user = User.build_user_hash(auth_hash)
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         redirect_to root_path
         return
       end
-      
+
     end
     session[:user_id] = user.id
     redirect_to root_path
