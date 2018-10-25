@@ -1,7 +1,1 @@
-<% if @user.merchant %>
-  <%= render partial: "merchant_show"%>
-<% else %>
-  <% if User.find_by(id: session[:user_id]) %>
-    <%= render partial: "user_show"%>
-  <% end %>
-<% end %>
+<%= display_merchant_page_or_user_profile?(@user, session[:user_id]) %>

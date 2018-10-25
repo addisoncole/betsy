@@ -1,5 +1,4 @@
 require "test_helper"
-require "pry"
 
 describe CartEntry do
   describe "validations" do
@@ -86,5 +85,23 @@ describe CartEntry do
       cart_entry.product_id.must_equal products(:avocadotoast).id
     end
 
+  end
+
+  describe "decrements " do
+    it "decreases quantity by cart entry quantity once the order is submitted by user" do
+      cart_entry = cart_entries(:new_entry)
+      cart_entry.decrement_product
+
+      expect(cart_entry.product.quantity).must_equal 5
+    end
+  end
+
+  describe "mark paid" do
+    it "marks the status as paid once order is submitted by user" do
+      cart_entry = cart_entries(:new_entry)
+      cart_entry.mark_paid
+
+      expect(cart_entry.status).must_equal "paid"
+    end
   end
 end

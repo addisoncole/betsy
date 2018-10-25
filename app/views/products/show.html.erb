@@ -1,4 +1,4 @@
-<h1><%= @product.name.capitalize %></h1>
+<h1><%= @product.name.downcase %></h1>
 
 <section class="table">
 <ul>
@@ -25,7 +25,17 @@
 </ul>
 </section>
 
-<%= display_add_to_cart_or_sold_out(@product) %>
+
+<section>
+
+  <%= form_with model: @cart_entry, :url =>  cart_entries_path(product_id:  @product.id)  do |f| %>
+    <%= f.label :quantity %>
+    <%= f.select :quantity, [*1..@product.quantity] %>
+
+
+    <%= display_add_to_cart_or_sold_out(@product) %>
+  <% end %>
+</section>
 
 <%= link_to "back to the previous spread", request.referer.present? ? request.referer : root_path %>
 
@@ -48,20 +58,6 @@
 
 
 <section>
-<h1>thoughts && prayers</h1>
-
-<% @product.reviews.each do |review| %>
-
-<ul>
-  <li>
-    member: <%= review.user.username %>
-  </li>
-  <li>
-    rating: <%= convert_review_rating_to_smileys(review.rating) %>
-  </li>
-  <li>
-    thought && prayer: <%= review.comment %>
-  </li>
-</ul>
-<% end %>
+<%= show_product_reviews_title?(@product) %>
+<%= render partial: "review", collection: @product.reviews %>
 </section>

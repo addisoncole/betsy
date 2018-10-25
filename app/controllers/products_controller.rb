@@ -33,6 +33,8 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @cart_entry = CartEntry.new
+    
   end
 
   def edit

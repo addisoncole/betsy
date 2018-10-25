@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2018_10_24_175133) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "order_id"
-    t.integer "quantity", default: 1
+    t.integer "quantity"
     t.string "status", default: "pending"
     t.bigint "product_id"
     t.index ["order_id"], name: "index_cart_entries_on_order_id"
