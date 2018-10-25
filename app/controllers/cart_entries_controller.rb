@@ -8,7 +8,7 @@ class CartEntriesController < ApplicationController
   end
 
   def update
-    if @cart_entry.update(params[:cart_entry][:quantity].to_i)
+    if @cart_entry.update(quantity: params[:cart_entry][:quantity].to_i)
       redirect_to order_path(@cart_entry.order_id)
     else
       render :edit, status: :bad_request
