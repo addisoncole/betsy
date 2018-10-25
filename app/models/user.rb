@@ -12,7 +12,6 @@ class User < ApplicationRecord
     user.username = auth_hash['info']['name']
     user.profile_picture = auth_hash['info']['image']
 
-    # Note that the user has not been saved
     return user
   end
 

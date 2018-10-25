@@ -1,19 +1,15 @@
 module UsersHelper
 
   def display_edit_pop_up_button?(user)
-    if @user == User.find_by(id: session[:user_id])
-      (link_to "Edit yr pop-up", edit_user_path(user_id: user)).html_safe
-    end
+    return (link_to "Edit yr pop-up", edit_user_path(user_id: user)).html_safe unless !current_user_page_owner?
   end
 
   def display_edit_button?(user)
-    if @user == User.find_by(id: session[:user_id])
-      (link_to "Edit yr profile", edit_user_path(user_id: user)).html_safe
-    end
+    return (link_to "Edit yr profile", edit_user_path(user_id: user)).html_safe unless !current_user_page_owner?
   end
 
   def display_sign_up_button?(user)
-    if @user == User.find_by(id: session[:user_id])
+    if current_user_page_owner?
       if !@user.merchant
         (link_to "Start yr pop up", edit_user_path(user_id: user)).html_safe
       end
@@ -21,9 +17,7 @@ module UsersHelper
   end
 
   def display_add_new_product?(user)
-    if @user == User.find_by(id: session[:user_id])
-      (link_to "Add new swag to pop-up", new_product_path).html_safe
-    end
+    return (link_to "Add new swag to pop-up", new_product_path).html_safe unless !current_user_page_owner?
   end
 
   def display_users_join_date(date)
@@ -31,10 +25,9 @@ module UsersHelper
   end
 
   def get_merchant_average_rating(user)
-    products = user.products
     rating = 0.0
     count = 0.0
-    products.each do |product|
+    user.products.each do |product|
       if product.reviews
         product.reviews.each do |review|
           rating += review.rating
@@ -42,11 +35,13 @@ module UsersHelper
         end
       end
     end
-    if count == 0.0
-      return "Review my swag!"
-    else
-      return "%.1f" % (rating/count)
-    end
+    count == 0.0 ? "Review my swag!" : ("%.1f" % (rating/count))
+  end
+
+  private
+
+  def current_user_page_owner?
+    @user == User.find_by(id: session[:user_id])
   end
 
 end
