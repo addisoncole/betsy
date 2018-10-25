@@ -41,11 +41,11 @@
   <% end %>
 </section>
 
-<section class="shop-settings">
-  <div class="shop-settings-header">
-    <h2>Shop Settings</h2>
+<section class="popup-settings">
+  <div class="popup-settings-header">
+    <h2>Pop-Up Settings</h2>
   </div>
-  <div class="shop-settings-form">
+  <div class="popup-settings-form">
     <%= render partial: "form_merchant" %>
   </div>
 </section>
@@ -53,14 +53,10 @@
 <section class="order-herstory">
   <h2>Your Personal Order Herstory</h2>
   <div class="orders-container">
-    <% @user.orders.each do |order| %>
-      <% unless order.total == 0 %>
-        <ul class="individual-order">
-          <li>ORDER #<%= order.id %></li>
-          <li><%= order.created_at.strftime("%Y AD / %b  %-d") %></li>
-          <li><%= order.total %></li>
-        </ul>
-      <% end %>
+    <% if non_pending_orders(@user) == [] %>
+      <span><%= "\u{1F629}" %>(*yells from the back of the auditorium*) She doesn't even shop here!! <%= "\u{1F613}" %></span>
+    <% else %>
+      <%= render partial: "individual_order", collection: non_pending_orders(@user) %>
     <% end %>
   </div>
 </section>
