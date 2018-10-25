@@ -25,7 +25,17 @@
 </ul>
 </section>
 
-<%= display_add_to_cart_or_sold_out(@product) %>
+
+<section>
+
+  <%= form_with model: @cart_entry, :url =>  cart_entries_path(product_id:  @product.id)  do |f| %>
+    <%= f.label :quantity %>
+    <%= f.select :quantity, [*1..@product.quantity] %>
+
+
+    <%= display_add_to_cart_or_sold_out(@product) %>
+  <% end %>
+</section>
 
 <%= link_to "back to the previous spread", request.referer.present? ? request.referer : root_path %>
 
