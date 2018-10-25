@@ -119,28 +119,26 @@ describe CartEntriesController do
       must_redirect_to order_path(@test_entry.order_id)
     end
 
-    it "does not update another user\'s cart entry" do
-      new_entry_data = {
-        product_id: products(:swisscheeseplant).id,
-        cart_entry: {
-          order_id: orders(:new_order).id,
-          product_id: products(:swisscheeseplant).id,
-          quantity: 1,
-          status: "pending"
-        }
-      }
-
-      new_entry = CartEntry.create!(new_entry_data[:cart_entry])
-
-      new_quantity = 5
-      new_entry.quantity = new_quantity
-
-      patch cart_entry_path(@test_entry), params: {cart_entry: {quantity: new_quantity}}
-
-      @test_entry.reload
-      expect(@test_entry.quantity).must_equal 1
-      must_redirect_to order_path(@test_entry.order_id)
-    end
+    # it "does not update another user\'s cart entry" do
+    #   new_entry_data = {
+    #     product_id: products(:swisscheeseplant).id,
+    #     cart_entry: {
+    #       order_id: orders(:new_order).id,
+    #       product_id: products(:swisscheeseplant).id,
+    #       quantity: 1,
+    #       status: "pending"
+    #     }
+    #   }
+    #
+    #   new_entry = CartEntry.create!(new_entry_data[:cart_entry])
+    #
+    #   new_quantity = 5
+    #   patch cart_entry_path(@test_entry), params: {cart_entry: {quantity: new_quantity}}
+    #
+    #   @test_entry.reload
+    #   expect(@test_entry.quantity).must_equal 1
+    #   must_redirect_to order_path(@test_entry.order_id)
+    # end
   end
 
   describe "destroy" do
@@ -174,7 +172,23 @@ describe CartEntriesController do
 
       #ASSERT
       must_respond_with :redirect
-      must_redirect_to order_path(test_entry.order_id)
+      expect(flash[:success]).must_equal "Successfully destroyed #{test_entry.product.name}"
     end
+    #
+    # it "does not delete someone else\'s cart entry" do
+    #   test_entry = CartEntry.create!(@cart_entry_data[:cart_entry])
+    #   test_entry.must_be :valid?, "Entry data was invalid. Please come fix this test"
+    #
+    #   new_entry
+    #
+    #   #ACT
+    #   expect {
+    #     delete cart_entry_path(test_entry.id)
+    #   }.wont_change('CartEntry.count')
+    #
+    #   #ASSERT
+    #   must_respond_with :redirect
+    #   expect(flash[:error]).must_equal "Unable to delete  #{test_entry.product.name}"
+    # end
   end
 end

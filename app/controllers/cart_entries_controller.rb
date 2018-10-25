@@ -14,6 +14,8 @@ class CartEntriesController < ApplicationController
       flash[:error] = "Unable to update quantity. Please try again."
       redirect_to order_path(@cart_entry.order_id)
     end
+
+    # TODO: what if the cart ID on the cart item doesn't match what's in the session?
   end
 
   def create
@@ -43,6 +45,9 @@ class CartEntriesController < ApplicationController
     # @order = Order.find(session[:order_id])
     if @cart_entry.destroy
       flash[:success] = "Successfully destroyed #{@cart_entry.product.name}"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:error] = "Unable to delete  #{@cart_entry.product.name}"
       redirect_back(fallback_location: root_path)
     end
   end

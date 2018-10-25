@@ -73,11 +73,5 @@ describe User do
       expect(@user.profile_picture).must_equal('someimage.jpg')
     end
 
-    # it "is persisted to the db" do
-    #   # User.build_user_hash(@auth_hash)
-    #   @user = User.find_by(uid: 12345)
-    #
-    #   expect(@user).must_be_instance_of(User)
-    # end
   end
 end

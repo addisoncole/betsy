@@ -168,11 +168,11 @@ describe ProductsController do
       it "can destroy an existing product" do
         # Arrange
         @product = products(:swisscheeseplant)
-        # before_book_count = Book.count
+        expect(@product.user_id).must_equal users(:fetchuser).id
 
         # Act
         expect {
-          delete product_path(@product)
+          delete product_path(@product.id)
         }.must_change('Product.count', -1)
 
         # Assert
@@ -190,7 +190,11 @@ describe ProductsController do
       end
     end
 
+    describe "review" do
+      it "checks the user is logged in" do
 
+      end
+    end
 
   end
 end

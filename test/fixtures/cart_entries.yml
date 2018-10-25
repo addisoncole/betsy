@@ -11,3 +11,10 @@ entry:
   order: persons_order
   product: avocadotoast
   quantity: 1
+
+new_entry:
+  order_id: persons_order
+  product_id: swisscheeseplant
+  order: persons_order
+  product: swisscheeseplant
+  quantity: 5
