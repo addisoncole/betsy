@@ -55,6 +55,9 @@
   <li>
     status:
   </li>
+  <li>
+    <%= button_to "Delete", cart_entry_path(entry.id), method: :delete %>
+  </li>
   <% end %>
 </ul>
 

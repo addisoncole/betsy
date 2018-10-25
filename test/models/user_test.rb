@@ -34,8 +34,50 @@ describe User do
     end
 
     it "has many reviews" do
-      puts @user.reviews
       expect(@user.reviews).must_respond_to :each
     end
+  end
+
+  describe "builds a hash using class method" do
+    before do
+      @auth_hash = {
+        uid: 12345,
+        info: {
+          name: 'Ultra Fetch',
+          email: 'fetch@fetch.com',
+          image: 'someimage.jpg'
+        }
+      }
+
+      @user = User.build_user_hash(@auth_hash)
+    end
+
+    it "sets the uid" do
+      expect(@user.uid).must_equal(12345)
+    end
+
+    it "sets the name and username" do
+      expect(@user.name).must_equal('Ultra Fetch')
+      expect(@user.username).must_equal('Ultra Fetch')
+    end
+
+    it "sets the provider" do
+      expect(@user.provider).must_equal('github')
+    end
+
+    it "sets the email" do
+      expect(@user.email).must_equal('fetch@fetch.com')
+    end
+
+    it "sets the image" do
+      expect(@user.profile_picture).must_equal('someimage.jpg')
+    end
+
+    # it "is persisted to the db" do
+    #   # User.build_user_hash(@auth_hash)
+    #   @user = User.find_by(uid: 12345)
+    #
+    #   expect(@user).must_be_instance_of(User)
+    # end
   end
 end
