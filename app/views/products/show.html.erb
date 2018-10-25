@@ -27,13 +27,13 @@
 
 <%= display_add_to_cart_or_sold_out(@product) %>
 
-<%= link_to "Back to Product List", products_path %>
+<%= link_to "back to the previous spread", request.referer.present? ? request.referer : root_path %>
 
 <section>
   <h5>leave thoughts && prayers for this item</h5>
   <%= form_with model: @review, :url => { :action => :review, :method => :post } do |f| %>
     <div>
-    <%= f.label :rating %> 😍:
+    <%= f.label :rating %> <%= "\u{1F60D}:" %>
     <%= f.select :rating, [*1..5] %>
   </div>
   <div>
@@ -42,7 +42,7 @@
       <%= f.text_area :comment %>
     </div>
   </div>
-    <%= f.submit "Make it happen" %>
+    <%= f.submit "make it happen" %>
   <% end %>
 </section>
 

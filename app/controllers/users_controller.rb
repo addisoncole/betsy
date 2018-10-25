@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       redirect_to edit_user_path(@user.id)
-      flash[:success] = "Successfully updated, you go Glen Coco!"
+      flash[:success] = "Successfully updated, you go Glen Coco! \u{1F389}"
     else
       render :edit, status: :bad_request
     end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     if current_user?
       @user.destroy
       flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id} 💥"
+      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id} \u{1F4A5}"
       redirect_to root_path
     else
       flash[:error] = "Must be logged in as this loser to do that."
