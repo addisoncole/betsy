@@ -8,6 +8,10 @@ module UsersHelper
     end
   end
 
+  def get_merchants(users)
+    users.find_all { |user| user.merchant == true }
+  end
+
   def display_edit_pop_up_button?(user)
     return (link_to "Edit yr pop-up", edit_user_path(user_id: user)).html_safe unless !current_user_page_owner?
   end

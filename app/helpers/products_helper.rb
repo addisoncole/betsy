@@ -32,4 +32,8 @@ module ProductsHelper
       end
       count == 0.0 ? "Review this swag!" : ("%.1f" % (rating/count))
     end
+
+    def show_product_reviews?(product)
+      ("<li>" + "Swag Rating: #{get_product_average_rating(product)}" + "</li>").html_safe unless product.reviews.count == 0
+    end
 end

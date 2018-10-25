@@ -1,16 +1,2 @@
 <h1>pop-ups</h1>
-
-<% @users.each do |user| %>
-  <% if user.merchant == true %>
-  <a href="<%= user_path(user) %>">
-    <ul>
-      <li>
-        <%=  "#{user.store_name}" %>
-      </li>
-      <li>
-        <%=  image_tag "#{user.store_banner_img}" %>
-      </li>
-    </ul>
-  </a>
-  <% end %>
-<% end %>
+<%= render partial: "merchant", collection: get_merchants(@users) %>
