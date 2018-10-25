@@ -1,5 +1,13 @@
 module UsersHelper
 
+  def display_merchant_page_or_user_profile?(user, session_id)
+    if user.merchant
+       (render partial: "merchant_show").html_safe
+     else
+      session_id == nil ? ("Members Only").html_safe : (render partial: "user_show").html_safe
+    end
+  end
+
   def display_edit_pop_up_button?(user)
     return (link_to "Edit yr pop-up", edit_user_path(user_id: user)).html_safe unless !current_user_page_owner?
   end
@@ -10,7 +18,7 @@ module UsersHelper
 
   def display_sign_up_button?(user)
     if current_user_page_owner?
-      if !@user.merchant
+      if !user.merchant
         (link_to "Start yr pop up", edit_user_path(user_id: user)).html_safe
       end
     end
