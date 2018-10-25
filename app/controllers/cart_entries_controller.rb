@@ -25,10 +25,10 @@ class CartEntriesController < ApplicationController
       @cart_entry.order_id = @order.id
     end
     if @cart_entry.save
-    flash[:success] = "Item succesfully added to cart"
+    flash[:success] = "Item added to bag, you go, Glen Coco!"
     redirect_to request.referrer
     else
-      flash[:error] = "ERRORRRRR"
+      flash[:error] = "Errawr. \u{1F996} Looks like something was missing."
       redirect_to request.referrer
     end
 

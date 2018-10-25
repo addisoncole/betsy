@@ -39,7 +39,7 @@
         <nav class="header-nav">
           <ul class="header-nav-links">
             <li><%= link_to "the spread", products_path %></li>
-            <li><%= link_to "pop-ups" %></li>
+            <li><%= link_to "pop-ups", users_path %></li>
             <li><%= link_to "the message", "/pages/themessage" %></li>
           </ul>
         </nav>
@@ -47,7 +47,7 @@
       <nav class="categories-nav">
         <ul class="categories">
           <li class="cat1"><%= link_to "plants", products_path(:category =>"Plants") %></li>
-          <li class="cat2"><%= link_to "paraphernalia", products_path(:category =>"Housewares") %></li>
+          <li class="cat2"><%= link_to "paraphernalia", products_path(:category =>"Paraphernalia") %></li>
           <li class="cat3"><%= link_to "fashion", products_path(:category =>"Fashion") %></li>
           <li class="cat4"><%= link_to "beauty", products_path(:category =>"Beauty") %></li>
           <li class="cat5"><%= link_to "lifestyle", products_path(:category =>"Lifestyle") %></li>

@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :product_owner?, only: [:edit, :destroy]
+  before_action :is_reviewer_logged_in, only: [:review]
 
 
   def index
@@ -22,7 +23,7 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
 
     if @product.save
-      flash[:success] = "Successfully uploaded \"#{@product.name}\""
+      flash[:success] = "Successfully uploaded \"#{@product.name}\", you go Glen Coco!"
       redirect_to product_path(@product.id)
     else
       puts "Failed to save product: #{@product.errors.messages}"
@@ -42,8 +43,10 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
+      flash[:success] = "Successfully updated yr swag! You go Glen Coco! \u{1F389}"
       redirect_to product_path(@product.id)
     else
+      flash[:error] = "Errawr. \u{1F996} Cannot review own product, loser."
       render :edit, status: :bad_request
     end
   end
@@ -52,7 +55,7 @@ class ProductsController < ApplicationController
     if product_owner?
       if @product.destroy
         flash[:status] = :success
-        flash[:result_text] = "Successfully destroyed #{@product.name}"
+        flash[:success] = "Successfully destroyed #{@product.name} \u{1F4A5}	"
         redirect_to products_path
       end
     else
@@ -61,19 +64,24 @@ class ProductsController < ApplicationController
   end
 
   def review
-    @review = Review.new(rating: params[:rating], comment: params[:comment])
-    @review.product_id = params[:id]
-    @review.user_id = session[:user_id]
+    if @reviewer
+      @review = Review.new(rating: params[:rating], comment: params[:comment])
+      @review.product_id = params[:id]
+      @review.user_id = session[:user_id]
 
-    @product = Product.find_by(id: params[:id])
+      @product = Product.find_by(id: params[:id])
 
-    @user = User.find_by(id: @review.user_id)
+      @user = User.find_by(id: @review.user_id)
 
-    if @user == @product.user
-      flash[:error] = "Cannot review own product."
-      redirect_to product_path(@review.product_id)
-    else @review.save
-      flash[:success] = "Successfully submitted comment!"
+      if @user == @product.user
+        flash[:error] = "Errawr. \u{1F996} Cannot review own product, loser."
+        redirect_to product_path(@review.product_id)
+      else @review.save
+        flash[:success] = "Successfully gave your thoughts && prayers! You go Glen Coco! \u{1F389}"
+        redirect_to request.referrer
+      end
+    else
+      flash[:error] = "Members Only"
       redirect_to request.referrer
     end
   end
@@ -91,5 +99,9 @@ class ProductsController < ApplicationController
   def product_owner?
     @user = User.find_by(id: session[:user_id])
     @user == @product.user
+  end
+
+  def is_reviewer_logged_in
+    @reviewer = User.find_by(id: session[:user_id])
   end
 end

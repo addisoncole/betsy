@@ -1,61 +1,53 @@
-<h1><%= @product.name.capitalize %></h1>
+<h1><%= @product.name.downcase %></h1>
 
 <section class="table">
 <ul>
   <li>
-    <%= @product.name %>
-  </li>
-  <li>
     <%= @product.category %>
   </li>
   <li>
-    <%= display_quantity_or_sell_out(@product) %>
+    Stock: <%= display_quantity_or_sell_out(@product) %>
   </li>
   <li>
-    <%= @product.price %>
+    Price: <%= @product.price %>
+  </li>
+  <li>
+    Swag Rating: <%= get_product_average_rating(@product) %>
   </li>
   <li>
     <%= image_tag ("#{@product.image}") %>
   <li>
-    <%= link_to "Edit", edit_product_path(@product.id) %>
+    <%= display_edit_product_button?(@product) %>
   </li>
   <li>
-    <%= link_to "Delete", product_path, method: :delete, data: {confirm: "Delete  #{@product.name}?"}  %>
+    <%= display_delete_product_button?(@product)  %>
   </li>
 </ul>
 </section>
 
 <%= display_add_to_cart_or_sold_out(@product) %>
 
-<%= link_to "Back to Product List", products_path %>
+<%= link_to "back to the previous spread", request.referer.present? ? request.referer : root_path %>
+
 <section>
+  <h5>leave thoughts && prayers for this item</h5>
   <%= form_with model: @review, :url => { :action => :review, :method => :post } do |f| %>
-    <%= f.label :rating %>
+    <div>
+    <%= f.label :rating %> <%= "\u{1F60D}:" %>
     <%= f.select :rating, [*1..5] %>
-
-    <%= f.label :comment %>
-    <%= f.text_area :comment %>
-
-    <%= f.submit "Submit" %>
+  </div>
+  <div>
+    <%= f.label :thoughts_and_prayers %>:
+    <div>
+      <%= f.text_area :comment %>
+    </div>
+  </div>
+    <%= f.submit "make it happen" %>
   <% end %>
 </section>
 
 
 <section>
-<h1>Reviews</h1>
-
-<% @product.reviews.each do |review| %>
-
-<ul>
-  <li>
-    Review title: <%= review.rating %>
-  </li>
-  <li>
-    Username: <%= review.user_id %>
-  </li>
-  <li>
-    Comments: <%= review.comment %>
-  </li>
-</ul>
-<% end %>
+<%= show_product_reviews_title?(@product) %>
+<%= render partial: "review", collection: @product.reviews %>
 </section>

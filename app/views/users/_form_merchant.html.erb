@@ -1,0 +1,22 @@
+<%= form_with model: @user do |f| %>
+
+<section>
+  <%= f.label :pop_up_name %>
+  <%= f.text_field :store_name %>
+  <%= f.label :pop_up_location %>
+  <%= f.text_field :store_location %>
+</section>
+<section>
+  <%= f.label :pop_up_deets %>
+  <div>
+    <%= f.text_area :store_description, cols: 50, rows: 3 %>
+  </div>
+</section>
+<section>
+  <%= f.label :pop_up_brand_image %>
+  <%= f.text_field :store_banner_img %>
+</section>
+
+  <%= f.submit "make it happen" %>
+
+<% end %>

@@ -1,11 +1,13 @@
 <h1><%= @title %></h1>
 
-<%= link_to "Add new product", new_product_path %>
 <% @products.each do |product| %>
 <a href="<%= product_path(product) %>">
   <ul>
     <li>
-      <%=  "#{product.name}" %>
+      <%= image_tag ("#{product.image}") %>
+    </li>
+    <li>
+      <h6><%=  "#{product.name}" %></h6>
     </li>
     <li>
       <%=  "#{product.category}" %>
@@ -16,6 +18,7 @@
     <li>
       <%=  "#{product.price}" %>
     </li>
+    <%= show_product_reviews?(product) %>
   </ul>
 </a>
 <% end %>
