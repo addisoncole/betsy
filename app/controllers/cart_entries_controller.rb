@@ -1,4 +1,3 @@
-require 'pry'
 class CartEntriesController < ApplicationController
   include CurrentCart
   before_action :find_cart_entry, only: [:edit, :update, :destroy]
