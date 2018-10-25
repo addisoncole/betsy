@@ -107,7 +107,13 @@
           <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
         </li>
         <li class="entry-status">
-          <%= entry.status %>
+          <% if entry.status == "paid" %>
+            <%= "\u{1F643}" %>awaiting shipment
+          <% elsif entry.status == "pending" %>
+            unpaid
+          <% else %>
+            <%= entry.status %>
+          <% end %>
         </li>
       </ul>
       <% end %>

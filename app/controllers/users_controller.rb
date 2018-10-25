@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :find_user, only: [:show, :edit, :update, :destroy, :userdash]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
   before_action :current_user?, only: [:edit, :destroy]
 
   def index
@@ -54,12 +54,28 @@ class UsersController < ApplicationController
   end
 
   def userdash
-    @products = @user.products
-    @orders = @user.orders
+    @products = @logged_in_user.products
+    @orders = @logged_in_user.orders
   end
 
   def manage_orders
-    @orders = @user.merchant_orders
+    @orders = @logged_in_user.merchant_orders
+
+    if params[:status] == ""
+      @title = "all_orders"
+    elsif params[:status]
+      @title = params[:status]
+    else
+      @title = "all_orders"
+    end
+
+    if params[:status] == "pending"
+      @my_orders = @orders.where(status: "paid")
+    elsif params[:status] == "shipped"
+      @my_orders = @orders.where(status: "shipped")
+    else
+      @my_orders = @orders
+    end
   end
 
   private

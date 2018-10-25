@@ -43,6 +43,7 @@ class Order < ApplicationRecord
       end
     end
 
+    self.update_attribute(:status, :shipped)
     return "all items in yr order have been shipped, bb!"
   end
 end

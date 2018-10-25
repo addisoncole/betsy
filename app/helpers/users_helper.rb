@@ -52,4 +52,79 @@ module UsersHelper
   def non_pending_orders(user)
     return user.orders.find_all { |order| order.status != "pending" }
   end
+
+  def find_my_entries(order)
+    my_products = @logged_in_user.products.ids
+    my_entries = []
+    order.cart_entries.each do |entry|
+      if my_products.include?(entry.product_id)
+        my_entries << entry
+      end
+    end
+
+    return my_entries
+  end
+
+  def find_entry_cost(entry)
+    price = Product.find(entry.product_id).price
+    return price * entry.quantity
+  end
+
+  def display_ship_button(entry)
+    if entry.status == "shipped"
+      (button_to "completed").html_safe
+    else
+      # (button_to "i shipped it", )
+    end
+  end
+
+  def total_revenue(orders)
+    my_products = @logged_in_user.products.ids
+    entries = []
+
+    orders.each do |order|
+      order.cart_entries.each do |entry|
+        if my_products.include?(entry.product_id)
+          price = Product.find(entry.product_id).price
+          entries << (entry.quantity * price)
+        end
+      end
+    end
+
+    return entries.sum
+  end
+
+  def monthly_revenue(month, orders)
+    my_products = @logged_in_user.products.ids
+    entries = []
+
+    orders.each do |order|
+      order.cart_entries.each do |entry|
+        if my_products.include?(entry.product_id) && entry.status == "paid" && order.updated_at.mon == month
+          price = Product.find(entry.product_id).price
+          entries << (entry.quantity * price)
+        end
+      end
+    end
+
+    return entries.sum
+  end
+
+  # turn back while you still can . . .
+  # this is your last chance ! ! !
+  #
+  # very well . . .   as you wish . . .
+  #
+  # the warning was given , this all-hallows eve ;
+  # the foolhardy among you chose not to turn back ;
+  # bravery turns to recklessness turns to despair as you encounter . . .
+  # T H E   C U R S E D   M E T H O D ! ! !
+  # you are now marked for life . . . .
+  def da_ordah_splittah_numoratorrr(ssstatus, orders)
+    # Saint Metz, please forgive us our trespasses . . .
+
+    return orders.map { |order| order.cart_entries.find_all { |entry|
+      entry.status == ssstatus && @logged_in_user.products.ids.include?(entry.product_id)
+    }.length}.sum
+  end
 end

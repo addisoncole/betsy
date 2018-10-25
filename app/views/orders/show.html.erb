@@ -55,4 +55,6 @@
   <% end %>
 </ul>
 
-<%= link_to "chekout!", order_checkout_path(@order) %>
+<% if @order.status == "pending" %>
+  <%= link_to "chekout!", order_checkout_path(@order) %>
+<% end %>

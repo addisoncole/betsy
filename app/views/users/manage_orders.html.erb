@@ -1,0 +1,52 @@
+<h1>Manage Orders</h1>
+
+<section class="stats-card">
+  <h2>Stats</h2>
+  <div class="stats-container-top">
+    <p>
+      $<%= monthly_revenue(Date.today.mon, @orders) %>
+      <%= Date.today.strftime("%B") %>'s Revenue
+    </p>
+    <p>
+      $<%= total_revenue(@orders) %>
+      Total Revenue
+    </p>
+  </div>
+  <div class="stats-container-bottom">
+    <p>
+      <%= da_ordah_splittah_numoratorrr("paid", @orders) %>
+      Pending
+    </p>
+    <p>
+      <%= da_ordah_splittah_numoratorrr("shipped", @orders) %>
+      Shipped
+    </p>
+  </div>
+</section>
+
+<section class="my-orders">
+  <div class="my-orders-header">
+    <h2><%= @title %></h2>
+    <%= form_tag '', method: :get do %>
+    <%= select_tag :status, options_for_select(["all_orders", "pending", "shipped"]), prompt: "order_status" %>
+    <%= submit_tag "filter" %>
+    <% end %>
+  </div>
+  <div class="my-orders-entries">
+    <% @my_orders.each do |order| %>
+      <ul class="my-orders-entry-headers">
+        <li><%= order.id %></li>
+        <li><%= order.updated_at %></li>
+        <li>Status</li>
+      </ul>
+      <% find_my_entries(order).each do |entry| %>
+        <ul class="my-orders-entry-data">
+          <li>- <%= link_to "#{entry.name}", product_path(entry.product_id) %></li>
+          <li>qty: <%= entry.quantity %></li>
+          <li>$<%= find_entry_cost(entry) %></li>
+          <li></li>
+          <li></li>
+        </ul>
+    <% end %>
+  </div>
+</section>
