@@ -60,6 +60,15 @@ class UsersController < ApplicationController
 
   def manage_orders
     @orders = @logged_in_user.merchant_orders
+    entries = []
+    my_products = @logged_in_user.products.ids
+    @orders.each do |order|
+      order.cart_entries.each do |entry|
+        if my_products.include?(entry.product_id)
+          entries << entry
+        end
+      end
+    end
 
     if params[:status] == ""
       @title = "all_orders"
@@ -70,11 +79,11 @@ class UsersController < ApplicationController
     end
 
     if params[:status] == "pending"
-      @my_orders = @orders.where(status: "paid")
+      @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
     elsif params[:status] == "shipped"
-      @my_orders = @orders.where(status: "shipped")
+      @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
     else
-      @my_orders = @orders
+      @entries = entries.reverse
     end
   end
 

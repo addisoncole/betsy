@@ -50,7 +50,7 @@
     <% end %>
   </li>
   <li>
-    <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
+    $<%= ("%.2f" % Product.find_by(id: entry.product_id).price * entry.quantity) %>
   </li>
   <li>
     status:

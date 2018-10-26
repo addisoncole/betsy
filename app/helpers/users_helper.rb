@@ -74,14 +74,14 @@ module UsersHelper
 
   def find_entry_cost(entry)
     price = Product.find(entry.product_id).price
-    return price * entry.quantity
+    return ("%.2f" % price * entry.quantity)
   end
 
   def display_ship_button(entry)
     if entry.status == "shipped"
-      (button_to "completed").html_safe
+      (button_to "all done").html_safe
     else
-      # (button_to "i shipped it", )
+      (button_to "i shipped it", shipped_it_path(entry)).html_safe
     end
   end
 
@@ -98,7 +98,7 @@ module UsersHelper
       end
     end
 
-    return entries.sum
+    return ("%.2f" % entries.sum)
   end
 
   def monthly_revenue(month, orders)
@@ -107,14 +107,14 @@ module UsersHelper
 
     orders.each do |order|
       order.cart_entries.each do |entry|
-        if my_products.include?(entry.product_id) && entry.status == "paid" && order.updated_at.mon == month
+        if my_products.include?(entry.product_id) && (entry.status == "paid" || entry.status == "shipped") && order.updated_at.mon == month
           price = Product.find(entry.product_id).price
           entries << (entry.quantity * price)
         end
       end
     end
 
-    return entries.sum
+    return ("%.2f" % entries.sum)
   end
 
   # turn back while you still can . . .

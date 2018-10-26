@@ -33,20 +33,20 @@
     <% end %>
   </div>
   <div class="my-orders-entries">
-    <% @my_orders.each do |order| %>
+    <% @entries.each do |entry| %>
+    <div class="my-orders-entry">
       <ul class="my-orders-entry-headers">
-        <li><%= order.id %></li>
-        <li><%= order.updated_at %></li>
+        <li><%= entry.order_id %></li>
+        <li><%= Order.find(entry.order_id).updated_at %></li>
         <li>Status</li>
       </ul>
-      <% find_my_entries(order).each do |entry| %>
-        <ul class="my-orders-entry-data">
-          <li>- <%= link_to "#{entry.name}", product_path(entry.product_id) %></li>
-          <li>qty: <%= entry.quantity %></li>
-          <li>$<%= find_entry_cost(entry) %></li>
-          <li></li>
-          <li></li>
-        </ul>
+      <ul class="my-orders-entry-data">
+        <li>- <%= link_to "#{Product.find(entry.product_id).name}", product_path(entry.product_id) %></li>
+        <li>qty: <%= entry.quantity %></li>
+        <li>$<%= find_entry_cost(entry) %></li>
+        <li><%= display_ship_button(entry) %></li>
+      </ul>
+    </div>
     <% end %>
   </div>
 </section>
