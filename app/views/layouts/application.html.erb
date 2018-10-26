@@ -32,7 +32,7 @@
             </li>
             <% if @logged_in_user.merchant == true %>
               <li class="header-button">
-                 <%= link_to "manage orders", manage_orders_path %>
+                 <%= link_to "orders #{number_of_paid_orders}", manage_orders_path %>
               </li>
             <% end %>
           <% end %>
@@ -80,12 +80,13 @@
     <main>
       <%= yield %>
     </main>
-    <footer>
-      <iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
-      <audio controls class="audio-player">
-      <source src="audio/pinkandblue.mp3" type="audio/mpeg" />
-      </audio>
-    </footer>
   </div>
+  <footer>
+    <iframe src="audio/silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+    <audio controls class="audio-player">
+      <source src="audio/pinkandblue.mp3" type="audio/mpeg" />
+    </audio>
+    <span>(c) fetch. 2k18</span>
+  </footer>
 </body>
 </html>

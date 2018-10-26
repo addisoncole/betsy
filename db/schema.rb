@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_24_175133) do
+ActiveRecord::Schema.define(version: 2018_10_26_064721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2018_10_24_175133) do
     t.string "billing_address"
     t.string "status", default: "pending"
     t.string "name"
-    t.bigint "users_id"
-    t.index ["users_id"], name: "index_orders_on_users_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|

@@ -1,3 +1,50 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.merchants-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75vw;
+  justify-content: space-between;
+}
+
+.merchant-ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 23vw;
+  padding: 0;
+  margin: 0;
+  margin-top: 9.3vw;
+}
+
+.merchant-pic img {
+  width: 23vw;
+  border-radius: 50%;
+  box-shadow: .2vw .2vw 2vw #d1d1d1;
+}
+
+.merchant-name {
+  align-self: center;
+  z-index: 99;
+  color: white;
+  font-family: NeuePlakSemi;
+  margin-bottom: -12.9vw;
+  font-size: 3vw;
+}
+
+.merchant-desc {
+  width: 18vw;
+  margin-top: -7vw;
+  margin-left: 5vw;
+  margin-bottom: 2.8vw;
+  background-image: linear-gradient(to right, #fdfff7, #ffffff);
+  padding: .7vw 2vw 1.5vw 2vw;
+  font-family: NeuePlakLight;
+  text-align: right;
+  color: #404040;
+}
+
+.merchant-desc:hover {
+  text-decoration: none;
+}

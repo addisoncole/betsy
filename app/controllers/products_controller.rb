@@ -8,9 +8,10 @@ class ProductsController < ApplicationController
     if params[:category]
       @title = "#{params[:category].downcase}"
       @products = Product.where(:category => params[:category])
+      @products = @products.shuffle
     else
       @title = "the spread"
-      @products = Product.all
+      @products = Product.all.shuffle
     end
   end
 
@@ -34,7 +35,6 @@ class ProductsController < ApplicationController
 
   def show
     @cart_entry = CartEntry.new
-    
   end
 
   def edit

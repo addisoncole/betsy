@@ -24,7 +24,7 @@ class Order < ApplicationRecord
     current_product
   end
 
-  def self.decrement_products
+  def decrement_products
     self.cart_entries.each do |entry|
       entry.decrement_product
     end

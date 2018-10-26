@@ -1,13 +1,13 @@
   <a href="<%= user_path(merchant) %>">
-    <ul>
-      <li>
+    <ul class="merchant-ul">
+      <li class="merchant-name">
         <%=  "#{merchant.store_name}" %>
       </li>
-      <li>
-        <%=  "#{merchant.store_description}" %>
+      <li class="merchant-pic">
+        <%=  image_tag merchant.store_banner_img, alt: "a pic of some awful capitalist bullshit" %>
       </li>
-      <li>
-        <%=  image_tag "#{merchant.store_banner_img}" %>
+      <li class="merchant-desc">
+        <%=  "#{merchant.store_description}" %>
       </li>
     </ul>
   </a>
