@@ -25,7 +25,7 @@
 <h2><small>fetch by</small> <%= @user.store_name.downcase %>.</h2>
 <section class="table">
   <ul>
-    <% @user.products.each do |product| %>
+    <% @user.products.reverse.each do |product| %>
     <a href="<%= product_path(product) %>">
       <li>
         <%= image_tag ("#{product.image}") %>
