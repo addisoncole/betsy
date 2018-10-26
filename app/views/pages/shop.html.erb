@@ -1,5 +1,26 @@
-<%= render partial: "popup", collection: @popups.sample(2) %>
-<%= render partial: "swag", collection: @swags.sample(2) %>
-<%= render partial: "popup", collection: @popups.sample(2) %>
-<%= render partial: "swag", collection: @swags.sample(2) %>
-<%= render partial: "popup", collection: @popups.sample(1) %>
+<div class="front-page-container">
+  <h1>featured pop-ups</h1>
+  <section class="popups-three popz">
+    <%= render partial: "popup", collection: @popups.sample(3) %>
+  </section>
+
+  <h1 class="swagz-header">top items</h1>
+  <section class="swags-four swagz">
+    <%= render partial: "swag", collection: @swags.sample(5) %>
+  </section>
+
+  <h1 class="popz-header">more popz</h1>
+  <section class="popups-four popz">
+    <%= render partial: "popup", collection: @popups.sample(4) %>
+  </section>
+
+  <h1 class="swagz-header2">check these out <%= "\u{1F62F}" %></h1>
+  <section class="swags-eight swagz">
+    <%= render partial: "swag", collection: @swags.sample(10) %>
+  </section>
+
+  <h1 class="popz-header2">even more...</h1>
+  <section class="popups-three popz">
+    <%= render partial: "popup", collection: @popups.sample(3) %>
+  </section>
+</div>

@@ -15,3 +15,172 @@
 .team-pic {
   width: 20vw;
 }
+
+.team-container h3 {
+  margin-top: .1vw;
+  margin-right: 1.6vw;
+  font-family: NeuePlakWide;
+  color: #404040;
+}
+
+.team-container div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.mean-girls {
+  font-family: NeuePlakLight;
+}
+
+
+
+
+
+
+.front-page-container {
+  width: 75vw;
+}
+
+.front-page-container h1 {
+  margin-bottom: 2.6vw;
+}
+
+.popz {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 13vw;
+}
+
+.popz ul, .swagz ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.popz img {
+  border-radius: 50%;
+  box-shadow: .2vw .2vw 2vw #d1d1d1;
+}
+
+.popups-three img {
+  width: 23vw;
+}
+
+.popups-four img {
+  width: 16.8vw;
+}
+
+.popups-three .pop-up-title {
+  align-self: center;
+  z-index: 99;
+  color: white;
+  font-family: NeuePlakSemi;
+  margin-top: -14.4vw;
+  font-size: 3vw;
+}
+
+.popups-four.popz {
+  margin-bottom: 9.2vw;
+}
+
+.popups-four .pop-up-title {
+  align-self: center;
+  z-index: 99;
+  color: white;
+  font-family: NeuePlakSemi;
+  margin-top: -10vw;
+  font-size: 2vw;
+}
+
+.front-page-container .popz-header {
+  border-top: none;
+  padding-top: 0;
+  text-align: left;
+}
+
+.front-page-container .popz-header2 {
+  border-top: none;
+  padding-top: 0;
+  text-align: right;
+}
+
+.swagz {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.front-page-container .swagz-header {
+  border-top: none;
+  padding-top: 0;
+}
+
+.front-page-container .swagz-header2 {
+  padding-right: 4vw;
+  border-top: none;
+  padding-top: 0;
+}
+
+.swagz ul {
+  width: 13vw;
+  height: 18vw;
+  padding: .5vw .5vw .5vw .5vw;
+  border: 3px solid #efccca;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2vw;
+  box-shadow: 0vw 0vw 3vw #e2e2e2;
+}
+
+.swagz-pic {
+  align-self: center;
+}
+
+.swagz a {
+  color: #404040;
+  text-decoration: none;
+}
+
+.swagz-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 27%;
+  margin-right: .4vw;
+}
+
+.swagz-text {
+  text-align: right;
+}
+
+.swagz p {
+  font-family: NeuePlakSemi;
+  font-size: 1.1vw;
+  color: white;
+  text-shadow: 0px 0px 1px #404040,
+    -0px 0px 1px #404040,
+    0px 0px 1px #404040,
+    0px -0px 1px #404040,
+  -2px 0px 4px #efccca,
+  2px 0px 4px #efccca,
+  0px 2px 4px #efccca,
+  0px -2px 4px #efccca;
+  margin: 0;
+}
+
+.swagz-price {
+  font-family: NeuePlakLight;
+  font-size: 1vw;
+}
+
+.swags-four img, .swags-eight img {
+  width: 11.5vw;
+  height: 11.5vw;
+  display: block;
+  border-radius: 10px;
+  border: 2px solid #efccca;
+}

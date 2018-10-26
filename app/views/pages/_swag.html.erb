@@ -1,14 +1,15 @@
 <a href="<%= product_path(swag) %>">
   <ul>
-    <%= swag.name.downcase %>
-    <li>
-      Price: <%= swag.price %>
+    <li class="swagz-pic">
+      <%=  image_tag swag.image, alt: "a pic of some awful capitalist bullshit" %>
     </li>
-    <li>
-      Swag Rating: <%= get_product_average_rating(swag) %>
-    </li>
-    <li>
-      <%=  image_tag "#{swag.image}" %>
-    </li>
+    <div class="swagz-div">
+      <p class="swagz-text">
+        <%= swag.name.downcase %>
+      </p>
+      <li class="swagz-text swagz-price">
+        <%= ("%.2f" % swag.price) %>
+      </li>
+    </div>
   </ul>
 </a>

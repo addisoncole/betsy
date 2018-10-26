@@ -179,7 +179,7 @@ header {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 4.5vw;
+  padding-top: 2.4vw;
 }
 
 .audio-player {
@@ -369,4 +369,20 @@ header {
 
 main {
   margin-left: 3vw;
+}
+
+footer {
+  margin-top: 2vw;
+  padding-top: 8vw;
+  padding-bottom: 2vw;
+  background-image: linear-gradient(#ffffff, #a5b4d5);
+}
+
+footer span {
+  font-family: NeuePlakWide;
+  margin-left: 4vw;
+  text-align: left;
+  color: #ffffff;
+  opacity: .8;
+  text-shadow: 1px 1px 2px #404040;
 }
