@@ -87,18 +87,40 @@ describe Order do
     end
   end
   describe 'add product method' do
-    it 'finds a cart entry given a product id and order id' do
-      current_product = Order.add_product(products(:avocadotoast), orders(:persons_order).id)
-      current_product.must_equal cart_entries(:entry)
-    end
     it 'returns current_product of type cart_entry' do
-      current_product = Order.add_product(products(:swisscheeseplant), orders(:persons_order).id)
+      current_product = Order.add_product(products(:swisscheeseplant), orders(:persons_order).id, 1)
       current_product.must_be_kind_of CartEntry
     end
-    it 'increments the cart entry quantity' do
-      order = Order.first
-      Order.add_product(products(:avocadotoast), orders(:persons_order).id)
-      order.cart_entries.count.must_equal 1
+    it 'returns nil if quantity is larger than available quantity' do
+      current_product = Order.add_product(products(:swisscheeseplant), orders(:persons_order).id, 11)
+      current_product.must_equal nil
+    end
+    it 'creates a new cart entry if the product does not exist in the current order' do
+      product = Product.new(name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 99.99)
+      order = Order.new(status: "pending")
+      current_product = Order.add_product(product, order.id, 3)
+      current_product.must_be_kind_of CartEntry
     end
   end
+  # describe 'decrement_product method' do
+  #   it 'decrements product quantity by quantity in order' do
+  #     Order.add_product(products(:swisscheeseplant), orders(:persons_order).id, 10)
+  #     # binding.pry
+  #     cart_entries = Order.decrement_products
+  #     expect(cart_entries.product.quantity).must_equal 0
+  #   end
+  # end
 end
+
+##THESE ARE THE METHODS FOR THE DECREMENT PRODUCT TEST
+# def decrement_products
+#   self.cart_entries.each do |entry|
+#     entry.decrement_product
+#   end
+# end
+
+##THIS IS THE ONE THAT 'DECREMENT_PRODUCTS' REFERENCES, LOCATED IN THE CART ENTRY MODEL
+# def decrement_product
+#     product = Product.find_by(id: self.product_id)
+#     product.decrement!(:quantity, by = self.quantity)
+# end

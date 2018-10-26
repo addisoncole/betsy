@@ -21,6 +21,6 @@ new_order:
   CVV: 123
   billing_zip_code: 98223
   shipping_address: 456 idk lane
-  email: EEmail@eeemail.eeemail
+  email: Email@eeemail.eeemail
   billing_address: 5678 idk lane
   status: Pending
