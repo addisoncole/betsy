@@ -1,3 +1,149 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-card-link:hover {
+  text-decoration: none;
+}
+
+.product-card {
+  border-radius: 10px;
+  padding: 1vw 1vw .5vw 1vw;
+  margin: 1.5vw;
+  width: 16vw;
+  height: 25vw;
+  box-shadow: .5vw .5vw 3vw #d1d1d1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Plants {
+  border: 3px solid #00ff00;
+}
+
+.Plants-image {
+  border: 2px solid #00ff00;
+}
+
+.Plants-title {
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #404040,
+    -0px 0px 1px #404040,
+    0px 0px 1px #404040,
+    0px -0px 1px #404040,
+  -2px 0px 3px #00ff00,
+  2px 0px 3px #00ff00,
+  0px 2px 3px #00ff00,
+  0px -2px 3px #00ff00;
+}
+
+.Beauty {
+  border: 3px solid pink;
+}
+
+.Beauty-image {
+  border: 2px solid pink;
+}
+
+.Beauty-title {
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #404040,
+    -0px 0px 1px #404040,
+    0px 0px 1px #404040,
+    0px -0px 1px #404040,
+  -2px 0px 3px pink,
+  2px 0px 3px pink,
+  0px 2px 3px pink,
+  0px -2px 3px pink;
+}
+
+.Fashion {
+  border: 3px solid #ff0000;
+}
+
+.Fashion-image {
+  border: 2px solid #ff0000;
+}
+
+.Fashion-title {
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #404040,
+    -0px 0px 1px #404040,
+    0px 0px 1px #404040,
+    0px -0px 1px #404040,
+    -2px 0px 3px #ff0000,
+  2px 0px 3px #ff0000,
+  0px 2px 3px #ff0000,
+  0px -2px 3px #ff0000;
+}
+
+.Paraphernalia {
+  border: 3px solid #fff000;
+}
+
+.Paraphernalia-image {
+  border: 2px solid #fff000;
+}
+
+.Paraphernalia-title {
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #404040,
+    -0px 0px 1px #404040,
+    0px 0px 1px #404040,
+    0px -0px 1px #404040,
+    -2px 0px 3px #fff000,
+  2px 0px 3px #fff000,
+  0px 2px 3px #fff000,
+  0px -2px 3px #fff000;
+}
+
+.Lifestyle {
+  border: 3px solid #0037ff;
+}
+
+.Lifestyle-image {
+  border: 2px solid #0037ff;
+}
+
+.Lifestyle-title {
+  color: #ffffff;
+  text-shadow: 0px 0px 1px #404040,
+    -0px 0px 1px #404040,
+    0px 0px 1px #404040,
+    0px -0px 1px #404040,
+    -2px 0px 3px #0037ff,
+  2px 0px 3px #0037ff,
+  0px 2px 3px #0037ff,
+  0px -2px 3px #0037ff;
+}
+
+.upper-product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-image {
+  border-radius: 10px;
+  width: 14vw;
+  height: 14vw;
+  align-self: center;
+  display: block;
+}
+
+.product-title {
+  text-align: right;
+  font-family: NeuePlakSemi;
+  font-size: 1.4vw;
+}
+
+.product-info {
+  text-align: right;
+  font-family: NeuePlakLight;
+  font-size: 1vw;
+  color: #404040;
+}

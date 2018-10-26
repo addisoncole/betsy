@@ -3,12 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 h1 {
-  color: #ff6b25;
-  font-family: NeuePlakSemi;
+  color: #ffffff;
+  font-family: NeuePlakWide;
   font-size: 6vw;
-  opacity: .8;
-  margin-top: -.5vw;
+  opacity: .5;
+  padding-top: .7vw;
   margin-bottom: 2vw;
+  margin-right: 6vw;
+  text-align: right;
+  text-shadow: 0vw -.6vw 1vw #6787ff,
+  0vw .6vw 1vw #ff6b25,
+  -.9vw 0vw 1vw #fffd67,
+  .9vw 0vw 1vw pink;
+  border-top: 1px solid #404040;
 }
 
 .order-info {

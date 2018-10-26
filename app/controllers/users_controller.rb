@@ -61,31 +61,35 @@ class UsersController < ApplicationController
 
   def manage_orders
     if current_user?
-      @orders = @logged_in_user.merchant_orders
-      entries = []
-      my_products = @logged_in_user.products.ids
-      @orders.each do |order|
-        order.cart_entries.each do |entry|
-          if my_products.include?(entry.product_id)
-            entries << entry
+      if @logged_in_user.merchant == true
+        @orders = @logged_in_user.merchant_orders
+        entries = []
+        my_products = @logged_in_user.products.ids
+        @orders.each do |order|
+          order.cart_entries.each do |entry|
+            if my_products.include?(entry.product_id)
+              entries << entry
+            end
           end
         end
-      end
 
-      if params[:status] == ""
-        @title = "all_orders"
-      elsif params[:status]
-        @title = params[:status]
-      else
-        @title = "all_orders"
-      end
+        if params[:status] == ""
+          @title = "all_orders"
+        elsif params[:status]
+          @title = params[:status]
+        else
+          @title = "all_orders"
+        end
 
-      if params[:status] == "pending"
-        @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
-      elsif params[:status] == "shipped"
-        @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
+        if params[:status] == "pending"
+          @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
+        elsif params[:status] == "shipped"
+          @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
+        else
+          @entries = entries.reverse
+        end
       else
-        @entries = entries.reverse
+        redirect_to root_path, :alert => "Dealers only..."
       end
     else
       redirect_to root_path, :alert => "Members Only"

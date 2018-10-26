@@ -8,10 +8,10 @@ class ProductsController < ApplicationController
     if params[:category]
       @title = "#{params[:category].downcase}"
       @products = Product.where(:category => params[:category])
-      @products = @products.order(created_at: :desc)
+      @products = @products.shuffle
     else
       @title = "the spread"
-      @products = Product.order(created_at: :desc)
+      @products = Product.all.shuffle
     end
   end
 
