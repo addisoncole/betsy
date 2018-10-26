@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to edit_user_path(@user.id)
+      redirect_to user_path(@user.id)
       flash[:success] = "Successfully updated, you go Glen Coco! \u{1F389}"
     else
       render :edit, status: :bad_request

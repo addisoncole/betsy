@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
       flash[:success] = "Successfully updated yr swag! You go Glen Coco! \u{1F389}"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Errawr. \u{1F996} Cannot review own product, loser."
+      flash[:error] = "Errawr. \u{1F996} Missing some deets, bb."
       render :edit, status: :bad_request
     end
   end
