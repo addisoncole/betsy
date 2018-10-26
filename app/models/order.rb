@@ -29,7 +29,6 @@ class Order < ApplicationRecord
       entry.decrement_product
     end
   end
-<<<<<<< HEAD
 
   def mark_paid
     self.update_attribute(:status, :paid)
@@ -59,6 +58,4 @@ class Order < ApplicationRecord
     self.update_attribute(:status, :shipped)
     return "all items in yr order have been shipped, bb!"
   end
-=======
->>>>>>> c89e6a3faf2a121bbae7bbe578569d9df570af69
 end
