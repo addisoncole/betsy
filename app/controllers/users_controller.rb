@@ -69,16 +69,6 @@ class UsersController < ApplicationController
           end
         end
 
-<<<<<<< HEAD
-      if params[:status] == ""
-        @title = "all_orders"
-      elsif params[:status]
-        @title = params[:status]
-
-      else
-        @title = "all_orders"
-      end
-=======
         if params[:status] == ""
           @title = "all_orders"
         elsif params[:status]
@@ -86,7 +76,6 @@ class UsersController < ApplicationController
         else
           @title = "all_orders"
         end
->>>>>>> 0f5f9226381502f7b28610a51d0bfae462e54349
 
         if params[:status] == "pending"
           @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
