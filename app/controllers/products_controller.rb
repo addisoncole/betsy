@@ -9,10 +9,10 @@ class ProductsController < ApplicationController
     if params[:category]
       @title = "#{params[:category].downcase}"
       @products = Product.where(:category => params[:category])
-      @products = @products.order(created_at: :desc)
+      @products = @products.shuffle
     else
       @title = "the spread"
-      @products = Product.order(created_at: :desc)
+      @products = Product.all.shuffle
     end
   end
 
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
       flash[:success] = "Successfully updated yr swag! You go Glen Coco! \u{1F389}"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Errawr. \u{1F996} Cannot review own product, loser."
+      flash[:error] = "Errawr. \u{1F996} Missing some deets, bb."
       render :edit, status: :bad_request
     end
   end

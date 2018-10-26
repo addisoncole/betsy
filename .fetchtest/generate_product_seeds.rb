@@ -13,8 +13,8 @@ require 'csv'
 CSV.open('.fetchtest/product_seeds.csv', "w", :write_headers=> true,
   :headers => ["category", "name", "quantity", "price", "image", "user_id"]) do |csv|
 
-    25.times do |i|
-      category = %w(Plants Housewares Fashion Beauty Lifestyle).sample
+    50.times do |i|
+      category = %w(Plants Paraphernalia Fashion Beauty Lifestyle).sample
       if category == "Plants"
         name = Faker::Ancient.primordial + " " + Faker::Zelda.item
         quantity = rand(25)
@@ -22,7 +22,7 @@ CSV.open('.fetchtest/product_seeds.csv', "w", :write_headers=> true,
         image = "https://placekitten.com/200/200"
         user_id = 1
       end
-      if category == "Housewares"
+      if category == "Paraphernalia"
         name = Faker::Robin.quote + " " + Faker::GameOfThrones.house
         quantity = rand(25)
         price = 6.66

@@ -1,5 +1,4 @@
 require "test_helper"
-require 'pry'
 
 describe Order do
   describe "validations" do
@@ -102,15 +101,44 @@ describe Order do
       current_product.must_be_kind_of CartEntry
     end
   end
-  # describe 'decrement_product method' do
-  #   it 'decrements product quantity by quantity in order' do
-  #     Order.add_product(products(:swisscheeseplant), orders(:persons_order).id, 10)
-  #     # binding.pry
-  #     cart_entries = Order.decrement_products
-  #     expect(cart_entries.product.quantity).must_equal 0
-  #   end
-  # end
+  describe 'mark paid method' do
+    it "changes status to paid upon checking out" do
+      cart_entries = cart_entries(:entry)
+      cart_entries.order.mark_paid
+      cart_entries.order.status.must_equal "paid"
+    end
+  end
+  describe 'total method' do
+    it "calculates total for all products in a cart entry" do
+      cart_entries = cart_entries(:entry)
+      total = cart_entries.order.total
+      total.must_equal 207.94
+    end
+  end
+  describe 'order status method' do
+    it "returns message if status is not shipped" do
+      cart_entries = cart_entries(:entry)
+      result = cart_entries.order.order_status
+      result.must_equal "awaiting shipment(s)"
+    end
+    it 'returns message to shipped' do
+      cart_entries = cart_entries(:shipped_entry)
+      result = cart_entries.order.order_status
+      result.must_equal "all items in yr order have been shipped, bb!"
+    end
+  end
 end
+
+########halp how to write this test?
+
+# describe 'decrement_product method' do
+#   it 'decrements product quantity by quantity in order' do
+#     Order.add_product(products(:swisscheeseplant), orders(:persons_order).id, 10)
+#     # binding.pry
+#     cart_entries = Order.decrement_products
+#     expect(cart_entries.product.quantity).must_equal 0
+#   end
+# end
 
 ##THESE ARE THE METHODS FOR THE DECREMENT PRODUCT TEST
 # def decrement_products

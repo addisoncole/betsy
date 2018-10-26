@@ -1,6 +1,6 @@
 class CartEntriesController < ApplicationController
   include CurrentCart
-  before_action :find_cart_entry, only: [:edit, :update, :destroy, :update_status]
+  before_action :find_cart_entry, only: [:edit, :update, :destroy]
   before_action :find_order, only: [:create]
 
   def edit
@@ -14,7 +14,6 @@ class CartEntriesController < ApplicationController
       redirect_to order_path(@cart_entry.order_id)
     end
 
-    # TODO: what if the cart ID on the cart item doesn't match what's in the session?
   end
 
   def create
@@ -48,16 +47,6 @@ class CartEntriesController < ApplicationController
     else
       flash[:error] = "Unable to delete  #{@cart_entry.product.name}"
       redirect_back(fallback_location: root_path)
-    end
-  end
-
-  def update_status
-    if @cart_entry.update_attribute(:status, "shipped")
-      flash[:success] = "Marked item as shipped. Nice one, bb!"
-      redirect_back(fallback_location: manage_orders_path)
-    else
-      flash[:error] = "Something went wrong... plz contact support lol"
-      redirect_back(fallback_location: manage_orders_path)
     end
   end
 

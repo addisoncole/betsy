@@ -39,8 +39,7 @@ class UsersController < ApplicationController
   def update
 
     if @user.update(user_params)
-
-      redirect_to edit_user_path(@user.id)
+      redirect_to user_path(@user.id)
       flash[:success] = "Successfully updated, you go Glen Coco! \u{1F389}"
     else
       render :edit, status: :bad_request
@@ -58,17 +57,19 @@ class UsersController < ApplicationController
 
   def manage_orders
     if current_user?
-      @orders = @logged_in_user.merchant_orders
-      entries = []
-      my_products = @logged_in_user.products.ids
-      @orders.each do |order|
-        order.cart_entries.each do |entry|
-          if my_products.include?(entry.product_id)
-            entries << entry
+      if @logged_in_user.merchant == true
+        @orders = @logged_in_user.merchant_orders
+        entries = []
+        my_products = @logged_in_user.products.ids
+        @orders.each do |order|
+          order.cart_entries.each do |entry|
+            if my_products.include?(entry.product_id)
+              entries << entry
+            end
           end
         end
-      end
 
+<<<<<<< HEAD
       if params[:status] == ""
         @title = "all_orders"
       elsif params[:status]
@@ -77,13 +78,25 @@ class UsersController < ApplicationController
       else
         @title = "all_orders"
       end
+=======
+        if params[:status] == ""
+          @title = "all_orders"
+        elsif params[:status]
+          @title = params[:status]
+        else
+          @title = "all_orders"
+        end
+>>>>>>> 0f5f9226381502f7b28610a51d0bfae462e54349
 
-      if params[:status] == "pending"
-        @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
-      elsif params[:status] == "shipped"
-        @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
+        if params[:status] == "pending"
+          @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
+        elsif params[:status] == "shipped"
+          @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
+        else
+          @entries = entries.reverse
+        end
       else
-        @entries = entries.reverse
+        redirect_to root_path, :alert => "Dealers only..."
       end
     else
       redirect_to root_path, :alert => "Members Only"
