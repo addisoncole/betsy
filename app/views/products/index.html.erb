@@ -6,7 +6,8 @@
     <ul class="product-card <%= product.category %>">
       <div class="upper-product-info">
         <li class="product-image">
-          <%= image_tag (product.image), alt: "a pic of some awful capitalist bullshit", class: "product-image #{product.category}-image" %>
+          <%= image_tag product.image, alt: "a pic of some awful capitalist bullshit", class: "product-image #{product.category}-image" %>
+
         </li>
         <li>
           <h6 class="product-title <%= product.category %>-title"><%= product.name %></h6>

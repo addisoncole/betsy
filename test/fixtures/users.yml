@@ -7,6 +7,7 @@ fetchuser:
   merchant: true
   uid: 1341342
   provider: github
+  store_banner_img: 'https://picsum.photos/200/200?image=1025,1'
 
 new_user:
   name: new person
@@ -15,3 +16,4 @@ new_user:
   merchant: true
   uid: 23456
   provider: github
+  store_banner_img: 'https://picsum.photos/200/200?image=1025,1'
