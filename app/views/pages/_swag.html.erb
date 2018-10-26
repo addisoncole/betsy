@@ -1,0 +1,14 @@
+<a href="<%= product_path(swag) %>">
+  <ul>
+    <%= swag.name.downcase %>
+    <li>
+      Price: <%= swag.price %>
+    </li>
+    <li>
+      Swag Rating: <%= get_product_average_rating(swag) %>
+    </li>
+    <li>
+      <%=  image_tag "#{swag.image}" %>
+    </li>
+  </ul>
+</a>
