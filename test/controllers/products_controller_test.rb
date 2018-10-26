@@ -12,6 +12,19 @@ describe ProductsController do
       # Assert
       must_respond_with :success
     end
+
+#     it "returns array of products that has the same category" do
+#       first_product = products(:swisscheeseplant)
+#       sec_product = products(:soupplant)
+#
+#       expect {
+#         get products_path, params: {category: 'Plants'}
+#       }
+# binding.pry
+# # @controller.view_assigns[]
+#       expect(assigns(:title)).must_equal 'plants'
+#       expect(assigns(:products).count).must_equal 2
+#     end
   end
 
   describe "new" do
@@ -86,27 +99,19 @@ describe ProductsController do
 
       it "should respond with success for showing an existing book" do
         # Arrange
-        @product = products(:avocadotoast)
+        product = products(:avocadotoast)
 
         # Act
-        get products_path(@product.id)
+        get products_path(product.id)
 
         # Assert
         must_respond_with :success
       end
 
       it "should respond with not found for showing a non-existing product" do
-        # Arrange
-        @product = products(:avocadotoast)
-        id = @product.id
 
-        get product_path(id)
-        must_respond_with :success
+        id = bad_product_id
 
-
-        @product.destroy
-
-        # Act
         get product_path(id)
 
         # Assert
@@ -118,14 +123,12 @@ describe ProductsController do
     describe "edit" do
       it "responds with success for an existing product" do
         get edit_product_path(Product.first)
-        must_respond_with :success
+        must_respond_with :found
       end
 
       it "responds with not_found for a product that doesn't exist" do
-        @product = products(:avocadotoast)
-        id = @product.id
 
-        @product.destroy
+        id = bad_product_id
 
         get edit_product_path(id)
         must_respond_with :not_found
@@ -167,17 +170,22 @@ describe ProductsController do
     describe "destroy" do
       it "can destroy an existing product" do
         # Arrange
-        @product = products(:swisscheeseplant)
-        expect(@product.user_id).must_equal users(:fetchuser).id
+        user = users(:fetchuser)
+        perform_login(user)
+
+        session[:user_id] = user.id
+        product = products(:swisscheeseplant)
+        expect(product.user_id).must_equal users(:fetchuser).id
 
         # Act
         expect {
-          delete product_path(@product.id)
+          delete product_path(product.id)
         }.must_change('Product.count', -1)
 
         # Assert
         must_respond_with :redirect
         must_redirect_to products_path
+        expect(flash[:success]).must_equal "Successfully destroyed #{product.name} \u{1F4A5}	"
       end
 
       it "responds with not_found if the product doesn't exist" do
@@ -192,7 +200,63 @@ describe ProductsController do
 
     describe "review" do
       it "checks the user is logged in" do
+        user = users(:new_user)
+        perform_login(user)
 
+        session[:user_id] = user.id
+        product = products(:avocadotoast)
+
+        review_hash = {
+            rating: 4,
+            comment: "new comment"
+        }
+
+
+          expect {
+            post review_path(product.id), params: review_hash
+          }.must_change('Review.count', 1)
+
+          must_respond_with :redirect
+          expect(flash[:success]).must_equal "Successfully gave your thoughts && prayers! You go Glen Coco! \u{1F389}"
+          must_redirect_to product_path(product.reviews.last.product_id)
+      end
+
+      it "does not save review for user that added that product" do
+        user = users(:fetchuser)
+        perform_login(user)
+
+        session[:user_id] = user.id
+        product = products(:avocadotoast)
+
+        review_hash = {
+            rating: 4,
+            comment: "new comment"
+        }
+
+          expect {
+            post review_path(product.id), params: review_hash
+          }.wont_change('Review.count')
+
+          must_respond_with :redirect
+          expect(flash[:error]).must_equal "Errawr. \u{1F996} Cannot review own product, loser."
+          must_redirect_to product_path(product.reviews.first.product_id)
+      end
+
+      it "does not save review if you are not logged in" do
+        product = products(:avocadotoast)
+
+        review_hash = {
+            rating: 4,
+            comment: "new comment"
+        }
+
+          expect {
+            post review_path(product.id), params: review_hash
+          }.wont_change('Review.count')
+
+          must_respond_with :redirect
+          expect(flash[:error]).must_equal "Members Only"
+          must_redirect_to product_path(product.id)
       end
     end
 

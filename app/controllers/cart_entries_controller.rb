@@ -14,7 +14,6 @@ class CartEntriesController < ApplicationController
       redirect_to order_path(@cart_entry.order_id)
     end
 
-    # TODO: what if the cart ID on the cart item doesn't match what's in the session?
   end
 
   def create
