@@ -1,8 +1,17 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
   has_many :cart_entries, dependent: :destroy
+  validates :card_number, presence: true, length: { is: 16 }, :numericality => { :only_interger => true }, if: Proc.new { |a| a.status != "pending" }
+  validates :card_expiration, presence: true, if: Proc.new { |a| a.status != "pending" }
+  validates :CVV, presence: true, length: { is: 3 }, :numericality => { :only_interger => true }, if: Proc.new { |a| a.status != "pending" }
+  validates :billing_address, presence: true, if: Proc.new { |a| a.status != "pending" }
+  validates :billing_zip_code, presence: true, length: { is: 5 }, :numericality => { :only_interger => true }, if: Proc.new { |a| a.status != "pending" }
+  validates :email, presence: true, if: Proc.new { |a| a.status != "pending" }
+  validates :shipping_address, presence: true, if: Proc.new { |a| a.status != "pending" }
+  validates :status, presence: true
+  validates :name, presence: true, if: Proc.new { |a| a.status != "pending" }
 
-  def add_product(product, order_id, quantity)
+  def self.add_product(product, order_id)
     current_product = CartEntry.find_by(product_id: product.id, order_id: order_id)
     if current_product
       current_product.increment(:quantity, by = quantity)
@@ -20,6 +29,7 @@ class Order < ApplicationRecord
       entry.decrement_product
     end
   end
+<<<<<<< HEAD
 
   def mark_paid
     self.update_attribute(:status, :paid)
@@ -49,4 +59,6 @@ class Order < ApplicationRecord
     self.update_attribute(:status, :shipped)
     return "all items in yr order have been shipped, bb!"
   end
+=======
+>>>>>>> c89e6a3faf2a121bbae7bbe578569d9df570af69
 end
