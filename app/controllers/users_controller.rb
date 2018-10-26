@@ -1,4 +1,3 @@
-require 'pry'
 class UsersController < ApplicationController
 
   before_action :find_user, only: [:show, :edit, :update, :userdash, :manage_orders]
