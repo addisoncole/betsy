@@ -8,7 +8,7 @@ describe CartEntry do
       @order.save!
       @product = Product.new(name: 'Artisanal Coffee', category: "Lifestyle", quantity: 4, price: 9.99, image: 'https://placekitten.com/200/200', user: @user)
       @product.save!
-      cart_entry = CartEntry.new(order: @order, order_id: @order.id, product: @product, product_id: @product.id)
+      cart_entry = CartEntry.new(order: @order, order_id: @order.id, product: @product, product_id: @product.id, quantity: 1)
       cart_entry.valid?.must_equal true
     end
 

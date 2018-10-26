@@ -50,12 +50,12 @@ class Order < ApplicationRecord
 
   def order_status
     self.cart_entries.each do |entry|
-      unless entry.status == :shipped
+      unless entry.status == "shipped"
         return "awaiting shipment(s)"
       end
     end
 
-    self.update_attribute(:status, :shipped)
+    self.update_attribute(:status, "shipped")
     return "all items in yr order have been shipped, bb!"
   end
 end
