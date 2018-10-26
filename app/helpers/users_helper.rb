@@ -57,7 +57,7 @@ module UsersHelper
   end
 
   def non_pending_orders(user)
-    return user.orders.find_all { |order| order.status != "pending" }.reverse
+    return user.orders.find_all { |order| order.status != "pending" }
   end
 
   def find_my_entries(order)
@@ -133,5 +133,13 @@ module UsersHelper
     return orders.map { |order| order.cart_entries.find_all { |entry|
       entry.status == ssstatus && @logged_in_user.products.ids.include?(entry.product_id)
     }.length}.sum
+  end
+
+  def dash_class(user)
+    if user.merchant == true
+      return ("merchant").html_safe
+    else
+      return ("user").html_safe
+    end
   end
 end

@@ -2,21 +2,24 @@
 
 <section>
   <%= f.label :pop_up_name %>
-  <%= f.text_field :store_name %>
-  <%= f.label :pop_up_location %>
-  <%= f.text_field :store_location %>
+  <%= f.text_field :store_name, class: "text-field" %>
 </section>
 <section>
+  <%= f.label :pop_up_location %>
+  <%= f.text_field :store_location, class: "text-field" %>
+</section>
+<section class="fake gay">
   <%= f.label :pop_up_deets %>
   <div>
-    <%= f.text_area :store_description, cols: 50, rows: 3 %>
+    <%= f.text_area :store_description, cols: 47, rows: 3 %>
   </div>
 </section>
 <section>
   <%= f.label :pop_up_brand_image %>
-  <%= f.text_field :store_banner_img %>
+  <%= f.text_field :store_banner_img, class: "text-field2" %>
 </section>
-
+<section class="buttonbutton">
   <%= f.submit "make it happen" %>
+</section>
 
 <% end %>

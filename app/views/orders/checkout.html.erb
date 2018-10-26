@@ -55,37 +55,6 @@
       <li><%= @order.order_status %></li>
     </ul>
     <% end %>
-
-    <!--
-    <li>
-    name:
-    <% user = User.find_by(id: session[:user_id]) %>
-    <% if user %>
-    <%= user.name %>
-    <% else %>
-    <span>Guest</span>
-    <% end %>
-  </li>
-  <li>
-  email:
-  <% if user %>
-  <%= user.name %>
-  <% else %>
-  <span>Guest</span>
-  <% end %>
-</li>
-<li>
-  shipping address:
-  <%= @order.shipping_address %>
-</li>
-<li>
-  cc:
-  <%= @order.card_number.to_s[-4..-1] %>
-</li>
-<li>
-  cc exp:
-  <%= @order.card_expiration %>
-</li> -->
   </ul>
 
   <section class="items-info">
@@ -104,7 +73,7 @@
           qty: <%= entry.quantity %>
         </li>
         <li class="entry-total">
-          $<%= ("%.2f" % Product.find_by(id: entry.product_id).price * entry.quantity) %>
+          $<%= ("%.2f" % (Product.find_by(id: entry.product_id).price * entry.quantity)) %>
         </li>
         <li class="entry-status">
           <% if entry.status == "paid" %>
@@ -119,7 +88,7 @@
       <% end %>
       <ul class="cart-entry">
         <li class="entry-total grand-total">
-          $<%= @order.total %>
+          $<%= ("%.2f" % @order.total) %>
         </li>
       </ul>
     </div>

@@ -1,65 +1,75 @@
-<h1>Dassshboard</h1>
-
-<section class="user-info-card">
-  <img src="" class="user-pic" />
-  <section class="user-info">
-    <ul class="user-info-list">
-      <li class="profile-pic"><%= image_tag @logged_in_user.profile_picture %></li>
-      <li>user name: <%= @logged_in_user.username %></li>
-      <li>name: <%= @logged_in_user.name %></li>
-      <li>email: <%= @logged_in_user.email %></li>
-      <li>user since: <%= @logged_in_user.created_at.strftime("%Y AD / %b  %-d, %H:%M:%S.%L") %></li>
-      <li>pop-up activated: <%= @logged_in_user.merchant %></li>
-    </ul>
-    <p><%= link_to "(edit)", edit_user_path(@logged_in_user) %></p>
-  </section>
-</section>
-
-<% if @logged_in_user.merchant == true %>
-  <section class="listings-card">
-    <section class="listings-amount">
-      <p><%= @logged_in_user.products.length %></p>
-      <p>listings</p>
-      <p><%= link_to "(add item)", new_product_path %></p>
+<h1>dassshboard</h1>
+ <div class="dash-top-container">
+  <div class="info-card-container">
+    <section class="<%= dash_class(@logged_in_user) %>-info-card">
+      <%= image_tag @logged_in_user.profile_picture, class: "#{dash_class(@logged_in_user)}-picy" %>
+      <section class="<%= dash_class(@logged_in_user) %>-info">
+        <ul class="<%= dash_class(@logged_in_user) %>-info-list">
+          <li><strong>user name</strong>: <%= @logged_in_user.username %></li>
+          <li><strong>name</strong>: <%= @logged_in_user.name %></li>
+          <li><strong>email</strong>: <%= @logged_in_user.email %></li>
+          <li><strong>user since</strong>: <%= @logged_in_user.created_at.strftime("%Y AD / %b  %-d, %H:%M:%S.%L") %></li>
+          <li><strong>pop-up activated</strong>: <%= @logged_in_user.merchant %></li>
+        </ul>
+        <p><%= link_to "(edit)", edit_user_path(@logged_in_user) %></p>
+      </section>
     </section>
-  </section>
+  </div>
 
-  <section class="orders-card">
-    <section class="orders-amount">
-      <p><%= @logged_in_user.merchant_orders.length %></p>
-      <p>pending orders</p>
-      <p><%= link_to "(manage orders)", manage_orders_path(@logged_in_user) %></p>
-    </section>
-  </section>
+  <% if @logged_in_user.merchant == true %>
+    <div class="dash-inner-container">
+      <div class="inner-inner-container">
+        <section class="listings-card">
+          <section class="listings-amount">
+            <p><%= @logged_in_user.products.length %></p>
+            <p>listings</p>
+            <p><%= link_to "(add item)", new_product_path %></p>
+          </section>
+        </section>
 
-  <section class="inventory">
-    <% @logged_in_user.products.each do |product| %>
-    <ul class="inventory-entry">
-      <li><%= product.name %></li>
-      <li>qty: <%= product.quantity %></li>
-      <li><%= link_to "(edit)", edit_product_path(product) %></li>
-      <li><%= link_to "(del)", product_path(product), method: :delete %></li>
-    </ul>
-    <% end %>
-  </section>
+        <section class="orders-card">
+          <section class="orders-amount">
+            <p><%= @logged_in_user.merchant_orders.length %></p>
+            <p>pending orders</p>
+            <p><%= link_to "(manage orders)", manage_orders_path(@logged_in_user) %></p>
+          </section>
+        </section>
+      </div>
 
+      <h2 class="inventory-header">inventory</h2>
+      <section class="inventory shmenventory">
+        <% @logged_in_user.products.each do |product| %>
+        <ul class="inventory-entry">
+          <li><%= product.name %></li>
+          <li>qty: <%= product.quantity %></li>
+          <li><%= link_to "(edit)", edit_product_path(product) %></li>
+          <li><%= link_to "(del)", product_path(product), method: :delete %></li>
+        </ul>
+        <% end %>
+      </section>
+    </div>
+    </div>
+<div class="popup-container">
   <section class="popup-settings">
     <div class="popup-settings-header">
-      <h2>Pop-Up Settings</h2>
+      <h2>pop-up settings</h2>
     </div>
     <div class="popup-settings-form">
       <%= render partial: "form_merchant" %>
     </div>
   </section>
+</div>
 <% end %>
 
-<section class="order-herstory">
-  <h2>Your Personal Order Herstory</h2>
-  <div class="orders-container">
-    <% if non_pending_orders(@logged_in_user) == [] %>
+<div class="info-card-container<% if @logged_in_user.merchant == true %><%= "2" %><% end %>">
+  <section class="order-herstory">
+    <h2>your personal order herstory</h2>
+    <div class="orders-container">
+      <% if non_pending_orders(@logged_in_user) == [] %>
       <span><%= "\u{1F629}" %>(*yells from the back of the auditorium*) She doesn't even shop here!! <%= "\u{1F613}" %></span>
-    <% else %>
+      <% else %>
       <%= render partial: "individual_order", collection: non_pending_orders(@logged_in_user) %>
-    <% end %>
-  </div>
-</section>
+      <% end %>
+    </div>
+  </section>
+</div>

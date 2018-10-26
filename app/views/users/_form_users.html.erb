@@ -1,27 +1,29 @@
-<%= form_with model: @user do |f| %>
+<div class="form-container">
+  <%= form_with model: @user do |f| %>
 
-<section>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+    <%= f.label :username, class: "name-label" %>
+    <%= f.text_field :username %>
 
-  <%= f.label :bio %>
-  <%= f.text_area :bio, cols: 50, rows: 3 %>
-</section>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
 
-<section>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-</section>
+    <%= f.label :bio %>
+    <%= f.text_area :bio, cols: 50, rows: 3 %>
+  
 
-<section>
-  Would you like to join the fetch team as a merchant?
-  <%= f.label :merchant, as: :boolean do
-    f.check_box :merchant, {}, "true", "false"
-  end %>
-</section>
 
-<%= f.submit "make it happen" %>
-<% end %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+
+
+  <section>
+    Would you like to join the fetch team as a merchant?
+    <%= f.label :merchant, as: :boolean do
+      f.check_box :merchant, {}, "true", "false"
+    end %>
+  </section>
+
+  <%= f.submit "make it happen" %>
+  <% end %>
+</div>

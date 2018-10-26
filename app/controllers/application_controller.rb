@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def find_order
     @order = Order.find_by(id: session[:order_id])
     if @order == nil
-      @order = Order.create
+      @order = Order.create(:user_id => session[:user_id])
       session[:order_id] = @order.id
     end
   end

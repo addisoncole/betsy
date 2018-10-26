@@ -8,12 +8,17 @@ class User < ApplicationRecord
     user = User.new
     user.uid = auth_hash[:uid]
     user.provider = 'github'
-    user.name = auth_hash[:info][:name]
     user.email = auth_hash[:info][:email]
+    if auth_hash[:info][:name] == nil
+      user.name = "mssingno"
+      user.username = "mssingnooo"
+    else
+      user.name = auth_hash[:info][:name]
     # Typically create a shorter username
     # for use in URLs, something like:
     # Ultra Fetch -> ultra-fetch
-    user.username = auth_hash[:info][:name]
+      user.username = auth_hash[:info][:name]
+    end
     user.profile_picture = auth_hash[:info][:image]
 
     return user
