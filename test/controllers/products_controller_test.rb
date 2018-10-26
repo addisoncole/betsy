@@ -12,6 +12,19 @@ describe ProductsController do
       # Assert
       must_respond_with :success
     end
+
+#     it "returns array of products that has the same category" do
+#       first_product = products(:swisscheeseplant)
+#       sec_product = products(:soupplant)
+#
+#       expect {
+#         get products_path, params: {category: 'Plants'}
+#       }
+# binding.pry
+# # @controller.view_assigns[]
+#       expect(assigns(:title)).must_equal 'plants'
+#       expect(assigns(:products).count).must_equal 2
+#     end
   end
 
   describe "new" do
@@ -167,6 +180,10 @@ describe ProductsController do
     describe "destroy" do
       it "can destroy an existing product" do
         # Arrange
+        user = users(:fetchuser)
+        perform_login(user)
+
+        session[:user_id] = user.id
         @product = products(:swisscheeseplant)
         expect(@product.user_id).must_equal users(:fetchuser).id
 
@@ -178,6 +195,7 @@ describe ProductsController do
         # Assert
         must_respond_with :redirect
         must_redirect_to products_path
+        expect(flash[:success]).must_equal "Successfully destroyed #{@product.name} \u{1F4A5}	"
       end
 
       it "responds with not_found if the product doesn't exist" do
@@ -192,7 +210,69 @@ describe ProductsController do
 
     describe "review" do
       it "checks the user is logged in" do
+        user = users(:new_user)
+        perform_login(user)
 
+        session[:user_id] = user.id
+        product = products(:avocadotoast)
+
+        review_hash = {
+            rating: 4,
+            comment: "new comment"
+        }
+
+
+          expect {
+            post review_path(product.id), params: review_hash
+          }.must_change('Review.count', 1)
+
+          must_respond_with :redirect
+          expect(flash[:success]).must_equal "Successfully gave your thoughts && prayers! You go Glen Coco! \u{1F389}"
+          must_redirect_to product_path(product.reviews.last.product_id)
+      end
+
+      it "does not save review for user that added that product" do
+        user = users(:fetchuser)
+        perform_login(user)
+
+        session[:user_id] = user.id
+        product = products(:avocadotoast)
+
+        review_hash = {
+            rating: 4,
+            comment: "new comment"
+        }
+
+          expect {
+            post review_path(product.id), params: review_hash
+          }.wont_change('Review.count')
+
+          must_respond_with :redirect
+          expect(flash[:error]).must_equal "Errawr. \u{1F996} Cannot review own product, loser."
+          must_redirect_to product_path(product.reviews.first.product_id)
+      end
+
+      it "does not save review if you are not logged in" do
+        user = users(:fetchuser)
+        user.provider = nil
+        perform_login(user)
+
+        user.provider = nil
+        session[:user_id] = nil
+        product = products(:avocadotoast)
+
+        review_hash = {
+            rating: 4,
+            comment: "new comment"
+        }
+
+          expect {
+            post review_path(product.id), params: review_hash
+          }.wont_change('Review.count')
+
+          must_respond_with :redirect
+          expect(flash[:error]).must_equal "Members Only"
+          must_redirect_to product_path(product.id)
       end
     end
 

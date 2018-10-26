@@ -13,3 +13,10 @@ swisscheeseplant:
   quantity: 10
   price: 39.99
   user: fetchuser
+
+soupplant:
+  name: chicken noodle plant
+  category: Plants
+  quantity: 3
+  price: 9.99
+  user: new_user

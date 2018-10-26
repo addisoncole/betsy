@@ -7,3 +7,11 @@ fetchuser:
   merchant: true
   uid: 1341342
   provider: github
+
+new_user:
+  name: new person
+  username: personname
+  email: person@fetch.com
+  merchant: true
+  uid: 23456
+  provider: github
