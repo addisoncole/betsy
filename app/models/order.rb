@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   validates :CVV, presence: true, length: { is: 3 }, :numericality => { :only_interger => true }, if: Proc.new { |a| a.status != "pending" }
   validates :billing_address, presence: true, if: Proc.new { |a| a.status != "pending" }
   validates :billing_zip_code, presence: true, length: { is: 5 }, :numericality => { :only_interger => true }, if: Proc.new { |a| a.status != "pending" }
-  validates :email, presence: true, if: Proc.gnew { |a| a.status != "pending" }
+  validates :email, presence: true, if: Proc.new { |a| a.status != "pending" }
   validates :shipping_address, presence: true, if: Proc.new { |a| a.status != "pending" }
   validates :status, presence: true
   validates :name, presence: true, if: Proc.new { |a| a.status != "pending" }
