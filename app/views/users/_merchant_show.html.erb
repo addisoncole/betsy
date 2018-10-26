@@ -1,8 +1,12 @@
-<h1><%= @user.store_name %></h1>
 
-<section class="table">
-  <%= image_tag ("#{@user.store_banner_img}") %>
-  <%= image_tag ("#{@user.profile_picture}") %>
+<section class="banner-section">
+  <h1 class="pop-up-title"><%= @user.store_name %></h1>
+  <figure class= "merchant-profile-banner">
+    <%= image_tag ("#{@user.store_banner_img}"), :class => "merchant-profile-banner" %>
+  </figure>
+  <%= image_tag ("#{@user.profile_picture}"), :class => "merchant-profile-photo" %>
+</section>
+<section>
   <ul>
     <li>
       <%= @user.store_description %>
@@ -21,34 +25,32 @@
     </li>
   </ul>
 </section>
+
 <% if @user.products.count > 0 %>
 <h2><small>fetch by</small> <%= @user.store_name.downcase %>.</h2>
-<section class="table">
-  <ul>
+<section class="products-container">
     <% @user.products.reverse.each do |product| %>
-    <a href="<%= product_path(product) %>">
-      <li>
-        <%= image_tag ("#{product.image}") %>
-      </li>
-      <li>
-        <h6><%=  "#{product.name}" %></h6>
-      </li>
-      <li>
-        <%=  "#{product.category}" %>
-      </li>
-      <li>
-        <%= display_quantity_or_sell_out(product) %>
-      </li>
-      <li>
-        <%=  "#{product.price}" %>
-      </li>
-        <%= display_edit_product_button?(product) %>
-      </li>
-      <li>
-        <%= display_delete_product_button?(product) %>
-      </li>
-  </a>
+    <a href="<%= product_path(product) %>" class="product-card-link">
+      <ul class="product-card <%= product.category %>">
+        <div class="upper-product-info">
+          <li class="product-image">
+            <%= image_tag (product.image), alt: "a pic of some awful capitalist bullshit", class: "product-image #{product.category}-image" %>
+          </li>
+          <li>
+            <h6 class="product-title <%= product.category %>-title"><%= product.name %></h6>
+          </li>
+        </div>
+        <div class="lower-product-info">
+          <li class="product-info">
+            <%= display_quantity_or_sell_out(product) %>
+          </li>
+          <li class="product-info">
+            $ <%= ("%.2f" % product.price) %>
+          </li class="product-info">
+          <%= show_product_reviews?(product) %>
+        </div>
+      </ul>
+    </a>
   <% end %>
-</ul>
 </section>
 <% end %>
