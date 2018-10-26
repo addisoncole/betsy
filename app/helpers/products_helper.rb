@@ -34,7 +34,7 @@ module ProductsHelper
     end
 
     def show_product_reviews?(product)
-      ("<li>" + "Swag Rating: #{get_product_average_rating(product)}" + "</li>").html_safe unless product.reviews.count == 0
+      ("<li class =" + "product-swag" + ">" + "Swag Rating: #{get_product_average_rating(product)}" + "</li>").html_safe unless product.reviews.count == 0
     end
 
     def show_product_reviews_title?(product)
