@@ -58,7 +58,6 @@ describe SessionsController do
       get login_path(:github)
       delete logout_path(:github)
 
-
       must_redirect_to root_path
       expect(session[:user_id]).must_equal nil
       expect(flash[:success]).must_equal "You have been logged out. Been there. Shopped that. \u{1F485}"

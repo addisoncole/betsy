@@ -99,27 +99,19 @@ describe ProductsController do
 
       it "should respond with success for showing an existing book" do
         # Arrange
-        @product = products(:avocadotoast)
+        product = products(:avocadotoast)
 
         # Act
-        get products_path(@product.id)
+        get products_path(product.id)
 
         # Assert
         must_respond_with :success
       end
 
       it "should respond with not found for showing a non-existing product" do
-        # Arrange
-        @product = products(:avocadotoast)
-        id = @product.id
 
-        get product_path(id)
-        must_respond_with :success
+        id = bad_product_id
 
-
-        @product.destroy
-
-        # Act
         get product_path(id)
 
         # Assert
@@ -131,14 +123,12 @@ describe ProductsController do
     describe "edit" do
       it "responds with success for an existing product" do
         get edit_product_path(Product.first)
-        must_respond_with :success
+        must_respond_with :found
       end
 
       it "responds with not_found for a product that doesn't exist" do
-        @product = products(:avocadotoast)
-        id = @product.id
 
-        @product.destroy
+        id = bad_product_id
 
         get edit_product_path(id)
         must_respond_with :not_found
@@ -184,18 +174,18 @@ describe ProductsController do
         perform_login(user)
 
         session[:user_id] = user.id
-        @product = products(:swisscheeseplant)
-        expect(@product.user_id).must_equal users(:fetchuser).id
+        product = products(:swisscheeseplant)
+        expect(product.user_id).must_equal users(:fetchuser).id
 
         # Act
         expect {
-          delete product_path(@product.id)
+          delete product_path(product.id)
         }.must_change('Product.count', -1)
 
         # Assert
         must_respond_with :redirect
         must_redirect_to products_path
-        expect(flash[:success]).must_equal "Successfully destroyed #{@product.name} \u{1F4A5}	"
+        expect(flash[:success]).must_equal "Successfully destroyed #{product.name} \u{1F4A5}	"
       end
 
       it "responds with not_found if the product doesn't exist" do
@@ -253,12 +243,6 @@ describe ProductsController do
       end
 
       it "does not save review if you are not logged in" do
-        user = users(:fetchuser)
-        user.provider = nil
-        perform_login(user)
-
-        user.provider = nil
-        session[:user_id] = nil
         product = products(:avocadotoast)
 
         review_hash = {

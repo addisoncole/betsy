@@ -55,7 +55,6 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    # require 'pry';binding.pry
     if product_owner?
 
       if @product.destroy
@@ -89,7 +88,8 @@ class ProductsController < ApplicationController
       end
     else
       flash[:error] = "Members Only"
-      redirect_to product_path(@review.product_id)
+      # @review is nil at this point... you have access to the right id off of params[:id] though
+      redirect_to product_path(id: params[:id])
     end
   end
 

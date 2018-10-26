@@ -1,7 +1,8 @@
+require 'pry'
 class UsersController < ApplicationController
 
-  before_action :find_user, only: [:show, :edit, :update, :destroy, :userdash, :manage_orders]
-  before_action :current_user?, only: [:edit, :destroy, :userdash, :manage_orders]
+  before_action :find_user, only: [:show, :edit, :update, :userdash, :manage_orders]
+  before_action :current_user?, only: [:edit, :userdash, :manage_orders]
 
   def index
     if User.find_by(id: session[:user_id])
@@ -21,6 +22,12 @@ class UsersController < ApplicationController
 
   def show
       @user = User.find_by(id: params[:id])
+      # If @user is nil, then the status should be :missing
+
+      if @user == nil
+        flash[:error] = "No such user exists!"
+        redirect_to users_path
+      end
   end
 
   def edit
@@ -30,23 +37,13 @@ class UsersController < ApplicationController
   end
 
   def update
+
     if @user.update(user_params)
+
       redirect_to edit_user_path(@user.id)
       flash[:success] = "Successfully updated, you go Glen Coco! \u{1F389}"
     else
       render :edit, status: :bad_request
-    end
-  end
-
-  def destroy
-    if current_user?
-      @user.destroy
-      flash[:status] = :success
-      flash[:result_text] = "Successfully destroyed #{@user.singularize} #{@user.id} \u{1F4A5}"
-      redirect_to root_path
-    else
-      flash[:error] = "Must be logged in as this loser to do that."
-      redirect_to root_path
     end
   end
 
@@ -76,6 +73,7 @@ class UsersController < ApplicationController
         @title = "all_orders"
       elsif params[:status]
         @title = params[:status]
+
       else
         @title = "all_orders"
       end
@@ -96,12 +94,14 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :username, :email, :merchant, :store_name, :store_banner_img, :store_location, :store_description, :bio)
   end
+
   def find_user
     @user = User.find_by(id: session[:user_id])
     if @user == nil
       @user = :GUEST
     end
   end
+
   def current_user?
     @user == User.find_by(id: session[:user_id])
   end
