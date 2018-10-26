@@ -97,7 +97,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :username, :email, :merchant, :store_name, :store_banner_img, :store_location, :store_description, :bio)
   end
   def find_user
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: session[:user_id])
     if @user == nil
       @user = :GUEST
     end
