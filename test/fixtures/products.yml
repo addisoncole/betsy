@@ -6,6 +6,7 @@ avocadotoast:
   quantity: 1
   price: 7.99
   user: fetchuser
+  image: 'https://picsum.photos/200/200?image=1025,1'
 
 swisscheeseplant:
   name: Monstera Deliciosa
@@ -13,3 +14,12 @@ swisscheeseplant:
   quantity: 10
   price: 39.99
   user: fetchuser
+  image: 'https://picsum.photos/200/200?image=1025,1'
+
+soupplant:
+  name: chicken noodle plant
+  category: Plants
+  quantity: 3
+  price: 9.99
+  user: new_user
+  image: 'https://picsum.photos/200/200?image=1025,1'

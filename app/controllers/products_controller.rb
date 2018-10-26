@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
 
 
   def index
+
     if params[:category]
       @title = "#{params[:category].downcase}"
       @products = Product.where(:category => params[:category])
@@ -48,14 +49,16 @@ class ProductsController < ApplicationController
       flash[:success] = "Successfully updated yr swag! You go Glen Coco! \u{1F389}"
       redirect_to product_path(@product.id)
     else
-      flash[:error] = "Errawr. \u{1F996} Cannot review own product, loser."
+      flash[:error] = "Errawr. \u{1F996} Missing some deets, bb."
       render :edit, status: :bad_request
     end
   end
 
   def destroy
     if product_owner?
+
       if @product.destroy
+
         flash[:status] = :success
         flash[:success] = "Successfully destroyed #{@product.name} \u{1F4A5}	"
         redirect_to products_path
@@ -78,13 +81,15 @@ class ProductsController < ApplicationController
       if @user == @product.user
         flash[:error] = "Errawr. \u{1F996} Cannot review own product, loser."
         redirect_to product_path(@review.product_id)
+
       else @review.save
         flash[:success] = "Successfully gave your thoughts && prayers! You go Glen Coco! \u{1F389}"
-        redirect_to request.referrer
+        redirect_to product_path(@review.product_id)
       end
     else
       flash[:error] = "Members Only"
-      redirect_to request.referrer
+      # @review is nil at this point... you have access to the right id off of params[:id] though
+      redirect_to product_path(id: params[:id])
     end
   end
 

@@ -2,19 +2,7 @@ class OrdersController < ApplicationController
 
   before_action :find_order, only: [:show, :edit, :update, :destroy, :checkout]
 
-  def index
-    @orders = Order.all
-  end
-
   def show
-
-  end
-
-  def new
-    @order = Order.new
-  end
-
-  def edit
   end
 
   def update
@@ -29,6 +17,12 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    # if @order.save
+    #   redirect_back(fallback_location: root_path)
+    # else
+    #   redirect_to root_path
+    # end
+
   end
 
   def destroy
