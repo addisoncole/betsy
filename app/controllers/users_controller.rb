@@ -102,7 +102,7 @@ class UsersController < ApplicationController
   def find_user
     @user = User.find_by(id: params[:id])
     if @user == nil
-      @user = :BADUSER
+      @user = :GUEST
     end
   end
   def current_user?
