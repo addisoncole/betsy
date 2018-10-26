@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :orders
 
   patch 'orders/chekout/:id', to: 'orders#update'
+  post 'manage/shippedit/:id', to: 'cart_entries#update_status', as: 'shipped_it'
 
   get 'orders/chekout/:id', to: 'orders#checkout', as: 'order_checkout'
 
-  get 'users/dash/:id', to: 'users#userdash', as: 'userdash'
+  get 'dash', to: 'users#userdash', as: 'userdash'
+  get 'manage', to: 'users#manage_orders', as: 'manage_orders'
 
   get "/auth/:provider/callback", to: "sessions#login", as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"

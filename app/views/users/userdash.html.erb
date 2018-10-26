@@ -1,1 +1,63 @@
 <h1>Dassshboard</h1>
+
+<section class="user-info-card">
+  <img src="" class="user-pic" />
+  <section class="user-info">
+    <ul class="user-info-list">
+      <li class="profile-pic"><%= image_tag @logged_in_user.profile_picture %></li>
+      <li>user name: <%= @logged_in_user.username %></li>
+      <li>name: <%= @logged_in_user.name %></li>
+      <li>email: <%= @logged_in_user.email %></li>
+      <li>user since: <%= @logged_in_user.created_at.strftime("%Y AD / %b  %-d, %H:%M:%S.%L") %></li>
+      <li>pop-up activated: <%= @logged_in_user.merchant %></li>
+    </ul>
+    <p><%= link_to "(edit)", edit_user_path(@logged_in_user) %></p>
+  </section>
+</section>
+
+<section class="listings-card">
+  <section class="listings-amount">
+    <p><%= @logged_in_user.products.length %></p>
+    <p>listings</p>
+    <p><%= link_to "(add item)", new_product_path %></p>
+  </section>
+</section>
+
+<section class="orders-card">
+  <section class="orders-amount">
+    <p><%= @logged_in_user.merchant_orders.length %></p>
+    <p>pending orders</p>
+    <p><%= link_to "(manage orders)", manage_orders_path(@logged_in_user) %></p>
+  </section>
+</section>
+
+<section class="inventory">
+  <% @logged_in_user.products.each do |product| %>
+  <ul class="inventory-entry">
+    <li><%= product.name %></li>
+    <li>qty: <%= product.quantity %></li>
+    <li><%= link_to "(edit)", edit_product_path(product) %></li>
+    <li><%= link_to "(del)", product_path(product), method: :delete %></li>
+  </ul>
+  <% end %>
+</section>
+
+<section class="popup-settings">
+  <div class="popup-settings-header">
+    <h2>Pop-Up Settings</h2>
+  </div>
+  <div class="popup-settings-form">
+    <%= render partial: "form_merchant" %>
+  </div>
+</section>
+
+<section class="order-herstory">
+  <h2>Your Personal Order Herstory</h2>
+  <div class="orders-container">
+    <% if non_pending_orders(@logged_in_user) == [] %>
+      <span><%= "\u{1F629}" %>(*yells from the back of the auditorium*) She doesn't even shop here!! <%= "\u{1F613}" %></span>
+    <% else %>
+      <%= render partial: "individual_order", collection: non_pending_orders(@logged_in_user) %>
+    <% end %>
+  </div>
+</section>

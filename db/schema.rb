@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2018_10_24_175133) do
     t.datetime "updated_at", null: false
     t.bigint "order_id"
     t.integer "quantity"
-    t.bigint "product_id"
     t.string "status", default: "pending"
+    t.bigint "product_id"
     t.index ["order_id"], name: "index_cart_entries_on_order_id"
     t.index ["product_id"], name: "index_cart_entries_on_product_id"
   end
@@ -37,7 +37,10 @@ ActiveRecord::Schema.define(version: 2018_10_24_175133) do
     t.string "email"
     t.string "billing_address"
     t.string "status", default: "pending"
+    t.integer "user_id"
     t.string "name"
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_orders_on_users_id"
   end
 
   create_table "products", force: :cascade do |t|

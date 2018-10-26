@@ -50,7 +50,7 @@
     <% end %>
   </li>
   <li>
-    <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
+    $<%= ("%.2f" % (Product.find_by(id: entry.product_id).price * entry.quantity)) %>
   </li>
   <li>
     status:
@@ -61,4 +61,6 @@
   <% end %>
 </ul>
 
-<%= link_to "chekout!", order_checkout_path(@order) %>
+<% if @order.status == "pending" %>
+  <%= link_to "chekout!", order_checkout_path(@order) %>
+<% end %>

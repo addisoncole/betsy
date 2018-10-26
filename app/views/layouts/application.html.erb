@@ -26,10 +26,23 @@
           <li class="guest-msg">currently browsing as a guest...</li>
           <li class="login-button"><%= link_to "login", "/auth/github" %></li>
           <% end %>
+          <% if session[:user_id] %>
+            <li class="header-button">
+              <%= link_to "my dash", userdash_path %>
+            </li>
+            <% if @logged_in_user.merchant == true %>
+              <li class="header-button">
+                 <%= link_to "manage orders", manage_orders_path %>
+              </li>
+            <% end %>
+          <% end %>
+          <% if @order.cart_entries.length >= 1 %>
+          <li>
+            <%= link_to "my bag (#{@order.cart_entries.length})", order_path(@order), class: "my-bag" %>
+          </li>
+          <% end %>
+
         </ul>
-        <% if @order.cart_entries.length >= 1 %>
-        <%= link_to "my bag (#{@order.cart_entries.length})", order_path(@order), class: "my-bag" %>
-        <% end %>
       </div>
       <div class="header-container">
         <div class="logo-container">

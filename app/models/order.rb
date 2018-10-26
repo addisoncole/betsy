@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  belongs_to :user, optional: true
   has_many :cart_entries, dependent: :destroy
   validates :card_number, presence: true, length: { is: 16 }, :numericality => { :only_interger => true }, if: Proc.new { |a| a.status != "pending" }
   validates :card_expiration, presence: true, if: Proc.new { |a| a.status != "pending" }
@@ -27,5 +28,34 @@ class Order < ApplicationRecord
     self.cart_entries.each do |entry|
       entry.decrement_product
     end
+  end
+
+  def mark_paid
+    self.update_attribute(:status, :paid)
+    self.cart_entries.each do |entry|
+      entry.mark_paid
+    end
+  end
+
+  def total
+    total = 0
+
+    self.cart_entries.each do |entry|
+      price = Product.find_by(id: entry.product_id).price
+      total += entry.quantity * price
+    end
+
+    return total
+  end
+
+  def order_status
+    self.cart_entries.each do |entry|
+      unless entry.status == :shipped
+        return "awaiting shipment(s)"
+      end
+    end
+
+    self.update_attribute(:status, :shipped)
+    return "all items in yr order have been shipped, bb!"
   end
 end
