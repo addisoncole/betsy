@@ -44,13 +44,19 @@
     <%= Product.find_by(id: entry.product_id).name %>
   </li>
   <li>
-    qty: <%= entry.quantity %>
+    <%= form_with model: entry, :method => "patch", :url =>  cart_entry_path(id: entry.id, product_id:  entry.product.id)   do |f| %>
+      <%= f.label :qty %>
+      <%= f.select :quantity, [*1..entry.product.quantity], {}, { value: entry.quantity, onchange: 'this.form.submit();' } %>
+    <% end %>
   </li>
   <li>
     <%= Product.find_by(id: entry.product_id).price * entry.quantity %>
   </li>
   <li>
     status:
+  </li>
+  <li>
+    <%= button_to "Delete", cart_entry_path(entry.id), method: :delete, data: { confirm: "Delete #{entry.product.name}?" } %>
   </li>
   <% end %>
 </ul>

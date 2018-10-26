@@ -1,0 +1,11 @@
+<ul>
+  <li>
+    member: <%= review.user.username %>
+  </li>
+  <li>
+    rating: <%= convert_review_rating_to_smileys(review.rating) %>
+  </li>
+  <li>
+    thought && prayer: <%= review.comment %>
+  </li>
+</ul>

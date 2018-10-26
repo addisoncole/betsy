@@ -4,9 +4,17 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
 entry:
   order_id: persons_order
   product_id: avocadotoast
   order: persons_order
   product: avocadotoast
   quantity: 1
+
+new_entry:
+  order_id: persons_order
+  product_id: swisscheeseplant
+  order: persons_order
+  product: swisscheeseplant
+  quantity: 5
