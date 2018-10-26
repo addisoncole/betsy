@@ -48,9 +48,6 @@ class UsersController < ApplicationController
       flash[:error] = "Must be logged in as this loser to do that."
       redirect_to root_path
     end
-  else
-    flash[:error] = "Members Only"
-    redirect_to root_path
   end
 
   def userdash
