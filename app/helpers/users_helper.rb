@@ -8,8 +8,8 @@ module UsersHelper
     end
   end
 
-  def get_merchants(users)
-    users.find_all { |user| user.merchant == true }
+  def get_merchants
+    return User.where(merchant: true)
   end
 
   def display_edit_pop_up_button?(user)

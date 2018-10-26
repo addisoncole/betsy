@@ -1,5 +1,9 @@
 <h1>dassshboard</h1>
+<% if @logged_in_user.merchant == true %>
  <div class="dash-top-container">
+<% else %>
+ <div class="whole-container">
+<% end %>
   <div class="info-card-container">
     <section class="<%= dash_class(@logged_in_user) %>-info-card">
       <%= image_tag @logged_in_user.profile_picture, class: "#{dash_class(@logged_in_user)}-picy" %>
@@ -48,7 +52,9 @@
         <% end %>
       </section>
     </div>
+    <% if @logged_in_user.merchant == true %>
     </div>
+    <% end %>
 <div class="popup-container">
   <section class="popup-settings">
     <div class="popup-settings-header">
@@ -73,3 +79,6 @@
     </div>
   </section>
 </div>
+<% if @logged_in_user.merchant == false %>
+</div>
+<% end %>
