@@ -22,7 +22,7 @@ class CartEntriesController < ApplicationController
     head :not_found unless @product
 
     if params[:cart_entry] != nil
-      @cart_entry = @order.add_product(@product, session[:order_id], params[:cart_entry][:quantity].to_i)
+      @cart_entry = Order.add_product(@product, session[:order_id], params[:cart_entry][:quantity].to_i)
     end
 
     if !@cart_entry

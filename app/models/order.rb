@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   validates :status, presence: true
   validates :name, presence: true, if: Proc.new { |a| a.status != "pending" }
 
-  def self.add_product(product, order_id)
+  def self.add_product(product, order_id, quantity)
     current_product = CartEntry.find_by(product_id: product.id, order_id: order_id)
     if current_product
       current_product.increment(:quantity, by = quantity)
