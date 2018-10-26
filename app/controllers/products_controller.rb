@@ -8,9 +8,10 @@ class ProductsController < ApplicationController
     if params[:category]
       @title = "#{params[:category].downcase}"
       @products = Product.where(:category => params[:category])
+      @products = @products.order(created_at: :desc)
     else
       @title = "the spread"
-      @products = Product.all
+      @products = Product.order(created_at: :desc)
     end
   end
 
@@ -34,7 +35,7 @@ class ProductsController < ApplicationController
 
   def show
     @cart_entry = CartEntry.new
-    
+
   end
 
   def edit
