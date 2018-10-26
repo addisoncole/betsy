@@ -1,5 +1,4 @@
 require "test_helper"
-require 'pry'
 
 describe CartEntriesController do
   describe "create" do
