@@ -29,8 +29,8 @@
 </section>
 
 <% if @user.products.count > 0 %>
-<h2><small>fetch by</small> <%= @user.store_name.downcase %>.</h2>
-<section class="products-container">
+<h2 class="pop-up-product-header"><small>fetch by</small> <%= @user.store_name.downcase %>.</h2>
+<section class="products-container-pop">
     <% @user.products.reverse.each do |product| %>
     <a href="<%= product_path(product) %>" class="product-card-link">
       <ul class="product-card <%= product.category %>">
