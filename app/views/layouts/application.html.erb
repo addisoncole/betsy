@@ -32,7 +32,7 @@
             </li>
             <% if @logged_in_user.merchant == true %>
               <li class="header-button">
-                 <%= link_to "manage orders", manage_orders_path %>
+                 <%= link_to "orders #{number_of_paid_orders}", manage_orders_path %>
               </li>
             <% end %>
           <% end %>
