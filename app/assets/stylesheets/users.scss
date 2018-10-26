@@ -53,6 +53,8 @@
   width: 23vw;
   border-radius: 50%;
   box-shadow: .2vw .2vw 2vw #d1d1d1;
+  margin-top: -10em;
+  margin-left:40em;
 }
 
 .merchant-profile-banner{
@@ -68,4 +70,22 @@
 
 .pop-up-title {
   text-align: left;
+}
+
+.pop-up-desc {
+  width: 18vw;
+  margin-top: -25vw;
+  margin-left: 3vw;
+  margin-bottom: 12vw;
+  background-image: linear-gradient(to right, #fdfff7, #ffffff);
+  padding: .7vw 2vw 1.5vw 2vw;
+  font-family: NeuePlakLight;
+  text-align: right;
+  color: #404040;
+}
+
+.edit-pop-up-buttns{
+  margin-top: -16em;
+  margin-right: 26em;
+  text-align: right;
 }
