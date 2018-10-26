@@ -36,7 +36,7 @@
     <% @entries.each do |entry| %>
     <div class="my-orders-entry">
       <ul class="my-orders-entry-headers">
-        <li><%= entry.order_id %></li>
+        <li><%= link_to "#{entry.order_id}", order_path(entry.order_id) %></li>
         <li><%= Order.find(entry.order_id).updated_at %></li>
         <li>Status</li>
       </ul>

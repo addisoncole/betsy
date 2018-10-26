@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
-  before_action :current_user?, only: [:edit, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy, :userdash, :manage_orders]
+  before_action :current_user?, only: [:edit, :destroy, :userdash, :manage_orders]
 
   def index
     if User.find_by(id: session[:user_id])
@@ -54,36 +54,44 @@ class UsersController < ApplicationController
   end
 
   def userdash
-    @products = @logged_in_user.products
-    @orders = @logged_in_user.orders
+    if current_user?
+      @products = @logged_in_user.products
+      @orders = @logged_in_user.orders
+    else
+      redirect_to root_path, :alert => "Members Only"
+    end
   end
 
   def manage_orders
-    @orders = @logged_in_user.merchant_orders
-    entries = []
-    my_products = @logged_in_user.products.ids
-    @orders.each do |order|
-      order.cart_entries.each do |entry|
-        if my_products.include?(entry.product_id)
-          entries << entry
+    if current_user?
+      @orders = @logged_in_user.merchant_orders
+      entries = []
+      my_products = @logged_in_user.products.ids
+      @orders.each do |order|
+        order.cart_entries.each do |entry|
+          if my_products.include?(entry.product_id)
+            entries << entry
+          end
         end
       end
-    end
 
-    if params[:status] == ""
-      @title = "all_orders"
-    elsif params[:status]
-      @title = params[:status]
-    else
-      @title = "all_orders"
-    end
+      if params[:status] == ""
+        @title = "all_orders"
+      elsif params[:status]
+        @title = params[:status]
+      else
+        @title = "all_orders"
+      end
 
-    if params[:status] == "pending"
-      @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
-    elsif params[:status] == "shipped"
-      @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
+      if params[:status] == "pending"
+        @entries = entries.find_all {|entry| entry.status == "paid"}.reverse
+      elsif params[:status] == "shipped"
+        @entries = entries.find_all {|entry| entry.status == "shipped"}.reverse
+      else
+        @entries = entries.reverse
+      end
     else
-      @entries = entries.reverse
+      redirect_to root_path, :alert => "Members Only"
     end
   end
 
@@ -93,6 +101,9 @@ class UsersController < ApplicationController
   end
   def find_user
     @user = User.find_by(id: params[:id])
+    if @user == nil
+      @user = :GUEST
+    end
   end
   def current_user?
     @user == User.find_by(id: session[:user_id])
