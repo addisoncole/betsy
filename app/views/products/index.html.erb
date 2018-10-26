@@ -14,16 +14,13 @@
       </div>
       <div class="lower-product-info">
         <li class="product-info">
-          <%= product.category %>
+          <%= display_quantity_or_sell_out(product) %>
         </li>
         <li class="product-info">
-          stock: <%= display_quantity_or_sell_out(product) %>
-        </li>
-        <li class="product-info">
-          <%= ("%.2f" % product.price) %>
+          $ <%= ("%.2f" % product.price) %>
         </li class="product-info">
+        <%= show_product_reviews?(product) %>
       </div>
-      <%= show_product_reviews?(product) %>
     </ul>
   </a>
   <% end %>

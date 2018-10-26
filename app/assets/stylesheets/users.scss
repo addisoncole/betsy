@@ -48,3 +48,44 @@
 .merchant-desc:hover {
   text-decoration: none;
 }
+
+.merchant-profile-photo {
+  width: 23vw;
+  border-radius: 50%;
+  box-shadow: .2vw .2vw 2vw #d1d1d1;
+  margin-top: -10em;
+  margin-left:40em;
+}
+
+.merchant-profile-banner{
+   width:1000px; /*container-width*/
+   overflow:hidden; /*hide bounds of image */
+   margin:0;   /*reset margin of figure tag*/
+}
+.merchant-profile-banner img{
+   display:block; /*remove inline-block spaces*/
+   width:100%; /*make image streatch*/
+   margin:-30.875% 0;
+}
+
+.pop-up-title {
+  text-align: left;
+}
+
+.pop-up-desc {
+  width: 18vw;
+  margin-top: -25vw;
+  margin-left: 3vw;
+  margin-bottom: 12vw;
+  background-image: linear-gradient(to right, #fdfff7, #ffffff);
+  padding: .7vw 2vw 1.5vw 2vw;
+  font-family: NeuePlakLight;
+  text-align: right;
+  color: #404040;
+}
+
+.edit-pop-up-buttns{
+  margin-top: -16em;
+  margin-right: 26em;
+  text-align: right;
+}
