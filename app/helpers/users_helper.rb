@@ -57,7 +57,7 @@ module UsersHelper
   end
 
   def non_pending_orders(user)
-    return user.orders.find_all { |order| order.status != "pending" }
+    return user.orders.find_all { |order| order.status != "pending" }.reverse
   end
 
   def find_my_entries(order)
